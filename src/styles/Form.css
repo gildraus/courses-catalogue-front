@@ -1,0 +1,165 @@
+.form {
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: #f7f7fa;
+}
+
+.form > .header {
+  background-color: #1e1e2d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.separator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background-color: #11c098;
+}
+
+.header-text {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 12px;
+}
+
+.form-container {
+  width: 100%;
+  /* min-height: 85vh; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 30px 0px 10px 0px;
+}
+
+.form-header {
+  min-width: 40%;
+  display: flex;
+  justify-content: left;
+  color: #008767;
+}
+
+.form-box {
+  min-width: 40%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px 25px 30px 25px;
+  margin-top: 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.form-box-header {
+  color: #005541;
+}
+
+.form-box-row {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.form-box-row-element {
+  width: 50%;
+  padding: 15px 15px 0px 0px;
+}
+
+.form-box-row-description-element {
+  width: 100%;
+  height: fit-content;
+  padding: 15px 15px 0px 0px;
+}
+
+.form-box-row-element button {
+  width: 100%;
+}
+
+.dropdown-plus {
+  border: 1px solid #e3e2e2;
+  width: fit-content;
+  padding: 0px 10px 0px 10px;
+  margin-top: 40px;
+
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.dropdown-plus:hover {
+  background-color: #198754;
+  color: #fff;
+}
+
+.dropdown-plus-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-box .input {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  width: 100%;
+}
+
+.added-elements {
+  width: 50%;
+  padding: 0px 15px 7px 0px;
+}
+
+.element {
+  padding: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+.description {
+  width: 100%;
+  height: 200px;
+}
+
+.save-btn {
+  background-color: #11c098;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  
+}
+.cancel-btn{
+    background-color: #7E8299;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.form-buttons-container{
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+}

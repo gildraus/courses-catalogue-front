@@ -1,0 +1,32 @@
+/* Login.css */
+
+/* .footer {
+  background: transparent;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+}
+.footer-body {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+} */
+
+.main-footer {
+  background: transparent; /* Fully transparent background */
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  z-index: 1;
+}
+.main-footer-body {
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  color: #181818;
+
+  display: flex;
+  justify-content: center;
+}
+
+.green-paragraph {
+  color: #11c098;
+}
