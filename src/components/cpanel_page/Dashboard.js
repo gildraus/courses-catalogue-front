@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 
-
+// git tst
 const server_name = "https://courses-catalogue-back.vercel.app";
 // const server_name = "http://localhost:3001";
 
