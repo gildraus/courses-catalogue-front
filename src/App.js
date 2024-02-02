@@ -36,7 +36,7 @@ function App() {
   const cookies = useCookies(["access_token"])[0];
   
 //ovde mozda izmena
-const server_name = "https://courses-catalogue-back.vercel.app";
+const server_name = "courses-catalogue-backend.vercel.app";
 // const server_name = "http://localhost:3001";
   const fetchCourses = async () => {
     try {

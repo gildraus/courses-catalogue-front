@@ -3,7 +3,7 @@ import Footer from "../../components/main_page/Footer";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useEffect, useState } from "react";
 import axios from "axios";
-const server_name = "https://courses-catalogue-back.vercel.app";
+const server_name = "courses-catalogue-backend.vercel.app";
 // const server_name = "http://localhost:3001";
 const Form = ({ allModules, allDepartments }) => {
   const [courseID, setCourseID] = useState(undefined);
