@@ -34,10 +34,13 @@ function App() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [emptyResponse, setEmptyResponse] = useState(false);
   const cookies = useCookies(["access_token"])[0];
+  
+//ovde mozda izmena
+  const server_name = "https://course-catalogue-backend.vercel.app"; //"http://localhost:3001";
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/courses");
+      const response = await axios.get(server_name+"/courses");
       setAllCourses(response.data);
     } catch (error) {
       console.log(error);
@@ -46,7 +49,7 @@ function App() {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/departments");
+      const response = await axios.get(server_name+"/departments");
       setAllDepartments(response.data);
     } catch (error) {
       console.log(error);
@@ -55,7 +58,7 @@ function App() {
 
   const fetchModules = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/modules");
+      const response = await axios.get(server_name+"/modules");
       setAllModules(response.data);
     } catch (error) {
       console.log(error);
@@ -64,7 +67,7 @@ function App() {
 
   const fetchLevelsOfStudy = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/levelsofstudy");
+      const response = await axios.get(server_name+"/levelsofstudy");
       console.log("balbla");
 
       setAllLevelsOfStudy(response.data);
@@ -78,7 +81,7 @@ function App() {
   const fetchFilteredCourses = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/filteredCourses",
+        server_name+"/filteredCourses",
         {
           params: {
             selectedLevelOfStudy,
