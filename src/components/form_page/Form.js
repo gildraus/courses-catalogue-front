@@ -4,6 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const server_name = "https://course-catalogue-backend.vercel.app";
 const Form = ({ allModules, allDepartments }) => {
   const [courseID, setCourseID] = useState(undefined);
   const [name, setName] = useState(undefined);
@@ -227,7 +228,7 @@ const Form = ({ allModules, allDepartments }) => {
   const submitForm = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/courses",
+        `${server_name}/api/courses`,
         {
           courseID: courseID,
           acc: accreditation,

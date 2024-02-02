@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-
+const server_name = "https://course-catalogue-backend.vercel.app";
 const Login = () => {
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Login = () => {
     const password = pass.value;
 
     try {
-      const response = await axios.post("http://localhost:3001/login", {
+      const response = await axios.post(`${server_name}/login`, {
         username,
         password,
       });
@@ -85,7 +85,7 @@ const Login = () => {
                   name="pass"
                   required
                 />
-            
+
               </div>
 
               <button className="login-button" type="submit">

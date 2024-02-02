@@ -5,6 +5,8 @@ import Footer from "../../components/main_page/Footer";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
+const server_name = "https://course-catalogue-backend.vercel.app";
+
 const UpdatePage = ({ allCourses, allModules, allDepartments }) => {
   const [course, setCourse] = useState(undefined);
 
@@ -59,7 +61,7 @@ const UpdatePage = ({ allCourses, allModules, allDepartments }) => {
       try {
         if (id) {
           const response = await axios.get(
-            `http://localhost:3001/api/courses/${id}`
+            `${server_name}/api/courses/${id}`
           );
           setCourse(response.data);
           setCourseID(response.data.course_id);
