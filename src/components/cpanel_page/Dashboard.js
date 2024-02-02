@@ -8,7 +8,8 @@ import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
 
 
-const server_name = "https://course-catalogue-backend.vercel.app";//"http://localhost:3001";
+const server_name = "https://courses-catalogue-back.vercel.app";
+// const server_name = "http://localhost:3001";
 
 const Dashboard = ({ allCourses }) => {
   const [open, setOpen] = useState(false);
