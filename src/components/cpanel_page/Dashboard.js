@@ -6,10 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
+import server_name from "../../config";
 
-// git tst
-const server_name = "courses-catalogue-backend.vercel.app";
-// const server_name = "http://localhost:3001";
+
 
 const Dashboard = ({ allCourses }) => {
   const [open, setOpen] = useState(false);

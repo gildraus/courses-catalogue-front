@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-const server_name = "courses-catalogue-backend.vercel.app";
-// const server_name = "http://localhost:3001";
+import server_name from "../../config";
+
 const Login = () => {
   const navigate = useNavigate();
 

@@ -12,7 +12,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
-
+import server_name from "./config";
 import axios from "axios";
 import { Button } from "@mui/material";
 import UpdatePage from "./components/cpanel_page/UpdatePage";
@@ -35,9 +35,7 @@ function App() {
   const [emptyResponse, setEmptyResponse] = useState(false);
   const cookies = useCookies(["access_token"])[0];
   
-//ovde mozda izmena
-const server_name = "courses-catalogue-backend.vercel.app";
-// const server_name = "http://localhost:3001";
+
   const fetchCourses = async () => {
     try {
       const response = await axios.get(server_name+"/courses");
