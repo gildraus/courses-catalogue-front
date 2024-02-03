@@ -132,9 +132,17 @@ function App() {
       "\n Godina studija: " + selectedYearOfStudy
     );
   };
+  const test2 = () => {
+   alert(allModules)
+  };
 
   return (
-   <div>lol</div>
+   <div>lol
+
+
+    <button onClick={fetchModules}>1</button>
+    <button onClick={test2}>2</button>
+   </div>
     // <BrowserRouter>
     //   <Routes>
     //     <Route
