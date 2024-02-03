@@ -132,8 +132,17 @@ function App() {
       "\n Godina studija: " + selectedYearOfStudy
     );
   };
-  const test2 = () => {
-   alert(allModules)
+
+  const test2 = async () => {
+    try {
+      const response = await axios.get(server_name+"/test");
+      alert(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const test3 = () => {
+  alert(allModules)
   };
 
   return (
@@ -141,7 +150,7 @@ function App() {
 
 
     <button onClick={fetchModules}>1</button>
-    <button onClick={test2}>2</button>
+    <button onClick={test3}>2</button>
    </div>
     // <BrowserRouter>
     //   <Routes>
