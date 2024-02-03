@@ -34,7 +34,16 @@ function App() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [emptyResponse, setEmptyResponse] = useState(false);
   const cookies = useCookies(["access_token"])[0];
-  
+  const [testData, setTestData] = useState(null);
+
+  const fetchTestData = async () => {
+    try {
+      const response = await axios.get(`${server_name}/test`);
+      setTestData(response.data);
+    } catch (error) {
+      console.error('Error fetching test data:', error);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
@@ -145,12 +154,22 @@ function App() {
   alert(allModules)
   };
 
+  
+
   return (
    <div>lol
 
 
     <button onClick={fetchModules}>1</button>
     <button onClick={test3}>2</button>
+    <button onClick={fetchTestData}>fetch</button>
+    <h2>Test Data:</h2>
+      {testData ? (
+        <pre>{JSON.stringify(testData, null, 2)}</pre>
+      ) : (
+        <p>Loading test data...</p>
+      )}
+
    </div>
     // <BrowserRouter>
     //   <Routes>
