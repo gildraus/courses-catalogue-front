@@ -116,10 +116,10 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCourses();
-    fetchDepartments();
-    fetchModules();
-    fetchLevelsOfStudy();
+    // fetchCourses();
+    // fetchDepartments();
+    // fetchModules();
+    // fetchLevelsOfStudy();
 
   }, []);
 
