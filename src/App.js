@@ -125,10 +125,10 @@ function App() {
   };
 
   useEffect(() => {
-    // fetchCourses();
-    // fetchDepartments();
-    // fetchModules();
-    // fetchLevelsOfStudy();
+    fetchCourses();
+    fetchDepartments();
+    fetchModules();
+    fetchLevelsOfStudy();
 
   }, []);
 
@@ -157,127 +157,114 @@ function App() {
   
 
   return (
-   <div>lol
+ 
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="container-fluid">
+              <div className="row navbar-row">
+                <div className="navbar-container col-sm-12">
+                  <Navbar />
+                  {/* <button onClick={test}>test</button> */}
+                </div>
+              </div>
 
+              <div className="App">
+                <div className="row">
+                  {selectedCourse === undefined ? (
+                    <div className="body-container">
+                      <Searchbar
+                        allCourses={allCourses}
+                        coursesToShow={coursesToShow}
+                        setCoursesToShow={setCoursesToShow}
+                        setSelectedCourse={setSelectedCourse}
+                      />
+                      <CoursesView
+                        allCourses={allCourses}
+                        allDepartments={allDepartments}
+                        allModules={allModules}
+                        allLevelsOfStudy={allLevelsOfStudy}
+                        coursesToShow={coursesToShow}
+                        selectedLevelOfStudy={selectedLevelOfStudy}
+                        selectedProgram={selectedProgram}
+                        selectedModule={selectedModule}
+                        selectedSemester={selectedSemester}
+                        selectedYearOfStudy={selectedYearOfStudy}
+                        selectedDepartments={selectedDepartments}
+                        selectedCourse={selectedCourse}
+                        emptyResponse={emptyResponse}
+                        isSidebarVisible={isSidebarVisible}
+                        setAllCourses={setAllCourses}
+                        setCoursesToShow={setCoursesToShow}
+                        setSelectedLevelOfStudy={setSelectedLevelOfStudy}
+                        setSelectedProgram={setSelectedProgram}
+                        setSelectedModule={setSelectedModule}
+                        setSelectedSemester={setSelectedSemester}
+                        setSelectedYearOfStudy={setSelectedYearOfStudy}
+                        setSelectedDepartments={setSelectedDepartments}
+                        setSelectedCourse={setSelectedCourse}
+                        setEmptyResponse={setEmptyResponse}
+                        setIsSidebarVisible={setIsSidebarVisible}
+                        fetchFilteredCourses={fetchFilteredCourses}
+                      />
+                    </div>
+                  ) : (
+                    <CourseDetails
+                      selectedCourse={selectedCourse}
+                      setSelectedCourse={setSelectedCourse}
+                    />
+                  )}
+                </div>
 
-    <button onClick={fetchModules}>1</button>
-    <button onClick={test3}>2</button>
-    <button onClick={fetchTestData}>fetch</button>
-    <h2>Test Data:</h2>
-      {testData ? (
-        <pre>{JSON.stringify(testData, null, 2)}</pre>
-      ) : (
-        <p>Loading test data...</p>
-      )}
+                <div className="row">
+                  <Footer />
+                </div>
+              </div>
+            </div>
+          }
+        />
+        <Route
+          path="/form"
+          element={
+            cookies.access_token && !isTokenExpired() ? (
+              <Form allModules={allModules} allDepartments={allDepartments} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            cookies.access_token && !isTokenExpired() ? (
+              <Dashboard allCourses={allCourses} />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
 
-   </div>
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route
-    //       path="/"
-    //       element={
-    //         <div className="container-fluid">
-    //           <div className="row navbar-row">
-    //             <div className="navbar-container col-sm-12">
-    //               <Navbar />
-    //               {/* <button onClick={test}>test</button> */}
-    //             </div>
-    //           </div>
+        <Route
+          path="/update/:id"
+          element={
+            cookies.access_token && !isTokenExpired() ? (
+              <UpdatePage
+                allCourses={allCourses}
+                allModules={allModules}
+                allDepartments={allDepartments}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
 
-    //           <div className="App">
-    //             <div className="row">
-    //               {selectedCourse === undefined ? (
-    //                 <div className="body-container">
-    //                   <Searchbar
-    //                     allCourses={allCourses}
-    //                     coursesToShow={coursesToShow}
-    //                     setCoursesToShow={setCoursesToShow}
-    //                     setSelectedCourse={setSelectedCourse}
-    //                   />
-    //                   <CoursesView
-    //                     allCourses={allCourses}
-    //                     allDepartments={allDepartments}
-    //                     allModules={allModules}
-    //                     allLevelsOfStudy={allLevelsOfStudy}
-    //                     coursesToShow={coursesToShow}
-    //                     selectedLevelOfStudy={selectedLevelOfStudy}
-    //                     selectedProgram={selectedProgram}
-    //                     selectedModule={selectedModule}
-    //                     selectedSemester={selectedSemester}
-    //                     selectedYearOfStudy={selectedYearOfStudy}
-    //                     selectedDepartments={selectedDepartments}
-    //                     selectedCourse={selectedCourse}
-    //                     emptyResponse={emptyResponse}
-    //                     isSidebarVisible={isSidebarVisible}
-    //                     setAllCourses={setAllCourses}
-    //                     setCoursesToShow={setCoursesToShow}
-    //                     setSelectedLevelOfStudy={setSelectedLevelOfStudy}
-    //                     setSelectedProgram={setSelectedProgram}
-    //                     setSelectedModule={setSelectedModule}
-    //                     setSelectedSemester={setSelectedSemester}
-    //                     setSelectedYearOfStudy={setSelectedYearOfStudy}
-    //                     setSelectedDepartments={setSelectedDepartments}
-    //                     setSelectedCourse={setSelectedCourse}
-    //                     setEmptyResponse={setEmptyResponse}
-    //                     setIsSidebarVisible={setIsSidebarVisible}
-    //                     fetchFilteredCourses={fetchFilteredCourses}
-    //                   />
-    //                 </div>
-    //               ) : (
-    //                 <CourseDetails
-    //                   selectedCourse={selectedCourse}
-    //                   setSelectedCourse={setSelectedCourse}
-    //                 />
-    //               )}
-    //             </div>
-
-    //             <div className="row">
-    //               <Footer />
-    //             </div>
-    //           </div>
-    //         </div>
-    //       }
-    //     />
-    //     <Route
-    //       path="/form"
-    //       element={
-    //         cookies.access_token && !isTokenExpired() ? (
-    //           <Form allModules={allModules} allDepartments={allDepartments} />
-    //         ) : (
-    //           <Navigate to="/login" />
-    //         )
-    //       }
-    //     />
-    //     <Route
-    //       path="/dashboard"
-    //       element={
-    //         cookies.access_token && !isTokenExpired() ? (
-    //           <Dashboard allCourses={allCourses} />
-    //         ) : (
-    //           <Navigate to="/login" />
-    //         )
-    //       }
-    //     />
-
-    //     <Route
-    //       path="/update/:id"
-    //       element={
-    //         cookies.access_token && !isTokenExpired() ? (
-    //           <UpdatePage
-    //             allCourses={allCourses}
-    //             allModules={allModules}
-    //             allDepartments={allDepartments}
-    //           />
-    //         ) : (
-    //           <Navigate to="/login" />
-    //         )
-    //       }
-    //     />
-
-    //     <Route path="/login" element={<Login />} />
-    //     <Route path="/form" element={<Form />} />
-    //   </Routes>
-    // </BrowserRouter>
+        <Route path="/login" element={<Login />} />
+        <Route path="/form" element={<Form />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
