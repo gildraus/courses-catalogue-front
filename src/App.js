@@ -30,6 +30,7 @@ function App() {
   const [selectedYearOfStudy, setSelectedYearOfStudy] = useState([]);
   const [selectedDepartments, setSelectedDepartments] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(undefined);
+  const [coursesOfTheSameName, setCoursesOfTheSameName] = useState([]);
 
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [emptyResponse, setEmptyResponse] = useState(false);
@@ -126,6 +127,13 @@ function App() {
     fetchLevelsOfStudy();
   }, []);
 
+  useEffect(() => {
+    const filteredCourses = allCourses.filter(
+      (item) => item.name === selectedCourse.name
+    );
+    setCoursesOfTheSameName(filteredCourses);
+  }, [selectedCourse]);
+
   const test = () => {
     alert(
       "Nivo studija: " +
@@ -208,7 +216,7 @@ function App() {
                     </div>
                   ) : (
                     <CourseDetails
-                      allCourses={allCourses}
+                      coursesOfTheSameName={coursesOfTheSameName}
                       selectedCourse={selectedCourse}
                       setSelectedCourse={setSelectedCourse}
                     />

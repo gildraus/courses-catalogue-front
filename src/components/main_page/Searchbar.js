@@ -122,7 +122,7 @@ const Searchbar = ({
   return (
     <div className="header">
       <div className="search-bar-logo">KATALOG KURSEVA</div>
-      <button onClick={test}>test </button>
+
       <div className="search-bar">
         <input
           type="text"
