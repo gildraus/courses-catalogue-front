@@ -1,15 +1,23 @@
 import "../../styles/CourseDetails.css";
 
-const CourseDetails = ({ selectedCourse, setSelectedCourse }) => {
+const CourseDetails = ({ allCourses, selectedCourse, setSelectedCourse }) => {
   const course = selectedCourse;
   const splitLiterature = course.literature[0].split(/\d+\./).filter(Boolean);
 
+  var coursesOfTheSameName = [];
+  allCourses.forEach((item) => {
+    if (item.name === selectedCourse.name) {
+      coursesOfTheSameName.push(item);
+    }
+  });
   return (
     <div className="course-details-background">
       <div className="course-details">
         <div className="course-details-header">
           <h1>{course.name}</h1>
-          {course.departments}
+
+          <div>{course.departments}</div>
+          <div>{course.program}</div>
         </div>
 
         <div className="course-details-body">

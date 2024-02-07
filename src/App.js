@@ -41,13 +41,13 @@ function App() {
       const response = await axios.get(`${server_name}/test`);
       setTestData(response.data);
     } catch (error) {
-      console.error('Error fetching test data:', error);
+      console.error("Error fetching test data:", error);
     }
   };
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get(server_name+"/courses");
+      const response = await axios.get(server_name + "/courses");
       setAllCourses(response.data);
     } catch (error) {
       console.log(error);
@@ -56,7 +56,7 @@ function App() {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get(server_name+"/departments");
+      const response = await axios.get(server_name + "/departments");
       setAllDepartments(response.data);
     } catch (error) {
       console.log(error);
@@ -65,7 +65,7 @@ function App() {
 
   const fetchModules = async () => {
     try {
-      const response = await axios.get(server_name+"/modules");
+      const response = await axios.get(server_name + "/modules");
       setAllModules(response.data);
     } catch (error) {
       console.log(error);
@@ -74,7 +74,7 @@ function App() {
 
   const fetchLevelsOfStudy = async () => {
     try {
-      const response = await axios.get(server_name+"/levelsofstudy");
+      const response = await axios.get(server_name + "/levelsofstudy");
       console.log("balbla");
 
       setAllLevelsOfStudy(response.data);
@@ -83,30 +83,25 @@ function App() {
     }
   };
 
-
-
   const fetchFilteredCourses = async () => {
     try {
-      const response = await axios.get(
-        server_name+"/filteredCourses",
-        {
-          params: {
-            selectedLevelOfStudy,
-            selectedProgram,
-            selectedModule,
-            selectedSemester,
-            selectedYearOfStudy,
-            selectedDepartments,
-          },
-        }
-      );
+      const response = await axios.get(server_name + "/filteredCourses", {
+        params: {
+          selectedLevelOfStudy,
+          selectedProgram,
+          selectedModule,
+          selectedSemester,
+          selectedYearOfStudy,
+          selectedDepartments,
+        },
+      });
       if (response.data.length === 0) {
         setEmptyResponse(true);
       } else {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const isTokenExpired = () => {
@@ -129,35 +124,36 @@ function App() {
     fetchDepartments();
     fetchModules();
     fetchLevelsOfStudy();
-
   }, []);
 
   const test = () => {
     alert(
-      "Nivo studija: " + selectedLevelOfStudy +
-      "\n Program: " + selectedProgram +
-      "\n Modul: " + selectedModule +
-      "\n Semestar: " + selectedSemester +
-      "\n Godina studija: " + selectedYearOfStudy
+      "Nivo studija: " +
+        selectedLevelOfStudy +
+        "\n Program: " +
+        selectedProgram +
+        "\n Modul: " +
+        selectedModule +
+        "\n Semestar: " +
+        selectedSemester +
+        "\n Godina studija: " +
+        selectedYearOfStudy
     );
   };
 
   const test2 = async () => {
     try {
-      const response = await axios.get(server_name+"/test");
+      const response = await axios.get(server_name + "/test");
       alert(response.data);
     } catch (error) {
       console.log(error);
     }
   };
   const test3 = () => {
-  alert(allModules)
+    alert(allModules);
   };
 
-  
-
   return (
- 
     <BrowserRouter>
       <Routes>
         <Route
@@ -212,6 +208,7 @@ function App() {
                     </div>
                   ) : (
                     <CourseDetails
+                      allCourses={allCourses}
                       selectedCourse={selectedCourse}
                       setSelectedCourse={setSelectedCourse}
                     />
