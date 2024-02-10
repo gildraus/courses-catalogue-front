@@ -1,6 +1,9 @@
 import "../../styles/CoursesView.css";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useState, useEffect } from "react";
+import Loading from "./Loading";
+import SkeletonCourseCard from "../skeletons/SkeletonCourseCard";
+import SkeletonSidebarCard from "../skeletons/SkeletonSidebarCard";
 
 const CoursesView = ({
   allCourses,
@@ -17,6 +20,7 @@ const CoursesView = ({
   selectedCourse,
   emptyResponse,
   isSidebarVisible,
+  isLoadingLevelsOfStudy,
   setAllCourses,
   setCoursesToShow,
   setSelectedLevelOfStudy,
@@ -28,7 +32,9 @@ const CoursesView = ({
   setSelectedCourse,
   setEmptyResponse,
   setIsSidebarVisible,
+  setIsLoadingLevelsOfStudy,
   fetchFilteredCourses,
+  isLoadingCourses,
 }) => {
   function toggle(groupName) {
     var displayType = document.getElementById(groupName).style.display;
@@ -141,8 +147,12 @@ const CoursesView = ({
       </div>
 
       <div className="course-view-body">
-        {isSidebarVisible ? (
-          <div className="courses-view-sidebar col-lg-12 col-xs-12">
+
+{isSidebarVisible ? (
+  isLoadingLevelsOfStudy ? (
+    <div><SkeletonSidebarCard /></div>
+  ) : (
+     <div className="courses-view-sidebar col-lg-12 col-xs-12">
             {/* НИВО СТУДИЈА*/}
             <div className="filter-box">
               <h4 className="filter-box-header">
@@ -355,142 +365,121 @@ const CoursesView = ({
               </div>
             </div>
           </div>
-        ) : (
-          <div></div>
-        )}
+  )
+) : (
+  <div></div>
+)}
+
+
+
+
 
         {!isSidebarVisible || !isSmallScreen ? (
-          <div className="courses-view-cards">
-            {emptyResponse ? (
-              <div className="cards-not-found">
-                <img src="./images/EmptyState.png" alt="" />
-                <h2>Није пронађен ниједан курс!</h2>
-                <h4>Пробајте да претражите по другим параметрима.</h4>
-              </div>
-            ) : (
-              coursesToDisplay
-                .slice(
-                  currentPage * 10,
-                  currentPage * 10 + 10 < coursesToDisplay.length
-                    ? currentPage * 10 + 10
-                    : coursesToDisplay.length
-                )
-                .map((course, index) => (
-                  <div
-                    key={index}
-                    className="courses-view-card clickable"
-                    onClick={() => setSelectedCourse(course)}
-                  >
-                    <div className="courses-view-card-left">
-                      <img src="./images/Imagery.png" alt="" />
-                    </div>
-                    <div className="courses-view-card-right">
-                      <h4>
-                        <b>{course.name}</b>
-                      </h4>
-                      <p className="department-card-item">
-                        {course.departments.join(", ")}
-                      </p>
+          isLoadingCourses ? (
+            <div className="courses-view-cards">
+              <SkeletonCourseCard />
+              <SkeletonCourseCard />
+              <SkeletonCourseCard />
+            </div>
+          ) : (
+            <div className="courses-view-cards">
+              {emptyResponse ? (
+                <div className="cards-not-found">
+                  <img src="./images/EmptyState.png" alt="" />
+                  <h2>Није пронађен ниједан курс!</h2>
+                  <h4>Пробајте да претражите по другим параметрима.</h4>
+                </div>
+              ) : (
+                coursesToDisplay
+                  .slice(
+                    currentPage * 10,
+                    currentPage * 10 + 10 < coursesToDisplay.length
+                      ? currentPage * 10 + 10
+                      : coursesToDisplay.length
+                  )
+                  .map((course, index) => (
+                    <div
+                      key={index}
+                      className="courses-view-card clickable"
+                      onClick={() => setSelectedCourse(course)}
+                    >
+                      <div className="courses-view-card-left">
+                        <img src="./images/Imagery.png" alt="" />
+                      </div>
+                      <div className="courses-view-card-right">
+                        <h4>
+                          <b>{course.name}</b>
+                        </h4>
+                        <p className="department-card-item">
+                          {course.departments.join(", ")}
+                        </p>
 
-                      <div className="espb-and-lecturers-card-items">
-                        <div className="espb-card-item">
-                          <div>
-                            <img
-                              src="./images/ic_round-star.png"
-                              className="courses-view-card-icon"
-                              alt=""
-                            />
+                        <div className="espb-and-lecturers-card-items">
+                          <div className="espb-card-item">
+                            <div>
+                              <img
+                                src="./images/ic_round-star.png"
+                                className="courses-view-card-icon"
+                                alt=""
+                              />
+                            </div>
+                            <p>{course.espb} ЕСПБ</p>
                           </div>
-                          <p>{course.espb} ЕСПБ</p>
-                        </div>
-                        {/* <div className="lecturers-card-item">
-                          <div>
-                            <img
-                              src="./images/clarity_group-solid.png"
-                              className="courses-view-card-icon"
-                              alt=""
-                            />
+
+                          <div className="program-card-item">
+                            <div>
+                              <img
+                                src="./images/clarity_group-solid.png"
+                                className="courses-view-card-icon"
+                                alt=""
+                              />
+                            </div>
+                            <p>{course.program}</p>
                           </div>
-                          <p>{course.lecturers.join(", ")}</p>
-                        </div> */}
-                        <div className="program-card-item">
-                          <div>
-                            <img
-                              src="./images/clarity_group-solid.png"
-                              className="courses-view-card-icon"
-                              alt=""
-                            />
-                          </div>
-                          <p>{course.program}</p>
                         </div>
                       </div>
+                    </div>
+                  ))
+              )}
 
-                      {/* <div className="card-options-group">
-                        {course?.status === "обавезан" && (
-                          <div className="card-option-mandatory">
-                            Обавезан предмет
-                          </div>
-                        )}
-                        {course?.status === "изборни" && (
-                          <div className="card-option-optional">
-                            Изборни предмет
-                          </div>
-                        )}
-
-                        {course?.note && (
-                          <div className="card-option-condition">
-                            <img src="./images/danger.png" alt="" />
-                            {course.note}
-                          </div>
-                        )}
-
-                        <div className="card-option-warning">
-                          <img src="./images/warning.png" alt="" />
-                          Упозорење везано за курс
-                        </div>
-                      </div> */}
+              {!emptyResponse && (
+                <div className="pagination">
+                  <div className="empty-div"></div>
+                  <div className="arrow-circle-container">
+                    <div
+                      className="arrow-circle"
+                      onClick={() => {
+                        if (currentPage > 0) setcurrentPage(currentPage - 1);
+                      }}
+                    >
+                      ←
+                    </div>
+                    <div
+                      className="arrow-circle"
+                      onClick={() => {
+                        if (currentPage < numberOfPages - 1)
+                          setcurrentPage(currentPage + 1);
+                      }}
+                    >
+                      →
                     </div>
                   </div>
-                ))
-            )}
-
-            {!emptyResponse && (
-              <div className="pagination">
-                <div className="empty-div"></div>
-                <div className="arrow-circle-container">
-                  <div
-                    className="arrow-circle"
-                    onClick={() => {
-                      if (currentPage > 0) setcurrentPage(currentPage - 1);
-                    }}
-                  >
-                    ←
-                  </div>
-                  <div
-                    className="arrow-circle"
-                    onClick={() => {
-                      if (currentPage < numberOfPages - 1)
-                        setcurrentPage(currentPage + 1);
-                    }}
-                  >
-                    →
-                  </div>
-                </div>
-                <div className="page-counter-container">
-                  Страна &nbsp;
-                  <div className="page-counter">
-                    &nbsp;{currentPage + 1}&nbsp;&nbsp;
-                    <div className="triangle-container">
-                      <div>▲</div>
-                      <div>▼</div>
+                  <div className="page-counter-container">
+                    Страна &nbsp;
+                    <div className="page-counter">
+                      &nbsp;{currentPage + 1}&nbsp;&nbsp;
+                      <div className="triangle-container">
+                        <div>▲</div>
+                        <div>▼</div>
+                      </div>
+                      &nbsp;
                     </div>
-                    &nbsp;
+                    &nbsp; од {numberOfPages}
                   </div>
-                  &nbsp; од {numberOfPages}
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )
         ) : (
           <div></div>
         )}

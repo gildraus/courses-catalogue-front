@@ -32,6 +32,8 @@ function App() {
   const [selectedCourse, setSelectedCourse] = useState(undefined);
   const [coursesOfTheSameName, setCoursesOfTheSameName] = useState([]);
 
+  const [isLoadingCourses, setIsLoadingCourses] = useState(true);
+  const [isLoadingLevelsOfStudy, setIsLoadingLevelsOfStudy] = useState(true);
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [emptyResponse, setEmptyResponse] = useState(false);
   const cookies = useCookies(["access_token"])[0];
@@ -52,6 +54,8 @@ function App() {
       setAllCourses(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoadingCourses(false);
     }
   };
 
@@ -81,6 +85,8 @@ function App() {
       setAllLevelsOfStudy(response.data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoadingLevelsOfStudy(false);
     }
   };
 
@@ -200,6 +206,8 @@ function App() {
                         selectedCourse={selectedCourse}
                         emptyResponse={emptyResponse}
                         isSidebarVisible={isSidebarVisible}
+                        isLoadingCourses={isLoadingCourses}
+                        isLoadingLevelsOfStudy={isLoadingLevelsOfStudy}
                         setAllCourses={setAllCourses}
                         setCoursesToShow={setCoursesToShow}
                         setSelectedLevelOfStudy={setSelectedLevelOfStudy}
@@ -211,6 +219,8 @@ function App() {
                         setSelectedCourse={setSelectedCourse}
                         setEmptyResponse={setEmptyResponse}
                         setIsSidebarVisible={setIsSidebarVisible}
+                        setIsLoadingLevelsOfStudy={setIsLoadingLevelsOfStudy}
+                        setIsLoadingCourses={setIsLoadingCourses}
                         fetchFilteredCourses={fetchFilteredCourses}
                       />
                     </div>
