@@ -1,6 +1,7 @@
 import { Dropdown, DropdownItem } from "react-bootstrap";
 import "../../styles/CourseDetails.css";
 import { useEffect } from "react";
+import CloseButton from "react-bootstrap/CloseButton";
 
 const CourseDetails = ({
   coursesOfTheSameName,
@@ -9,11 +10,17 @@ const CourseDetails = ({
 }) => {
   const course = selectedCourse;
   const splitLiterature = course.literature[0].split(/\d+\./).filter(Boolean);
-
+  const closeCourseDetails = () => {
+    setSelectedCourse(undefined);
+  };
   return (
     <div className="course-details-background">
+       <div className="close-button-container">    <CloseButton className="close-button" onClick={closeCourseDetails} /></div>
+    
       <div className="course-details">
+       
         <div className="course-details-header">
+          
           <h1>{course.name}</h1>
 
           <div>{course.departments}</div>

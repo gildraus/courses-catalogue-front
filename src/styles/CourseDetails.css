@@ -97,3 +97,12 @@
 img {
   min-width: 18px;
 }
+.close-button-container {
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

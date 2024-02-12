@@ -134,38 +134,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const filteredCourses = allCourses.filter(
-      (item) => item.name === selectedCourse.name
-    );
-    setCoursesOfTheSameName(filteredCourses);
-  }, [selectedCourse]);
-
-  const test = () => {
-    alert(
-      "Nivo studija: " +
-        selectedLevelOfStudy +
-        "\n Program: " +
-        selectedProgram +
-        "\n Modul: " +
-        selectedModule +
-        "\n Semestar: " +
-        selectedSemester +
-        "\n Godina studija: " +
-        selectedYearOfStudy
-    );
-  };
-
-  const test2 = async () => {
-    try {
-      const response = await axios.get(server_name + "/test");
-      alert(response.data);
-    } catch (error) {
-      console.log(error);
+    if (selectedCourse && selectedCourse.name) {
+      const filteredCourses = allCourses.filter(
+        (item) => item.name === selectedCourse.name
+      );
+      setCoursesOfTheSameName(filteredCourses);
     }
-  };
-  const test3 = () => {
-    alert(allModules);
-  };
+  }, [selectedCourse, allCourses]);
+  
+
 
   return (
     <BrowserRouter>
@@ -177,7 +154,6 @@ function App() {
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
                   <Navbar />
-                  {/* <button onClick={test}>test</button> */}
                 </div>
               </div>
 
