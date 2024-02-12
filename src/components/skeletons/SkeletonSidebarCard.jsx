@@ -5,10 +5,10 @@ import "../../styles/CoursesView.css";
 
 const SkeletonSidebarCard= () => {
   return (
-    <div>
+    <div className="filter-box">
 
-      fasfd
-      <Skeleton classes="title width-50"></Skeleton>
+      <div className="filter-box-header"><Skeleton classes="title width-50"></Skeleton></div>
+      
       <Skeleton classes="text width-30"></Skeleton>
       <Skeleton classes="text width-30"></Skeleton>
       <Skeleton classes="text width-30"></Skeleton>

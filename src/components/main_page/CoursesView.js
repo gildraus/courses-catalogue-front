@@ -147,232 +147,234 @@ const CoursesView = ({
       </div>
 
       <div className="course-view-body">
-
-{isSidebarVisible ? (
-  isLoadingLevelsOfStudy ? (
-    <div><SkeletonSidebarCard /></div>
-  ) : (
-     <div className="courses-view-sidebar col-lg-12 col-xs-12">
-            {/* НИВО СТУДИЈА*/}
-            <div className="filter-box">
-              <h4 className="filter-box-header">
-                <b>Ниво студија</b>{" "}
-                <img
-                  id="level-of-study-group-arrow"
-                  src="./images/feArrowDown0.png"
-                  onClick={() => toggle("level-of-study-group")}
-                  alt=""
-                />
-              </h4>
-              <div id="level-of-study-group">
-                {allLevelsOfStudy.map((levelofstudy, index) => (
-                  <div key={index}>
-                    <input
-                      type="radio"
-                      value={levelofstudy.levelOfStudyName}
-                      name="level_of_study"
-                      onChange={handleLevelOfStudyChange}
-                    />
-                    {levelofstudy.levelOfStudyName}
-                  </div>
-                ))}
-              </div>
-
+        {isSidebarVisible ? (
+          isLoadingLevelsOfStudy ? (
+            <div className="courses-view-sidebar col-lg-12 col-xs-12">
+              <SkeletonSidebarCard />
               <hr className="filter-box-separator"></hr>
+              <SkeletonSidebarCard />
+              <hr className="filter-box-separator"></hr>
+              <SkeletonSidebarCard />
             </div>
-
-            {/* СТУДИЈСКИ ПРОГРАМ*/}
-            {selectedLevelOfStudy && (
+          ) : (
+            <div className="courses-view-sidebar col-lg-12 col-xs-12">
+              {/* НИВО СТУДИЈА*/}
               <div className="filter-box">
                 <h4 className="filter-box-header">
-                  <b>Студијски програми</b>
+                  <b>Ниво студија</b>{" "}
+                  <img
+                    id="level-of-study-group-arrow"
+                    src="./images/feArrowDown0.png"
+                    onClick={() => toggle("level-of-study-group")}
+                    alt=""
+                  />
                 </h4>
-                <div id="programs-group">
-                  {allLevelsOfStudy
-                    .find(
-                      (level) => level.levelOfStudyName === selectedLevelOfStudy
-                    )
-                    ?.programs.map((program, programIndex) => (
-                      <div key={programIndex}>
-                        <input
-                          type="radio"
-                          value={program.programName}
-                          name="program"
-                          checked={selectedProgram === program.programName}
-                          onChange={() =>
-                            handleProgramChange(program.programName)
-                          }
-                        />
-                        {program.programName}
-                      </div>
-                    ))}
+                <div id="level-of-study-group">
+                  {allLevelsOfStudy.map((levelofstudy, index) => (
+                    <div key={index}>
+                      <input
+                        type="radio"
+                        value={levelofstudy.levelOfStudyName}
+                        name="level_of_study"
+                        onChange={handleLevelOfStudyChange}
+                      />
+                      {levelofstudy.levelOfStudyName}
+                    </div>
+                  ))}
                 </div>
+
                 <hr className="filter-box-separator"></hr>
               </div>
-            )}
-            {/* МОДУЛ*/}
-            {selectedProgram &&
-              allLevelsOfStudy
-                .find(
-                  (level) => level.levelOfStudyName === selectedLevelOfStudy
-                )
-                ?.programs.find(
-                  (program) => program.programName === selectedProgram
-                )?.modules?.length > 0 && ( // Check if modules array is not empty
+
+              {/* СТУДИЈСКИ ПРОГРАМ*/}
+              {selectedLevelOfStudy && (
                 <div className="filter-box">
                   <h4 className="filter-box-header">
-                    <b>Модули</b>{" "}
-                    <img
-                      id="module-group-arrow"
-                      src="./images/feArrowDown0.png"
-                      onClick={() => toggle("module-group")}
-                      className="clickable-pointer"
-                      alt=""
-                    />
+                    <b>Студијски програми</b>
                   </h4>
-                  <div id="module-group">
+                  <div id="programs-group">
                     {allLevelsOfStudy
                       .find(
                         (level) =>
                           level.levelOfStudyName === selectedLevelOfStudy
                       )
-                      ?.programs.find(
-                        (program) => program.programName === selectedProgram
-                      )
-                      ?.modules.map((module, moduleIndex) => (
-                        <div key={moduleIndex}>
+                      ?.programs.map((program, programIndex) => (
+                        <div key={programIndex}>
                           <input
                             type="radio"
-                            value={module.module}
-                            name="module"
-                            checked={selectedModule === module.module}
-                            onChange={() => handleModuleChange(module.module)}
+                            value={program.programName}
+                            name="program"
+                            checked={selectedProgram === program.programName}
+                            onChange={() =>
+                              handleProgramChange(program.programName)
+                            }
                           />
-                          {module.module}
+                          {program.programName}
                         </div>
                       ))}
                   </div>
                   <hr className="filter-box-separator"></hr>
                 </div>
               )}
+              {/* МОДУЛ*/}
+              {selectedProgram &&
+                allLevelsOfStudy
+                  .find(
+                    (level) => level.levelOfStudyName === selectedLevelOfStudy
+                  )
+                  ?.programs.find(
+                    (program) => program.programName === selectedProgram
+                  )?.modules?.length > 0 && ( // Check if modules array is not empty
+                  <div className="filter-box">
+                    <h4 className="filter-box-header">
+                      <b>Модули</b>{" "}
+                      <img
+                        id="module-group-arrow"
+                        src="./images/feArrowDown0.png"
+                        onClick={() => toggle("module-group")}
+                        className="clickable-pointer"
+                        alt=""
+                      />
+                    </h4>
+                    <div id="module-group">
+                      {allLevelsOfStudy
+                        .find(
+                          (level) =>
+                            level.levelOfStudyName === selectedLevelOfStudy
+                        )
+                        ?.programs.find(
+                          (program) => program.programName === selectedProgram
+                        )
+                        ?.modules.map((module, moduleIndex) => (
+                          <div key={moduleIndex}>
+                            <input
+                              type="radio"
+                              value={module.module}
+                              name="module"
+                              checked={selectedModule === module.module}
+                              onChange={() => handleModuleChange(module.module)}
+                            />
+                            {module.module}
+                          </div>
+                        ))}
+                    </div>
+                    <hr className="filter-box-separator"></hr>
+                  </div>
+                )}
 
-            {/* Семестар*/}
-            <div className="filter-box">
-              <h4 className="filter-box-header">
-                <b>Семестар</b>{" "}
-                <img
-                  id="semester-group-arrow"
-                  src="./images/feArrowDown0.png"
-                  onClick={() => toggle("semester-group")}
-                  className="clickable-pointer"
-                  alt=""
-                />
-              </h4>
-              <div id="semester-group">
-                <div>
-                  {" "}
-                  <input
-                    type="checkbox"
-                    value="летњи"
-                    name="semester"
-                    onChange={createCheckboxChangeHandler(
-                      selectedSemester,
-                      setSelectedSemester
-                    )}
-                  />{" "}
-                  Летњи семестар
+              {/* Семестар*/}
+              <div className="filter-box">
+                <h4 className="filter-box-header">
+                  <b>Семестар</b>{" "}
+                  <img
+                    id="semester-group-arrow"
+                    src="./images/feArrowDown0.png"
+                    onClick={() => toggle("semester-group")}
+                    className="clickable-pointer"
+                    alt=""
+                  />
+                </h4>
+                <div id="semester-group">
+                  <div>
+                    {" "}
+                    <input
+                      type="checkbox"
+                      value="летњи"
+                      name="semester"
+                      onChange={createCheckboxChangeHandler(
+                        selectedSemester,
+                        setSelectedSemester
+                      )}
+                    />{" "}
+                    Летњи семестар
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      value="зимски"
+                      name="semester"
+                      onChange={createCheckboxChangeHandler(
+                        selectedSemester,
+                        setSelectedSemester
+                      )}
+                    />{" "}
+                    Зимски семестар
+                  </div>
                 </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    value="зимски"
-                    name="semester"
-                    onChange={createCheckboxChangeHandler(
-                      selectedSemester,
-                      setSelectedSemester
-                    )}
-                  />{" "}
-                  Зимски семестар
-                </div>
+
+                <hr className="filter-box-separator"></hr>
               </div>
 
-              <hr className="filter-box-separator"></hr>
-            </div>
-
-            {/* Година студија*/}
-            <div className="filter-box">
-              <h4 className="filter-box-header">
-                <b>Година студија</b>{" "}
-                <img
-                  id="year-of-study-group-arrow"
-                  src="./images/feArrowDown0.png"
-                  onClick={() => toggle("year-of-study-group")}
-                  className="clickable-pointer"
-                  alt=""
-                />
-              </h4>
-              <div id="year-of-study-group">
-                <div>
-                  {" "}
-                  <input
-                    type="checkbox"
-                    value="прва"
-                    name="year_of_study"
-                    onChange={createCheckboxChangeHandler(
-                      selectedYearOfStudy,
-                      setSelectedYearOfStudy
-                    )}
-                  />{" "}
-                  Прва
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    value="друга"
-                    name="year_of_study"
-                    onChange={createCheckboxChangeHandler(
-                      selectedYearOfStudy,
-                      setSelectedYearOfStudy
-                    )}
-                  />{" "}
-                  Друга
-                </div>
-                <div>
-                  {" "}
-                  <input
-                    type="checkbox"
-                    value="трећа"
-                    name="year_of_study"
-                    onChange={createCheckboxChangeHandler(
-                      selectedYearOfStudy,
-                      setSelectedYearOfStudy
-                    )}
-                  />{" "}
-                  Трећа
-                </div>
-                <div>
-                  <input
-                    type="checkbox"
-                    value="четврта"
-                    name="year_of_study"
-                    onChange={createCheckboxChangeHandler(
-                      selectedYearOfStudy,
-                      setSelectedYearOfStudy
-                    )}
-                  />{" "}
-                  Четврта
+              {/* Година студија*/}
+              <div className="filter-box">
+                <h4 className="filter-box-header">
+                  <b>Година студија</b>{" "}
+                  <img
+                    id="year-of-study-group-arrow"
+                    src="./images/feArrowDown0.png"
+                    onClick={() => toggle("year-of-study-group")}
+                    className="clickable-pointer"
+                    alt=""
+                  />
+                </h4>
+                <div id="year-of-study-group">
+                  <div>
+                    {" "}
+                    <input
+                      type="checkbox"
+                      value="прва"
+                      name="year_of_study"
+                      onChange={createCheckboxChangeHandler(
+                        selectedYearOfStudy,
+                        setSelectedYearOfStudy
+                      )}
+                    />{" "}
+                    Прва
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      value="друга"
+                      name="year_of_study"
+                      onChange={createCheckboxChangeHandler(
+                        selectedYearOfStudy,
+                        setSelectedYearOfStudy
+                      )}
+                    />{" "}
+                    Друга
+                  </div>
+                  <div>
+                    {" "}
+                    <input
+                      type="checkbox"
+                      value="трећа"
+                      name="year_of_study"
+                      onChange={createCheckboxChangeHandler(
+                        selectedYearOfStudy,
+                        setSelectedYearOfStudy
+                      )}
+                    />{" "}
+                    Трећа
+                  </div>
+                  <div>
+                    <input
+                      type="checkbox"
+                      value="четврта"
+                      name="year_of_study"
+                      onChange={createCheckboxChangeHandler(
+                        selectedYearOfStudy,
+                        setSelectedYearOfStudy
+                      )}
+                    />{" "}
+                    Четврта
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-  )
-) : (
-  <div></div>
-)}
-
-
-
-
+          )
+        ) : (
+          <div></div>
+        )}
 
         {!isSidebarVisible || !isSmallScreen ? (
           isLoadingCourses ? (
