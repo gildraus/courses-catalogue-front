@@ -29,6 +29,8 @@
 
 .suggestions-list {
   position: absolute;
+  max-height: 250px;
+  overflow-y: auto;
   top: 100%;
   left: 0;
   right: 0;
