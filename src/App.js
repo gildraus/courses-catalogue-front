@@ -7,6 +7,7 @@ import CoursesView from "./components/main_page/CoursesView";
 import CourseDetails from "./components/main_page/CourseDetails";
 import Login from "./components/login_page/Login";
 import Form from "./components/form_page/Form";
+import NewCourseForm from "./components/form_page/NewCourseForm";
 import Dashboard from "./components/cpanel_page/Dashboard";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
@@ -22,6 +23,7 @@ function App() {
   const [allDepartments, setAllDepartments] = useState([]);
   const [allModules, setAllModules] = useState([]);
   const [allLevelsOfStudy, setAllLevelsOfStudy] = useState([]);
+  const [allPrograms, setAllPrograms] = useState([]);
   const [coursesToShow, setCoursesToShow] = useState([]);
   const [selectedLevelOfStudy, setSelectedLevelOfStudy] = useState(undefined);
   const [selectedProgram, setSelectedProgram] = useState(undefined);
@@ -90,6 +92,15 @@ function App() {
     }
   };
 
+  const fetchProgram = async () => {
+    try {
+      const response = await axios.get(server_name + "/programs");
+      setAllPrograms(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchFilteredCourses = async () => {
     try {
       const response = await axios.get(server_name + "/filteredCourses", {
@@ -141,8 +152,6 @@ function App() {
       setCoursesOfTheSameName(filteredCourses);
     }
   }, [selectedCourse, allCourses]);
-  
-
 
   return (
     <BrowserRouter>
@@ -220,8 +229,13 @@ function App() {
           path="/form"
           element={
             cookies.access_token && !isTokenExpired() ? (
-              <Form allModules={allModules} allDepartments={allDepartments} />
+              <NewCourseForm
+                allPrograms={allPrograms}
+                allModules={allModules}
+                allDepartments={allDepartments}
+              />
             ) : (
+              // <Form allModules={allModules} allDepartments={allDepartments} />
               <Navigate to="/login" />
             )
           }
@@ -242,6 +256,7 @@ function App() {
           element={
             cookies.access_token && !isTokenExpired() ? (
               <UpdatePage
+                allLevelsOfStudy={allLevelsOfStudy}
                 allCourses={allCourses}
                 allModules={allModules}
                 allDepartments={allDepartments}
