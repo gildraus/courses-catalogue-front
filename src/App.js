@@ -17,6 +17,7 @@ import server_name from "./config";
 import axios from "axios";
 import { Button } from "@mui/material";
 import UpdatePage from "./components/cpanel_page/UpdatePage";
+import Test from "./components/main_page/Test";
 
 function App() {
   const [allCourses, setAllCourses] = useState([]);
@@ -269,6 +270,7 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/form" element={<Form />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   );

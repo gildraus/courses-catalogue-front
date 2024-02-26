@@ -119,7 +119,12 @@ const CoursesView = ({
           <img src="./images/filter-icon.png" alt="" />
           Филтери
         </button>
-        {/* <button onClick={testiraj}>testiraj</button> */}
+
+        <div className="applied-filters-box">
+          {" "}
+          <button>placeholder for applied filter</button>
+        </div>
+
         <p
           className="reset-filter-text"
           onClick={() => {
