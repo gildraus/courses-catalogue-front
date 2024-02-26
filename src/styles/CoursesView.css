@@ -322,3 +322,19 @@ input{
 .courses-view-card-icon{
   min-width: 18px;
 }
+
+.active-filter{
+  background-color: #ffffff; 
+  color: #000000;
+  border: 2px solid #11c098;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex; 
+  align-items: center; 
+
+ }
+
+ .active-filter:hover{
+  cursor:default;
+ }

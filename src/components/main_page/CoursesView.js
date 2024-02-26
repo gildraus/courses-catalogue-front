@@ -1,5 +1,6 @@
 import "../../styles/CoursesView.css";
 import Dropdown from "react-bootstrap/Dropdown";
+import CloseButton from "react-bootstrap/CloseButton";
 import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import SkeletonCourseCard from "../skeletons/SkeletonCourseCard";
@@ -99,8 +100,18 @@ const CoursesView = ({
     alert(selectedLevelOfStudy);
   };
   const handleLevelOfStudyChange = (event) => {
-    const selectedLevel = event.target.value;
+    const selectedLevel = event ? event.target.value : undefined;
     setSelectedLevelOfStudy(selectedLevel);
+    setSelectedProgram(null);
+    setSelectedModule(null);
+  };
+
+  const handleLevelOfStudyUncheck = () => {
+    const radioButtons = document.getElementsByName("level_of_study");
+    radioButtons.forEach((radio) => {
+      radio.checked = false;
+    });
+    setSelectedLevelOfStudy(undefined);
     setSelectedProgram(null);
     setSelectedModule(null);
   };
@@ -112,6 +123,8 @@ const CoursesView = ({
   const handleModuleChange = (moduleName) => {
     setSelectedModule(moduleName);
   };
+ 
+
   return (
     <div className="courses-view">
       <div className="courses-view-header">
@@ -122,7 +135,23 @@ const CoursesView = ({
 
         <div className="applied-filters-box">
           {" "}
-          <button>placeholder for applied filter</button>
+          {/* Level of study applied filter */}
+          {selectedLevelOfStudy && (
+            <button className="active-filter">
+              {" "}
+              Ниво студија
+              <CloseButton onClick={handleLevelOfStudyUncheck} />
+            </button>
+          )}
+          {/* Program applied filter */}
+          {selectedModule && (
+            <button className="active-filter">
+              {" "}
+              Модул
+              <CloseButton onClick={handleLevelOfStudyUncheck} />
+            </button>
+          )}
+          {/* Module applied filter */}
         </div>
 
         <p
