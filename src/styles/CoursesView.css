@@ -338,3 +338,9 @@ input{
  .active-filter:hover{
   cursor:default;
  }
+
+ .applied-filters-box {
+  display: flex;
+  gap: 10px; /* Adjust the gap between buttons */
+  margin: 10px;
+}

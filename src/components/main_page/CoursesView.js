@@ -120,10 +120,26 @@ const CoursesView = ({
     setSelectedProgram(programName);
     setSelectedModule(null);
   };
+
+  const handleProgramUncheck = () => {
+    const radioButtons = document.getElementsByName("program");
+    radioButtons.forEach((radio) => {
+      radio.checked = false;
+    });
+    setSelectedProgram(null);
+    setSelectedModule(null);
+  };
   const handleModuleChange = (moduleName) => {
     setSelectedModule(moduleName);
   };
- 
+
+  const handleModuleUncheck = () => {
+    const radioButtons = document.getElementsByName("module");
+    radioButtons.forEach((radio) => {
+      radio.checked = false;
+    });
+    setSelectedModule([]);
+  };
 
   return (
     <div className="courses-view">
@@ -144,14 +160,20 @@ const CoursesView = ({
             </button>
           )}
           {/* Program applied filter */}
-          {selectedModule && (
+          {selectedProgram && (
             <button className="active-filter">
               {" "}
-              Модул
-              <CloseButton onClick={handleLevelOfStudyUncheck} />
+              Студијски програм
+              <CloseButton onClick={handleProgramUncheck} />
             </button>
           )}
           {/* Module applied filter */}
+          {selectedModule != null && selectedModule.length > 0 && (
+            <button className="active-filter">
+              Модул
+              <CloseButton onClick={handleModuleUncheck} />
+            </button>
+          )}
         </div>
 
         <p
