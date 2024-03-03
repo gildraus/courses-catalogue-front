@@ -141,6 +141,22 @@ const CoursesView = ({
     setSelectedModule([]);
   };
 
+  const handleSemesterUncheck = () => {
+    const buttons = document.getElementsByName("semester");
+    buttons.forEach((button) => {
+      button.checked = false;
+    })
+    setSelectedSemester([]);
+  }
+
+  const handleYearOfStudyUncheck = () => {
+    const buttons = document.getElementsByName("year_of_study");
+    buttons.forEach((button) => {
+      button.checked = false;
+    })
+    setSelectedYearOfStudy([]);
+  }
+
   return (
     <div className="courses-view">
       <div className="courses-view-header">
@@ -174,6 +190,23 @@ const CoursesView = ({
               <CloseButton onClick={handleModuleUncheck} />
             </button>
           )}
+
+          {selectedSemester != null && selectedSemester.length > 0 && (
+            <button className="active-filter">
+              Семестар
+              <CloseButton onClick={handleSemesterUncheck} />
+            </button>
+          )}
+
+
+          {selectedYearOfStudy != null && selectedYearOfStudy.length > 0 && (
+            <button className="active-filter">
+              Година студија
+              <CloseButton onClick={handleYearOfStudyUncheck} />
+            </button>
+
+          )}
+
         </div>
 
         <p
@@ -185,7 +218,7 @@ const CoursesView = ({
         >
           Ресетуј филтере
         </p>
-        {/* ovde bi trebalo da stoji dropdown ali iz nekog razloga bootstrap ne radi*/}
+
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Сортирај приказ
