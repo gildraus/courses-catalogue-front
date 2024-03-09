@@ -231,6 +231,7 @@ function App() {
           element={
             cookies.access_token && !isTokenExpired() ? (
               <NewCourseForm
+              allLevelsOfStudy={allLevelsOfStudy}
                 allPrograms={allPrograms}
                 allModules={allModules}
                 allDepartments={allDepartments}

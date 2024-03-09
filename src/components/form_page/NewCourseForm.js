@@ -16,6 +16,8 @@ const Form = ({
   const [accreditation, setAccreditation] = useState(undefined);
   const [semester, setSemester] = useState(undefined);
   const [levelOfStudy, setLevelOfStudy] = useState(undefined);
+  const [program, setProgram] = useState(undefined);
+  const [module, setModule] = useState(undefined);
   const [modules, setModules] = useState([]);
   const [yearsOfStudy, setYearsOfStudy] = useState([]);
   const [status, setStatus] = useState(undefined);
@@ -205,6 +207,18 @@ const Form = ({
   const handleLevelOfStudyChange = (selectedValue) => {
     setLevelOfStudy((prevLevel) =>
       prevLevel === selectedValue ? undefined : selectedValue
+    );
+  };
+
+  const handleProgramChange = (selectedValue) => {
+    setProgram((prevProgram) =>
+      prevProgram === selectedValue ? undefined : selectedValue
+    );
+  };
+
+  const handleModuleChange = (selectedValue) => {
+    setModule((prevModule) =>
+      prevModule === selectedValue ? undefined : selectedValue
     );
   };
 
@@ -433,97 +447,71 @@ const Form = ({
               Ниво студија
               <Dropdown className="sort-dropdown">
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {levelOfStudy ? levelOfStudy : "Изаберите ниво студија"}
-                </Dropdown.Toggle>
-                <p>ovde ce nesto drugo</p>
-                <button> test</button>
-                <Dropdown.Menu>
-                  {/* {allLevelsOfStudy.map((levelOfStudy) => (
-                    <Dropdown.Item>{levelOfStudy.name}</Dropdown.Item>
-                  ))} */}
-
-                  <Dropdown.Item
-                    onClick={() =>
-                      handleLevelOfStudyChange("Основне академске студије")
-                    }
-                  >
-                    Основне академске студије
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() =>
-                      handleLevelOfStudyChange("Мастер академске студије")
-                    }
-                  >
-                    Мастер академске студије
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() =>
-                      handleLevelOfStudyChange(
-                        "Специјалистичке академске студије"
-                      )
-                    }
-                  >
-                    Специјалистичке академске студије
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() =>
-                      handleLevelOfStudyChange("Докторске студије")
-                    }
-                  >
-                    Докторске студије
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </div>
-
-          <div className="form-box-row">
-            <div className="form-box-row-element">
-              Модул
-              <Dropdown className="sort-dropdown">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Изаберите модул
+                  {levelOfStudy
+                    ? levelOfStudy.levelOfStudyName
+                    : "Изаберите ниво студија"}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {allModules.map((modul, index) => (
-                    <Dropdown.Item key={index} onClick={addModule}>
-                      {modul.name}
+                  {allLevelsOfStudy.map((level, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      onClick={() => handleLevelOfStudyChange(level)}
+                    >
+                      {level.levelOfStudyName}
                     </Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
-              {modules.map((item, index) => (
-                <p key={index}>{item}</p>
-              ))}
             </div>
+          </div>
+          <div className="form-box-row">
+            {levelOfStudy && (
+              <div className="form-box-row-element">
+                Програм
+                <Dropdown className="sort-dropdown">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {program ? program.programName : "Изаберите програм"}
+                  </Dropdown.Toggle>
 
-            <div className="form-box-row-element">
-              Година студија
-              <Dropdown className="sort-dropdown">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Изаберите годину студија
-                </Dropdown.Toggle>
+                  <Dropdown.Menu>
+                    {levelOfStudy.programs.map((program, index) => (
+                      <Dropdown.Item
+                        key={index}
+                        onClick={() => handleProgramChange(program)}
+                      >
+                        {program.programName}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            )}
 
-                <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1" onClick={addYearOfStudy}>
-                    1
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="2" onClick={addYearOfStudy}>
-                    2
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="3" onClick={addYearOfStudy}>
-                    3
-                  </Dropdown.Item>
-                  <Dropdown.Item eventKey="4" onClick={addYearOfStudy}>
-                    4
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-              {yearsOfStudy.map((year, index) => (
-                <p key={index}>{year}</p>
-              ))}
-            </div>
+            {program && (
+              <div className="form-box-row-element">
+                Модул
+                <Dropdown className="sort-dropdown">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {module ? module.module : "Изаберите модул"}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {program.modules.map((module, index) => (
+                      <Dropdown.Item
+                        key={index}
+                        onClick={() => handleModuleChange(module)}
+                      >
+                        {module.module}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+                {yearsOfStudy.map((year, index) => (
+                  <p key={index}>{year}</p>
+                ))}
+              </div>
+            )}
           </div>
 
           <div className="form-box-row">
