@@ -76,6 +76,25 @@ const CourseDetails = ({
               )}
             </div>
 
+            <div className="course-details-info">
+              <h2>Картон предмета</h2>
+              <p>
+                Веб сајт: <a href={course.link}>{course.link}</a>
+              </p>
+              <p>Број ЕСПБ поена: {course.espb}</p>
+
+              <p>Семестар: {course.semester}</p>
+              <p>Статус: {course.status}</p>
+              <p>ИД курса: {course.course_id}</p>
+              <p>Модул: {course.modules[0]}</p>
+              <h2>Напомена</h2>
+              <p>
+                <img src="./images/danger.png" />
+                {course.note}
+              </p>
+              <p></p>
+            </div>
+
             <div className="course-details-basic-info-box">
               <h3>Предавачи:</h3>
               {course.lecturers.map((lecturer, index) => (

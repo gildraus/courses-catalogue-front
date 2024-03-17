@@ -61,6 +61,7 @@
 
 .course-details-basic-info-box,
 .course-details-sidecard,
+.course-details-info,
 .course-details-detailed-info-box,
 .course-details-literature {
   background-color: #ffffff;
@@ -106,3 +107,48 @@ img {
   top: 0;
   right: 0;
 }
+
+/*
+ *  Styling for extra large screens
+ */
+ @media (min-width: 1200px) {
+  body {
+    color: red;
+  }
+  .course-details-sidecard {
+    display: block;
+  }
+  .course-details-info {
+    display: none;
+  }
+ }
+
+ @media (min-width: 1000px) and (max-width: 1200px){
+  body {
+    color: blue;
+  }
+  .course-details-sidebar {
+    display: none;
+  }
+  .course-details-info {
+    display: block;
+  }
+  .course-details-main-body {
+    width: 90%;
+  }
+ }
+
+ @media (max-width: 1000px) {
+  body {
+    color: green;
+  }
+  .course-details-sidebar {
+    display: none;
+  }
+  .course-details-info {
+    display: inline-block;
+  }
+  .course-details-main-body {
+    width: 90%;
+  }
+ }
