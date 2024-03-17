@@ -112,9 +112,6 @@ img {
  *  Styling for extra large screens
  */
  @media (min-width: 1200px) {
-  body {
-    color: red;
-  }
   .course-details-sidecard {
     display: block;
   }
@@ -124,9 +121,6 @@ img {
  }
 
  @media (min-width: 1000px) and (max-width: 1200px){
-  body {
-    color: blue;
-  }
   .course-details-sidebar {
     display: none;
   }
@@ -139,9 +133,6 @@ img {
  }
 
  @media (max-width: 1000px) {
-  body {
-    color: green;
-  }
   .course-details-sidebar {
     display: none;
   }
