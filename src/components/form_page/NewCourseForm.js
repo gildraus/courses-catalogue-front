@@ -586,43 +586,6 @@ const Form = ({
 
           <div className="form-box-row">
             <div className="form-box-row-element">
-              Тип полагања
-              <Dropdown className="sort-dropdown">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {typeOfExam ? typeOfExam : "Изаберите тип полагања"}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => handleTypeOfExam("писмено")}>
-                    писмено
-                  </Dropdown.Item>
-                  <Dropdown.Item onClick={() => handleTypeOfExam("усмено")}>
-                    усмено
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() => handleTypeOfExam("писмено + усмено")}
-                  >
-                    писмено + усмено
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-
-            <div className="form-box-row-element">
-              Тип наставе
-              <input
-                type="text"
-                placeholder="Унесите тип наставе"
-                className="input"
-                name=""
-                onChange={(e) => setTypeOfLecture(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-
-          <div className="form-box-row">
-            <div className="form-box-row-element">
               Предавач
               <input
                 type="text"
