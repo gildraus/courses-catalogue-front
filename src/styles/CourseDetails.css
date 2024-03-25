@@ -108,6 +108,19 @@ img {
   right: 0;
 }
 
+.module-selector{
+  display: flex;
+  flex-direction: column;
+
+}
+.module-selector p {
+  margin-bottom: 5px; /* Adjust margin as needed */
+}
+
+#course-name-header-text, #course-department-header-text{
+  text-align: left;
+}
+
 /*
  *  Styling for extra large screens
  */

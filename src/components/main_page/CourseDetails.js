@@ -2,6 +2,7 @@ import { Dropdown, DropdownItem } from "react-bootstrap";
 import "../../styles/CourseDetails.css";
 import { useEffect } from "react";
 import CloseButton from "react-bootstrap/CloseButton";
+import BasicInfoCard from "./BasicInfoCard";
 
 const CourseDetails = ({
   coursesOfTheSameName,
@@ -15,21 +16,22 @@ const CourseDetails = ({
   };
   return (
     <div className="course-details-background">
-       <div className="close-button-container">    <CloseButton className="close-button" onClick={closeCourseDetails} /></div>
-    
+      <div className="close-button-container">
+        {" "}
+        <CloseButton className="close-button" onClick={closeCourseDetails} />
+      </div>
+
       <div className="course-details">
-       
         <div className="course-details-header">
-          
-          <h1>{course.name}</h1>
-
-          <div>{course.departments}</div>
-
+          <h2 id="course-name-header-text">{course.name}</h2>
+          <div id="course-department-header-text">{course.departments}</div>
+        </div>
+        <div className="module-selector">
+          <p> Изабери модул:</p>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {selectedCourse.modules[0]}
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
               {coursesOfTheSameName.map((item) => (
                 <Dropdown.Item
@@ -77,22 +79,8 @@ const CourseDetails = ({
             </div>
 
             <div className="course-details-info">
-              <h2>Картон предмета</h2>
-              <p>
-                Веб сајт: <a href={course.link}>{course.link}</a>
-              </p>
-              <p>Број ЕСПБ поена: {course.espb}</p>
-
-              <p>Семестар: {course.semester}</p>
-              <p>Статус: {course.status}</p>
-              <p>ИД курса: {course.course_id}</p>
-              <p>Модул: {course.modules[0]}</p>
-              <h2>Напомена</h2>
-              <p>
-                <img src="./images/danger.png" />
-                {course.note}
-              </p>
-              <p></p>
+              {/* desktop view */}
+              <BasicInfoCard selectedCourse={selectedCourse} />
             </div>
 
             <div className="course-details-basic-info-box">
@@ -135,22 +123,8 @@ const CourseDetails = ({
 
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
-              <h2>Картон предмета</h2>
-              <p>
-                Веб сајт: <a href={course.link}>{course.link}</a>
-              </p>
-              <p>Број ЕСПБ поена: {course.espb}</p>
-
-              <p>Семестар: {course.semester}</p>
-              <p>Статус: {course.status}</p>
-              <p>ИД курса: {course.course_id}</p>
-              <p>Модул: {course.modules[0]}</p>
-              <h2>Напомена</h2>
-              <p>
-                <img src="./images/danger.png" />
-                {course.note}
-              </p>
-              <p></p>
+              {/* mobile view */}
+              <BasicInfoCard selectedCourse={selectedCourse} />
             </div>
           </div>
         </div>
