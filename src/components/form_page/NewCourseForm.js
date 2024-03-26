@@ -18,6 +18,7 @@ const Form = ({
   const [module, setModule] = useState(undefined);
   const [modules, setModules] = useState([]);
   const [yearsOfStudy, setYearsOfStudy] = useState([]);
+  const [yearOfStudy, setYearOfStudy] = useState(undefined);
   const [status, setStatus] = useState(undefined);
   const [espb, setEspb] = useState(undefined);
   const [departments, setDepartments] = useState([]);
@@ -50,7 +51,26 @@ const Form = ({
   }, []);
 
   const test = () => {
-    alert("proba");
+    // alert("id: " + courseID 
+    // + "\nnaziv: " + name 
+    // + "\nsemestar: " + semester 
+    // + "\ngodina studija: " + yearOfStudy 
+    // + "\nnivo studija: " + levelOfStudy.levelOfStudyName 
+    // + "\nprogram: " + program.programName 
+    // + "\nmodul: " + module.module
+    // +"\nstatus: " + status
+    // +"\nespb" + espb
+    // +"\nkatedra: " + departments
+    // + "\npredavac: " + lecturers
+    // +"\ntermin predavanja: " + lectureSessionTimes
+    // + "\ntermini vezbi: " + exerciseSessionTimes 
+    // + "\nopis: " +description
+    // +"\nnapomena: " +note
+    // + "\nliteratura: " + literatures
+    // + "\ntagovi: " + tags
+    // + "\nlink: " + link
+    // +"\nvideo: " + video);
+    alert('lol')
   };
 
   const addModule = (event) => {
@@ -195,28 +215,24 @@ const Form = ({
       const response = await axios.post(
         `${server_name}/api/courses`,
         {
-          courseID: courseID,
-          semester: semester,
+          course_id: courseID,
           name: name,
-          levelOfStudy: levelOfStudy,
-          moduleItems: modules,
-          departmentItems: departments,
-          yearOfStudyItems: yearsOfStudy,
-          status: status,
-          espb: espb,
-          lecturerItems: lecturers,
-          lectureSessionTimeItems: lectureSessionTimes,
-          exerciseSessionTimeItems: exerciseSessionTimes,
-          periodicity: periodicity,
-          abstract: abstract,
-          content: content,
-          objective: objective,
+          level_of_study: levelOfStudy?.levelOfStudyName,
+          program: program?.programName,
+          modules: module?.module,
+          semester: semester,
+          departments: departments,
+          year_of_study: yearOfStudy,
+          lecturers: lecturers,
+          lecture_session_time: lectureSessionTimes,
+          exercise_session_time: exerciseSessionTimes,
           description: description,
           note: note,
-          literatureItems: literatures,
-          tagItems: tags,
+          literature: literatures,
+          tags: tags,
           link: link,
           video: video,
+          status: status
         },
         {
           headers: {
@@ -224,11 +240,17 @@ const Form = ({
           },
         }
       );
-      console.log(response.data);
+      // Display success message or handle response data
+      alert("Course successfully submitted!");
+      console.log(response.data); // Log the response data for debugging
     } catch (error) {
-      console.error(error);
+      // Display error message or handle error
+      console.error("Error submitting course:", error);
+      alert("Failed to submit course. Please try again.");
     }
   };
+  
+  
 
   return (
     <div className="form">
@@ -296,27 +318,25 @@ const Form = ({
               Година студија
               <Dropdown className="sort-dropdown">
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  Изаберите годину студија
+                {yearOfStudy ? yearOfStudy : "Изаберите годину студија"} 
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1" onClick={addYearOfStudy}>
+                  <Dropdown.Item eventKey="1" onClick={() => setYearOfStudy("прва")}>
                     1
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="2" onClick={addYearOfStudy}>
+                  <Dropdown.Item eventKey="2" onClick={() => setYearOfStudy("друга")}>
                     2
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="3" onClick={addYearOfStudy}>
+                  <Dropdown.Item eventKey="3" onClick={() => setYearOfStudy("трећа")}>
                     3
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="4" onClick={addYearOfStudy}>
+                  <Dropdown.Item eventKey="4" onClick={() => setYearOfStudy("четврта")}>
                     4
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              {yearsOfStudy.map((year, index) => (
-                <p key={index}>{year}</p>
-              ))}
+
             </div>
           </div>
         </div>

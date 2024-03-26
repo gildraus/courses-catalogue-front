@@ -80,7 +80,7 @@ const CourseDetails = ({
 
             <div className="course-details-info">
               {/* desktop view */}
-              <BasicInfoCard selectedCourse={selectedCourse} />
+              <BasicInfoCard selectedCourse={selectedCourse} coursesOfTheSameName={coursesOfTheSameName} />
             </div>
 
             <div className="course-details-basic-info-box">
@@ -124,7 +124,7 @@ const CourseDetails = ({
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
               {/* mobile view */}
-              <BasicInfoCard selectedCourse={selectedCourse} />
+              <BasicInfoCard selectedCourse={selectedCourse}  coursesOfTheSameName={coursesOfTheSameName}/>
             </div>
           </div>
         </div>
