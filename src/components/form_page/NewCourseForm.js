@@ -12,8 +12,6 @@ const Form = ({
 }) => {
   const [courseID, setCourseID] = useState(undefined);
   const [name, setName] = useState(undefined);
-  const [studies, setStudies] = useState([]);
-  const [accreditation, setAccreditation] = useState(undefined);
   const [semester, setSemester] = useState(undefined);
   const [levelOfStudy, setLevelOfStudy] = useState(undefined);
   const [program, setProgram] = useState(undefined);
@@ -23,20 +21,17 @@ const Form = ({
   const [status, setStatus] = useState(undefined);
   const [espb, setEspb] = useState(undefined);
   const [departments, setDepartments] = useState([]);
-  const [typeOfExam, setTypeOfExam] = useState(undefined);
-  const [typeOfLecture, setTypeOfLecture] = useState(undefined);
   const [lecturers, setLecturers] = useState([]);
   const [lectureSessionTimes, setLectureSessionTimes] = useState([]);
   const [exerciseSessionTimes, setExerciseSessionTimes] = useState([]);
-  const [preconditions, setPreconditions] = useState([]);
   const [periodicity, setPeriodicity] = useState(undefined);
   const [abstract, setAbstract] = useState(undefined);
   const [content, setContent] = useState(undefined);
   const [objective, setObjective] = useState(undefined);
+  const [description, setDescription] = useState(undefined);
   const [note, setNote] = useState(undefined);
   const [literatures, setLiteratures] = useState([]);
   const [tags, setTags] = useState([]);
-  const [restrictions, setRestrictions] = useState([]);
   const [link, setLink] = useState(undefined);
   const [video, setVideo] = useState(undefined);
 
@@ -47,17 +42,15 @@ const Form = ({
     useState("");
   const [exerciseSessionTimeInputValue, setExerciseSessionTimeInputValue] =
     useState("");
-  const [preconditionInputValue, setPreconditionInputValue] = useState("");
   const [literatureInputValue, setLiteratureInputValue] = useState("");
   const [tagInputValue, setTagInputValue] = useState("");
-  const [restrictionInputValue, setRestrictionInputValue] = useState("");
 
   useEffect(() => {
     document.title = "Унос курса";
   }, []);
 
   const test = () => {
-    alert(lectureSessionTimes);
+    alert("proba");
   };
 
   const addModule = (event) => {
@@ -130,20 +123,6 @@ const Form = ({
     );
   };
 
-  const addPrecondition = () => {
-    if (
-      preconditionInputValue.trim() !== "" &&
-      !preconditions.includes(preconditionInputValue)
-    ) {
-      setPreconditions((prevItems) => [...prevItems, preconditionInputValue]);
-      setPreconditionInputValue("");
-    }
-  };
-
-  const removePrecondition = (index) => {
-    setPreconditions((prevItems) => prevItems.filter((_, i) => i !== index));
-  };
-
   const addLiterature = () => {
     if (
       literatureInputValue.trim() !== "" &&
@@ -168,33 +147,10 @@ const Form = ({
   const removeTag = (index) => {
     setTags((prevItems) => prevItems.filter((_, i) => i !== index));
   };
-  const addRestriction = () => {
-    if (
-      restrictionInputValue.trim() !== "" &&
-      !restrictions.includes(restrictionInputValue)
-    ) {
-      setRestrictions((prevItems) => [...prevItems, restrictionInputValue]);
-      setRestrictionInputValue("");
-    }
-  };
 
-  const removeRestriction = (index) => {
-    setRestrictions((prevItems) => prevItems.filter((_, i) => i !== index));
-  };
-
-  const handleTypeOfExam = (selectedValue) => {
-    setTypeOfExam((prevType) =>
-      prevType === selectedValue ? undefined : selectedValue
-    );
-  };
   const handlePeriodicity = (selectedValue) => {
     setPeriodicity((prevPeriodicity) =>
       prevPeriodicity === selectedValue ? undefined : selectedValue
-    );
-  };
-  const handleAccreditationChange = (selectedValue) => {
-    setAccreditation((prevAccreditation) =>
-      prevAccreditation === selectedValue ? undefined : selectedValue
     );
   };
 
@@ -233,15 +189,6 @@ const Form = ({
       prevEspb === selectedEspb ? undefined : selectedEspb
     );
   };
-  const handleCheckboxChange = (value) => {
-    if (studies.includes(value)) {
-      setStudies((prevStudies) =>
-        prevStudies.filter((study) => study !== value)
-      );
-    } else {
-      setStudies((prevStudies) => [...prevStudies, value]);
-    }
-  };
 
   const submitForm = async () => {
     try {
@@ -249,9 +196,7 @@ const Form = ({
         `${server_name}/api/courses`,
         {
           courseID: courseID,
-          acc: accreditation,
           semester: semester,
-          studies: studies,
           name: name,
           levelOfStudy: levelOfStudy,
           moduleItems: modules,
@@ -259,20 +204,17 @@ const Form = ({
           yearOfStudyItems: yearsOfStudy,
           status: status,
           espb: espb,
-          typeOfExam: typeOfExam,
-          typeOfLecture: typeOfLecture,
           lecturerItems: lecturers,
           lectureSessionTimeItems: lectureSessionTimes,
           exerciseSessionTimeItems: exerciseSessionTimes,
-          preconditionItems: preconditions,
           periodicity: periodicity,
           abstract: abstract,
           content: content,
           objective: objective,
+          description: description,
           note: note,
           literatureItems: literatures,
           tagItems: tags,
-          restrictionItems: restrictions,
           link: link,
           video: video,
         },
@@ -288,64 +230,6 @@ const Form = ({
     }
   };
 
-  const handleTestClick = () => {
-    alert(
-      "id: " +
-        courseID +
-        " \n name:" +
-        name +
-        " \n studies" +
-        studies +
-        " \n accreditation" +
-        accreditation +
-        " \n semester" +
-        semester +
-        " \n levelOfStudy" +
-        levelOfStudy +
-        " \n modules" +
-        modules +
-        " \n yearsOfStudy" +
-        yearsOfStudy +
-        " \n status" +
-        status +
-        " \n espb" +
-        espb +
-        " \n departments" +
-        departments +
-        " \n typeOfExam" +
-        typeOfExam +
-        " \n typeOfLecture" +
-        typeOfLecture +
-        " \n lecturers" +
-        lecturers +
-        " \n lectureSessionTimes" +
-        lectureSessionTimes +
-        " \n exerciseSessionTimes" +
-        exerciseSessionTimes +
-        " \n preconditions" +
-        preconditions +
-        " \n periodicity" +
-        periodicity +
-        " \n abstract" +
-        abstract +
-        " \n content" +
-        content +
-        " \n objective" +
-        objective +
-        " \n note" +
-        note +
-        " \n literatures" +
-        literatures +
-        " \n tagovi" +
-        tags +
-        " \n restrictions" +
-        restrictions +
-        " \n link" +
-        link +
-        " \n video" +
-        video
-    );
-  };
   return (
     <div className="form">
       <div className="header">
@@ -692,102 +576,19 @@ const Form = ({
           </div>
 
           <div className="form-box-row">
-            <div className="form-box-row-element">
-              Предуслов
-              <input
-                type="text"
-                placeholder="Унесите предуслов"
-                className="input"
-                name=""
-                value={preconditionInputValue}
-                onChange={(e) => setPreconditionInputValue(e.target.value)}
-                required
-              />
-            </div>
-            <div className="dropdown-plus" onClick={addPrecondition}>
-              <b>
-                <h4>+</h4>
-              </b>
-            </div>
-          </div>
-
-          <div className="added-elements">
-            {preconditions.map((precondition, index) => (
-              <div className="element" key={index}>
-                {precondition}
-                <img
-                  src="../../../images/delete.png"
-                  alt="Delete element"
-                  onClick={() => removePrecondition(index)}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="form-box-row">
-            <div className="form-box-row-element">
-              Периодичност
-              <Dropdown className="sort-dropdown">
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {periodicity ? periodicity : "Изаберите периодичност "}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item
-                    onClick={() => handlePeriodicity("једносеместрално")}
-                  >
-                    једносеместрално
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    onClick={() => handlePeriodicity("двосеместрално")}
-                  >
-                    двосеместрално
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </div>
-
-          <div className="form-box-row">
             <div className="form-box-row-description-element">
-              Сажетак курса
+              Опис курса
               <input
                 type="text"
-                placeholder="Унесите сажетак курса"
+                placeholder="Унесите опис курса"
                 className="input description"
                 name=""
-                onChange={(e) => setAbstract(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-          <div className="form-box-row">
-            <div className="form-box-row-description-element">
-              Садржај курса
-              <input
-                type="text"
-                placeholder="Унесите садржај курса"
-                className="input description"
-                name=""
-                onChange={(e) => setContent(e.target.value)}
+                onChange={(e) => setDescription(e.target.value)}
                 required
               />
             </div>
           </div>
 
-          <div className="form-box-row">
-            <div className="form-box-row-description-element">
-              Циљ курса
-              <input
-                type="text"
-                placeholder="Унесите циљ курса"
-                className="input description"
-                name=""
-                onChange={(e) => setObjective(e.target.value)}
-                required
-              />
-            </div>
-          </div>
           <div className="form-box-row">
             <div className="form-box-row-description-element">
               Напомена
@@ -875,38 +676,6 @@ const Form = ({
 
           <div className="form-box-row">
             <div className="form-box-row-element">
-              Рестрикција
-              <input
-                type="text"
-                placeholder="Додајте рестрикцију"
-                className="input"
-                name=""
-                value={restrictionInputValue}
-                onChange={(e) => setRestrictionInputValue(e.target.value)}
-                required
-              />
-            </div>
-            <div className="dropdown-plus" onClick={addRestriction}>
-              <b>
-                <h4>+</h4>
-              </b>
-            </div>
-          </div>
-          <div className="added-elements">
-            {restrictions.map((restriction, index) => (
-              <div className="element" key={index}>
-                {restriction}
-                <img
-                  src="../../../images/delete.png"
-                  alt="Delete element"
-                  onClick={() => removeRestriction(index)}
-                />
-              </div>
-            ))}
-          </div>
-
-          <div className="form-box-row">
-            <div className="form-box-row-element">
               Линк ка веб сајту
               <input
                 type="text"
@@ -937,6 +706,7 @@ const Form = ({
             <img src="../../../images/submit ico.png" alt="Сачувај" />
             Сачувај
           </button>
+          <button onClick={test}>test</button>
         </div>
       </div>
 
