@@ -63,12 +63,11 @@ const Dashboard = ({ allCourses }) => {
               <td>{course.dateUpdated}</td>
               <td>{course.accreditation}</td>
               <td>
-                <Button onClick={() => handleEdit(course.course_id)}>
-                  Измени
-                </Button>
-                <Button onClick={() => handleOpen(course.course_id)}>
+                
+                <Button onClick={() => handleOpen(course._id)}>
                   Уклони
                 </Button>
+                <Button onClick={() => alert(course._id)}>_id</Button>
               </td>
             </tr>
           ))}
