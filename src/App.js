@@ -18,6 +18,7 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import UpdatePage from "./components/cpanel_page/UpdatePage";
 import Test from "./components/main_page/Test";
+import UpdateCourse from "./components/cpanel_page/UpdateCourse";
 
 function App() {
   const [allCourses, setAllCourses] = useState([]);
@@ -231,7 +232,7 @@ function App() {
           element={
             cookies.access_token && !isTokenExpired() ? (
               <NewCourseForm
-              allLevelsOfStudy={allLevelsOfStudy}
+                allLevelsOfStudy={allLevelsOfStudy}
                 allPrograms={allPrograms}
                 allModules={allModules}
                 allDepartments={allDepartments}
@@ -253,7 +254,7 @@ function App() {
           }
         />
 
-        <Route
+        {/* <Route
           path="/update/:id"
           element={
             cookies.access_token && !isTokenExpired() ? (
@@ -267,10 +268,25 @@ function App() {
               <Navigate to="/login" />
             )
           }
+        /> */}
+
+        <Route
+          path="/update/:id"
+          element={
+            cookies.access_token && !isTokenExpired() ? (
+              <UpdateCourse
+                allLevelsOfStudy={allLevelsOfStudy}
+                allPrograms={allPrograms}
+                allModules={allModules}
+                allDepartments={allDepartments}
+              />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
         />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/form" element={<Form />} />
         <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>

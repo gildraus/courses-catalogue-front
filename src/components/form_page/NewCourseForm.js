@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import server_name from "../../config";
-const Form = ({
+const NewCourseForm = ({
   allLevelsOfStudy,
   allPrograms,
   allModules,
@@ -25,10 +25,7 @@ const Form = ({
   const [lecturers, setLecturers] = useState([]);
   const [lectureSessionTimes, setLectureSessionTimes] = useState([]);
   const [exerciseSessionTimes, setExerciseSessionTimes] = useState([]);
-  const [periodicity, setPeriodicity] = useState(undefined);
-  const [abstract, setAbstract] = useState(undefined);
-  const [content, setContent] = useState(undefined);
-  const [objective, setObjective] = useState(undefined);
+
   const [description, setDescription] = useState(undefined);
   const [note, setNote] = useState(undefined);
   const [literatures, setLiteratures] = useState([]);
@@ -36,8 +33,6 @@ const Form = ({
   const [link, setLink] = useState(undefined);
   const [video, setVideo] = useState(undefined);
 
-  const [studieISIT, setStudieISIT] = useState(false);
-  const [studieMEN, setStudieMEN] = useState(false);
   const [lecturerInputValue, setLecturerInputValue] = useState("");
   const [lectureSessionTimeInputValue, setLectureSessionTimeInputValue] =
     useState("");
@@ -168,11 +163,7 @@ const Form = ({
     setTags((prevItems) => prevItems.filter((_, i) => i !== index));
   };
 
-  const handlePeriodicity = (selectedValue) => {
-    setPeriodicity((prevPeriodicity) =>
-      prevPeriodicity === selectedValue ? undefined : selectedValue
-    );
-  };
+ 
 
   const handleSemesterChange = (selectedValue) => {
     setSemester((prevSemester) =>
@@ -254,6 +245,7 @@ const Form = ({
 
   return (
     <div className="form">
+      
       <div className="header">
         <div className="separator"></div>
         <div className="header-text">KATALOG KURSEVA</div>
@@ -735,4 +727,4 @@ const Form = ({
   );
 };
 
-export default Form;
+export default NewCourseForm;

@@ -6,9 +6,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import server_name from "../../config";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
-
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
 
 const Dashboard = ({ allCourses }) => {
   const [open, setOpen] = useState(false);
@@ -27,9 +30,7 @@ const Dashboard = ({ allCourses }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(
-        `${server_name}/api/courses/${courseIdToDelete}`
-      );
+      await axios.delete(`${server_name}/api/courses/${courseIdToDelete}`);
 
       handleClose();
       window.location.reload();
@@ -42,9 +43,35 @@ const Dashboard = ({ allCourses }) => {
     navigate(`/update/${courseId}`);
   };
 
+  const [checked, setChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState("1");
+  const radios = [
+    { name: "Сви нивои студија", value: "1" },
+    { name: "Основне академске студије", value: "2" },
+    { name: "Мастер академске студије", value: "3" },
+    
+  ];
   return (
     <div className="dashboard">
       <h1>Контролна табла</h1>
+
+      <ButtonGroup>
+        {radios.map((radio, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`radio-${idx}`}
+            type="radio"
+            variant={idx % 2 ? "outline-success" : "outline-danger"}
+            name="radio"
+            value={radio.value}
+            checked={radioValue === radio.value}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+      <Button onClick={() => alert(radioValue)}>klik</Button>
       <table className="dashboard-table">
         <thead>
           <tr>
@@ -63,11 +90,9 @@ const Dashboard = ({ allCourses }) => {
               <td>{course.dateUpdated}</td>
               <td>{course.accreditation}</td>
               <td>
-                
-                <Button onClick={() => handleOpen(course._id)}>
-                  Уклони
-                </Button>
-                <Button onClick={() => alert(course._id)}>_id</Button>
+                <Button onClick={()=>handleEdit(course._id)}>Измени</Button>
+                <Button onClick={() => handleOpen(course._id)}>Уклони</Button>
+           
               </td>
             </tr>
           ))}
