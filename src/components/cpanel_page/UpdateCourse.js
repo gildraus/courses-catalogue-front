@@ -259,9 +259,10 @@ const UpdateCourse = ({
   };
 
   const handleLevelOfStudyChange = (selectedValue) => {
-    setLevelOfStudy((prevLevel) =>
-      prevLevel === selectedValue ? undefined : selectedValue
-    );
+    setFormData({
+      ...formData,
+      levelOfStudy: selectedValue,
+    });
   };
 
   const handleProgramChange = (selectedValue) => {
@@ -519,10 +520,11 @@ const UpdateCourse = ({
               <div className="form-box-row">
                 <div className="form-box-row-element">
                   Ниво студија
+                  <button onClick={()=> alert(formData.program)}>klik</button>
                   <Dropdown className="sort-dropdown">
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
-                      {levelOfStudy
-                        ? levelOfStudy.levelOfStudyName
+                      {formData.levelOfStudy
+                        ? formData.levelOfStudy
                         : "Изаберите ниво студија"}
                     </Dropdown.Toggle>
 
@@ -540,7 +542,7 @@ const UpdateCourse = ({
                 </div>
               </div>
               <div className="form-box-row">
-                {levelOfStudy && (
+                {/* {levelOfStudy && (
                   <div className="form-box-row-element">
                     Програм
                     <Dropdown className="sort-dropdown">
@@ -560,9 +562,9 @@ const UpdateCourse = ({
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                )}
+                )} */}
 
-                {program && (
+                {/* {program && (
                   <div className="form-box-row-element">
                     Модул
                     <Dropdown className="sort-dropdown">
@@ -585,7 +587,7 @@ const UpdateCourse = ({
                       <p key={index}>{year}</p>
                     ))}
                   </div>
-                )}
+                )} */}
               </div>
 
               <div className="form-box-row">
