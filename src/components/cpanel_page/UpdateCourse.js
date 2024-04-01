@@ -10,7 +10,7 @@ import Footer from "../main_page/Footer";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-
+import Form from "react-bootstrap/Form";
 const UpdateCourse = ({
   allLevelsOfStudy,
   allPrograms,
@@ -259,22 +259,27 @@ const UpdateCourse = ({
   };
 
   const handleLevelOfStudyChange = (selectedValue) => {
+    setLevelOfStudy(selectedValue);
     setFormData({
       ...formData,
-      levelOfStudy: selectedValue,
+      levelOfStudy: selectedValue.levelOfStudyName,
     });
   };
 
   const handleProgramChange = (selectedValue) => {
-    setProgram((prevProgram) =>
-      prevProgram === selectedValue ? undefined : selectedValue
-    );
+    setProgram(selectedValue);
+    setFormData({
+      ...formData,
+      program: selectedValue.programName,
+    });
   };
 
   const handleModuleChange = (selectedValue) => {
-    setModule((prevModule) =>
-      prevModule === selectedValue ? undefined : selectedValue
-    );
+    setModule(selectedValue);
+    setFormData({
+      ...formData,
+      module: selectedValue.module,
+    });
   };
 
   const handleStatusChange = (selectedStatus) => {
@@ -515,12 +520,21 @@ const UpdateCourse = ({
             <div className="form-box">
               <div className="form-box-header">
                 <h4>Академске информације</h4>
+                <div>
+                  Тренутно поставке
+                  <br />
+                  Ниво студија: {formData.levelOfStudy}
+                  <br />
+                  Програм: {formData.program}
+                  <br />
+                  Модул: {formData.module}
+                  <br />
+                </div>
               </div>
 
               <div className="form-box-row">
                 <div className="form-box-row-element">
                   Ниво студија
-                  <button onClick={()=> alert(formData.program)}>klik</button>
                   <Dropdown className="sort-dropdown">
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                       {formData.levelOfStudy
@@ -542,12 +556,14 @@ const UpdateCourse = ({
                 </div>
               </div>
               <div className="form-box-row">
-                {/* {levelOfStudy && (
+                {levelOfStudy && (
                   <div className="form-box-row-element">
                     Програм
                     <Dropdown className="sort-dropdown">
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        {program ? program.programName : "Изаберите програм"}
+                        {formData.program
+                          ? formData.program
+                          : "Изаберите програм"}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -562,14 +578,14 @@ const UpdateCourse = ({
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                )} */}
+                )}
 
-                {/* {program && (
+                {program && (
                   <div className="form-box-row-element">
                     Модул
                     <Dropdown className="sort-dropdown">
                       <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        {module ? module.module : "Изаберите модул"}
+                        {formData.module ? formData.module : "Изаберите модул"}
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
@@ -583,11 +599,11 @@ const UpdateCourse = ({
                         ))}
                       </Dropdown.Menu>
                     </Dropdown>
-                    {yearsOfStudy.map((year, index) => (
+                    {/* {yearsOfStudy.map((year, index) => (
                       <p key={index}>{year}</p>
-                    ))}
+                    ))} */}
                   </div>
-                )} */}
+                )}
               </div>
 
               <div className="form-box-row">
@@ -983,7 +999,9 @@ const UpdateCourse = ({
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <div className="modal-buttons">
-                      <button className="save-btn">Потврди измене</button>
+                      <button className="save-btn" onClick={handleUpdate}>
+                        Потврди измене
+                      </button>
                       <button className="cancel-btn" onClick={handleClose}>
                         Откажи измене
                       </button>
