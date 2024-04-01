@@ -43,20 +43,32 @@ const Dashboard = ({ allCourses }) => {
     navigate(`/update/${courseId}`);
   };
 
-  const [checked, setChecked] = useState(false);
   const [radioValue, setRadioValue] = useState("1");
-  const radios = [
-    { name: "Сви нивои студија", value: "1" },
-    { name: "Основне академске студије", value: "2" },
-    { name: "Мастер академске студије", value: "3" },
-    
-  ];
+
+  const handleRadioChange = (e) => {
+    setRadioValue(e.currentTarget.value);
+  };
+
+  const filteredCourses = allCourses.filter((course) => {
+    if (radioValue === "1") {
+      return true; // Prikaži sve kurseve
+    } else if (radioValue === "2") {
+      return course.level_of_study === "Основне академске студије"; // Prikaži samo kurseve osnovnih akademskih studija
+    } else if (radioValue === "3") {
+      return course.level_of_study === "Мастер академске студије"; // Prikaži samo kurseve master akademskih studija
+    }
+  });
+
   return (
     <div className="dashboard">
       <h1>Контролна табла</h1>
 
       <ButtonGroup>
-        {radios.map((radio, idx) => (
+        {[
+          { name: "Сви нивои студија", value: "1" },
+          { name: "Основне академске студије", value: "2" },
+          { name: "Мастер академске студије", value: "3" },
+        ].map((radio, idx) => (
           <ToggleButton
             key={idx}
             id={`radio-${idx}`}
@@ -65,34 +77,30 @@ const Dashboard = ({ allCourses }) => {
             name="radio"
             value={radio.value}
             checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
+            onChange={handleRadioChange}
           >
             {radio.name}
           </ToggleButton>
         ))}
       </ButtonGroup>
-      <Button onClick={() => alert(radioValue)}>klik</Button>
       <table className="dashboard-table">
         <thead>
           <tr>
             <th>ИД</th>
             <th>Назив</th>
-            <th>Измењено</th>
-            <th>Акредитација</th>
+
             <th>Акције</th>
           </tr>
         </thead>
         <tbody>
-          {allCourses.map((course) => (
+          {filteredCourses.map((course) => (
             <tr key={course.id}>
               <td>{course.course_id}</td>
               <td>{course.name}</td>
-              <td>{course.dateUpdated}</td>
-              <td>{course.accreditation}</td>
+
               <td>
-                <Button onClick={()=>handleEdit(course._id)}>Измени</Button>
+                <Button onClick={() => handleEdit(course._id)}>Измени</Button>
                 <Button onClick={() => handleOpen(course._id)}>Уклони</Button>
-           
               </td>
             </tr>
           ))}
