@@ -46,6 +46,7 @@ const UpdateCourse = ({
   const [video, setVideo] = useState(undefined);
 
   const [lecturerInputValue, setLecturerInputValue] = useState("");
+  const [departmentInputValue, setDeparmtmentInputValue] = useState("");
   const [lectureSessionTimeInputValue, setLectureSessionTimeInputValue] =
     useState("");
   const [exerciseSessionTimeInputValue, setExerciseSessionTimeInputValue] =
@@ -77,13 +78,25 @@ const UpdateCourse = ({
     video: "",
   });
 
-  const addDepartmentToFormData = (newDepartment) => {
-    if (!formData.departments.includes(newDepartment)) {
+  const addDepartmentToFormData = (departmentName) => {
+    if (
+      departmentName.trim() !== "" &&
+      !formData.departments.includes(departmentName)
+    ) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        departments: [...prevFormData.departments, newDepartment],
+        departments: [...prevFormData.departments, departmentName],
       }));
     }
+  };
+
+  const removeDepartment = (indexToRemove) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      departments: prevFormData.departments.filter(
+        (_, index) => index !== indexToRemove
+      ),
+    }));
   };
 
   const handleOpen = () => {
@@ -705,9 +718,18 @@ const UpdateCourse = ({
                       ))}
                     </Dropdown.Menu>
                   </Dropdown>
-                  {formData.departments.map((department, index) => (
-                    <p key={index}>{department}</p>
-                  ))}
+                  <div className="added-elements">
+                    {formData.departments.map((department, index) => (
+                      <div className="element" key={index}>
+                        {department}
+                        <img
+                          src="../../../images/delete.png"
+                          alt="Delete element"
+                          onClick={() => removeDepartment(index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -999,7 +1021,10 @@ const UpdateCourse = ({
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     <div className="modal-buttons">
-                      <button className="save-btn" onClick={handleUpdate}>
+                      <button
+                        className="save-btn"
+                        onClick={() => handleUpdate()}
+                      >
                         Потврди измене
                       </button>
                       <button className="cancel-btn" onClick={handleClose}>
