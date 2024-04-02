@@ -1,3 +1,5 @@
+import server_name from "../../config";
+
 import React, { useState } from "react";
 import axios from "axios";
 import "../../styles/Dashboard.css";
@@ -6,16 +8,12 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useNavigate } from "react-router-dom";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import server_name from "../../config";
-import { Dropdown, DropdownButton } from "react-bootstrap";
-
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
+import { ButtonGroup, ToggleButton } from "react-bootstrap";
 
 const Dashboard = ({ allCourses }) => {
   const [open, setOpen] = useState(false);
   const [courseIdToDelete, setCourseIdToDelete] = useState(null);
+  const [selectedCourses, setSelectedCourses] = useState([]);
   const navigate = useNavigate();
 
   const handleOpen = (courseId) => {
@@ -30,14 +28,20 @@ const Dashboard = ({ allCourses }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${server_name}/api/courses/${courseIdToDelete}`);
-
+      if (selectedCourses.length === 0) {
+        await axios.delete(`${server_name}/api/courses/${courseIdToDelete}`);
+      } else {
+        await axios.post(`${server_name}/api/courses/delete`, { courseIds: selectedCourses });
+      }
+  
       handleClose();
       window.location.reload();
     } catch (error) {
-      console.error("Error deleting course:", error);
+      console.error("Error deleting courses:", error);
     }
   };
+  
+  
 
   const handleEdit = (courseId) => {
     navigate(`/update/${courseId}`);
@@ -47,6 +51,14 @@ const Dashboard = ({ allCourses }) => {
 
   const handleRadioChange = (e) => {
     setRadioValue(e.currentTarget.value);
+  };
+
+  const handleCheckboxChange = (courseId) => {
+    if (selectedCourses.includes(courseId)) {
+      setSelectedCourses(selectedCourses.filter((id) => id !== courseId));
+    } else {
+      setSelectedCourses([...selectedCourses, courseId]);
+    }
   };
 
   const filteredCourses = allCourses.filter((course) => {
@@ -86,6 +98,7 @@ const Dashboard = ({ allCourses }) => {
       <table className="dashboard-table">
         <thead>
           <tr>
+            <th></th>
             <th>ИД</th>
             <th>Назив</th>
 
@@ -94,18 +107,28 @@ const Dashboard = ({ allCourses }) => {
         </thead>
         <tbody>
           {filteredCourses.map((course) => (
-            <tr key={course.id}>
+            <tr key={course._id}>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={selectedCourses.includes(course._id)}
+                  onChange={() => handleCheckboxChange(course._id)}
+                />
+              </td>
               <td>{course.course_id}</td>
               <td>{course.name}</td>
 
               <td>
                 <Button onClick={() => handleEdit(course._id)}>Измени</Button>
-                <Button onClick={() => handleOpen(course._id)}>Уклони</Button>
+                {/* <Button onClick={() => handleOpen(course._id)}>Уклони</Button> */}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <div className="delete-selected">
+        <Button onClick={handleDelete}>Обриши одабране курсеве</Button>
+      </div>
       <Modal
         open={open}
         onClose={handleClose}
