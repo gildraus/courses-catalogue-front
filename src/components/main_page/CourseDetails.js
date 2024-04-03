@@ -10,10 +10,21 @@ const CourseDetails = ({
   setSelectedCourse,
 }) => {
   const course = selectedCourse;
-  const splitLiterature = course.literature[0].split(/\d+\./).filter(Boolean);
+  
+  let literatureItems;
+  if (Array.isArray(course.literature)) {
+    literatureItems = course.literature.map((item, index) => (
+      <p key={index}>
+        {index + 1}. {item}
+      </p>
+    ));
+  } else {
+    literatureItems = <p>{course.literature}</p>;
+  }
   const closeCourseDetails = () => {
     setSelectedCourse(undefined);
   };
+
   return (
     <div className="course-details-background">
       <div className="close-button-container">
@@ -113,11 +124,7 @@ const CourseDetails = ({
               {course.content}
               <hr />
               <h3 className="green-paragraph">Литература</h3>
-              {splitLiterature.map((book, index) => (
-                <p key={index}>
-                  {index + 1}. {book.trim()}
-                </p>
-              ))}
+              {literatureItems}
             </div>
           </div>
 

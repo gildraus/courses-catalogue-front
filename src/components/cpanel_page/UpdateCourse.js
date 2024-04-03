@@ -438,41 +438,24 @@ const UpdateCourse = ({
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
+                 
                       <Dropdown.Item
                         onClick={() =>
                           handleChange({
-                            target: { name: "semester", value: "први" },
+                            target: { name: "semester", value: "зимски" },
                           })
                         }
                       >
-                        први
+                        зимски
                       </Dropdown.Item>
                       <Dropdown.Item
                         onClick={() =>
                           handleChange({
-                            target: { name: "semester", value: "други" },
+                            target: { name: "semester", value: "летњи" },
                           })
                         }
                       >
-                        други
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() =>
-                          handleChange({
-                            target: { name: "semester", value: "трећи" },
-                          })
-                        }
-                      >
-                        трећи
-                      </Dropdown.Item>
-                      <Dropdown.Item
-                        onClick={() =>
-                          handleChange({
-                            target: { name: "semester", value: "четврти" },
-                          })
-                        }
-                      >
-                        четврти
+                        летњи
                       </Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
