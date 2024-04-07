@@ -10,7 +10,7 @@ const CourseDetails = ({
   setSelectedCourse,
 }) => {
   const course = selectedCourse;
-  
+
   let literatureItems;
   if (Array.isArray(course.literature)) {
     literatureItems = course.literature.map((item, index) => (
@@ -84,38 +84,53 @@ const CourseDetails = ({
                     allowFullScreen
                   ></iframe>
                 </div>
-              ) : (
-                <p>[катедра нема промотивни видео]</p>
-              )}
+              ) : null}
             </div>
 
             <div className="course-details-info">
               {/* desktop view */}
-              <BasicInfoCard selectedCourse={selectedCourse} coursesOfTheSameName={coursesOfTheSameName} />
+              <BasicInfoCard
+                selectedCourse={selectedCourse}
+                coursesOfTheSameName={coursesOfTheSameName}
+              />
             </div>
 
-            <div className="course-details-basic-info-box">
-              <h3>Предавачи:</h3>
-              {course.lecturers.map((lecturer, index) => (
-                <p key={index}>{lecturer}</p>
-              ))}
-
-              <h3>Термини предавања:</h3>
-              {course.lecture_session_time.map((time, index) => (
-                <p key={index}>{time}</p>
-              ))}
-              <p>ПОН-015-08:15</p>
-
-              <h3>Термини вежби:</h3>
-              {course.exercise_session_time.map((time, index) => (
-                <p key={index}>{time}</p>
-              ))}
-              <p>ПОН-015-08:15</p>
-              <a style={{ color: "red" }}>
-                {" "}
-                placeholder(nije preuzeto sa oasa)
-              </a>
-            </div>
+            {course.lecture_session_time.length > 0 ||
+            course.exercise_session_time.length > 0 ||
+            course.lecturers.length > 0 ? (
+              <div className="course-details-basic-info-box">
+                {course.lecturers.length > 0 && (
+                  <div className="lecturers-div">
+                    <h3>Предавачи:</h3>
+                    <ul>
+                      {course.lecturers.map((lecturer, index) => (
+                        <li key={index}>{lecturer}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {course.lecture_session_time.length > 0 && (
+                  <div className="lecture_session_time-div">
+                    <h3>Термини предавања:</h3>
+                    <ul>
+                      {course.lecture_session_time.map((time, index) => (
+                        <li key={index}>{time}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {course.exercise_session_time.length > 0 && (
+                  <div className="exercise_session_time-div">
+                    <h3>Термини вежби:</h3>
+                    <ul>
+                      {course.exercise_session_time.map((time, index) => (
+                        <li key={index}>{time}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : null}
 
             <div className="course-details-literature">
               <h2>Опис и литература</h2>
@@ -124,14 +139,21 @@ const CourseDetails = ({
               {course.description}
               <hr />
               <h3 className="green-paragraph">Литература</h3>
-              {literatureItems}
+              <ul>
+                {course.literature.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
             </div>
           </div>
 
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
               {/* mobile view */}
-              <BasicInfoCard selectedCourse={selectedCourse}  coursesOfTheSameName={coursesOfTheSameName}/>
+              <BasicInfoCard
+                selectedCourse={selectedCourse}
+                coursesOfTheSameName={coursesOfTheSameName}
+              />
             </div>
           </div>
         </div>
