@@ -118,10 +118,10 @@ const CourseDetails = ({
             </div>
 
             <div className="course-details-literature">
-              <h2>Садржај и литература</h2>
+              <h2>Опис и литература</h2>
               <br />
-              <h3 className="green-paragraph">Садржај</h3>
-              {course.content}
+              <h3 className="green-paragraph">Опис</h3>
+              {course.description}
               <hr />
               <h3 className="green-paragraph">Литература</h3>
               {literatureItems}

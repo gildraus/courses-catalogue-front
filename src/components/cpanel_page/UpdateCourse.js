@@ -60,9 +60,7 @@ const UpdateCourse = ({
     semester: "",
     levelOfStudy: "",
     program: "",
-    module: "",
     modules: [],
-    yearsOfStudy: [],
     yearOfStudy: "",
     status: "",
     espb: "",
@@ -287,11 +285,23 @@ const UpdateCourse = ({
     });
   };
 
-  const handleModuleChange = (selectedValue) => {
-    setModule(selectedValue);
+  const handleModuleChange = (selectedModule) => {
+    if (!formData.modules.includes(selectedModule.module)) {
+      const updatedModules = [...formData.modules, selectedModule.module];
+      setFormData({
+        ...formData,
+        modules: updatedModules,
+      });
+    }
+  };
+  
+  const handleModuleRemove = (indexToRemove) => {
+    const updatedModules = formData.modules.filter(
+      (_, index) => index !== indexToRemove
+    );
     setFormData({
       ...formData,
-      module: selectedValue.module,
+      modules: updatedModules,
     });
   };
 
@@ -334,11 +344,9 @@ const UpdateCourse = ({
         semester: courseData.semester || "",
         levelOfStudy: courseData.level_of_study || "",
         program: courseData.program || "",
-        module: courseData.modules.length > 0 ? courseData.modules[0] : "",
         modules: courseData.modules || [],
-        yearsOfStudy: courseData.year_of_study || [],
         yearOfStudy:
-          courseData.year_of_study.length > 0
+          courseData.year_of_study && courseData.year_of_study.length > 0
             ? courseData.year_of_study[0]
             : "",
         status: courseData.status || "",
@@ -438,7 +446,6 @@ const UpdateCourse = ({
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                 
                       <Dropdown.Item
                         onClick={() =>
                           handleChange({
@@ -517,13 +524,18 @@ const UpdateCourse = ({
               <div className="form-box-header">
                 <h4>Академске информације</h4>
                 <div>
-                  Тренутно поставке
+                  Тренутне поставке
                   <br />
                   Ниво студија: {formData.levelOfStudy}
                   <br />
                   Програм: {formData.program}
                   <br />
-                  Модул: {formData.module}
+                  Модул:
+                  <ul>
+                    {formData.modules.map((item, index) => (
+                      <li key={index}> {item}</li>
+                    ))}
+                  </ul>
                   <br />
                 </div>
               </div>
@@ -575,7 +587,6 @@ const UpdateCourse = ({
                     </Dropdown>
                   </div>
                 )}
-
                 {program && (
                   <div className="form-box-row-element">
                     Модул
@@ -595,9 +606,16 @@ const UpdateCourse = ({
                         ))}
                       </Dropdown.Menu>
                     </Dropdown>
-                    {/* {yearsOfStudy.map((year, index) => (
-                      <p key={index}>{year}</p>
-                    ))} */}
+                    {formData.modules.map((item, index) => (
+                      <div className="element" key={index}>
+                        {item}
+                        <img
+                          src="../../../images/delete.png"
+                          alt="Избриши ставку"
+                          onClick={() => handleModuleRemove(index)}
+                        />
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
@@ -982,7 +1000,10 @@ const UpdateCourse = ({
                     <p>Семестар: {formData.semester}</p>
                     <p>Ниво студија: {formData.levelOfStudy}</p>
                     <p>Програм: {formData.program}</p>
-                    <p>Модул: {formData.module}</p>
+                    <p>Модул: 
+                      <ul>{formData.modules.map((item, index)=>(
+                        <li key={index}>{item}</li>
+                      ))}</ul></p>
                     <p>Година студија: {formData.yearOfStudy}</p>
                     <p>Статус предмета: {formData.status}</p>
                     <p>ESPB: {formData.espb}</p>

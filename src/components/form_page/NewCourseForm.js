@@ -46,26 +46,26 @@ const NewCourseForm = ({
   }, []);
 
   const test = () => {
-    // alert("id: " + courseID 
-    // + "\nnaziv: " + name 
-    // + "\nsemestar: " + semester 
-    // + "\ngodina studija: " + yearOfStudy 
-    // + "\nnivo studija: " + levelOfStudy.levelOfStudyName 
-    // + "\nprogram: " + program.programName 
+    // alert("id: " + courseID
+    // + "\nnaziv: " + name
+    // + "\nsemestar: " + semester
+    // + "\ngodina studija: " + yearOfStudy
+    // + "\nnivo studija: " + levelOfStudy.levelOfStudyName
+    // + "\nprogram: " + program.programName
     // + "\nmodul: " + module.module
     // +"\nstatus: " + status
     // +"\nespb" + espb
     // +"\nkatedra: " + departments
     // + "\npredavac: " + lecturers
     // +"\ntermin predavanja: " + lectureSessionTimes
-    // + "\ntermini vezbi: " + exerciseSessionTimes 
+    // + "\ntermini vezbi: " + exerciseSessionTimes
     // + "\nopis: " +description
     // +"\nnapomena: " +note
     // + "\nliteratura: " + literatures
     // + "\ntagovi: " + tags
     // + "\nlink: " + link
     // +"\nvideo: " + video);
-    alert('lol')
+    alert("lol");
   };
 
   const addModule = (event) => {
@@ -73,6 +73,10 @@ const NewCourseForm = ({
     if (!modules.includes(selectedItem)) {
       setModules((prevItems) => [...prevItems, selectedItem]);
     }
+  };
+
+  const removeModule = (index) => {
+    setModules((prevItems) => prevItems.filter((_, i) => i !== index));
   };
 
   const addDepartment = (event) => {
@@ -163,8 +167,6 @@ const NewCourseForm = ({
     setTags((prevItems) => prevItems.filter((_, i) => i !== index));
   };
 
- 
-
   const handleSemesterChange = (selectedValue) => {
     setSemester((prevSemester) =>
       prevSemester === selectedValue ? undefined : selectedValue
@@ -210,7 +212,7 @@ const NewCourseForm = ({
           name: name,
           level_of_study: levelOfStudy?.levelOfStudyName,
           program: program?.programName,
-          modules: module?.module,
+          modules: modules,
           semester: semester,
           departments: departments,
           year_of_study: yearOfStudy,
@@ -223,7 +225,8 @@ const NewCourseForm = ({
           tags: tags,
           link: link,
           video: video,
-          status: status
+          status: status,
+          espb: espb,
         },
         {
           headers: {
@@ -240,12 +243,9 @@ const NewCourseForm = ({
       alert("Failed to submit course. Please try again.");
     }
   };
-  
-  
 
   return (
     <div className="form">
-      
       <div className="header">
         <div className="separator"></div>
         <div className="header-text">KATALOG KURSEVA</div>
@@ -310,25 +310,36 @@ const NewCourseForm = ({
               Година студија
               <Dropdown className="sort-dropdown">
                 <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {yearOfStudy ? yearOfStudy : "Изаберите годину студија"} 
+                  {yearOfStudy ? yearOfStudy : "Изаберите годину студија"}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item eventKey="1" onClick={() => setYearOfStudy("прва")}>
-                    1
+                  <Dropdown.Item
+                    eventKey="1"
+                    onClick={() => setYearOfStudy("прва")}
+                  >
+                    прва
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="2" onClick={() => setYearOfStudy("друга")}>
-                    2
+                  <Dropdown.Item
+                    eventKey="2"
+                    onClick={() => setYearOfStudy("друга")}
+                  >
+                    друга
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="3" onClick={() => setYearOfStudy("трећа")}>
-                    3
+                  <Dropdown.Item
+                    eventKey="3"
+                    onClick={() => setYearOfStudy("трећа")}
+                  >
+                    трећа
                   </Dropdown.Item>
-                  <Dropdown.Item eventKey="4" onClick={() => setYearOfStudy("четврта")}>
-                    4
+                  <Dropdown.Item
+                    eventKey="4"
+                    onClick={() => setYearOfStudy("четврта")}
+                  >
+                    четврта
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-
             </div>
           </div>
         </div>
@@ -394,17 +405,21 @@ const NewCourseForm = ({
 
                   <Dropdown.Menu>
                     {program.modules.map((module, index) => (
-                      <Dropdown.Item
-                        key={index}
-                        onClick={() => handleModuleChange(module)}
-                      >
+                      <Dropdown.Item key={index} onClick={addModule}>
                         {module.module}
                       </Dropdown.Item>
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-                {yearsOfStudy.map((year, index) => (
-                  <p key={index}>{year}</p>
+                {modules.map((item, index) => (
+                  <div className="element" key={index}>
+                    {item}
+                    <img
+                      src="../../../images/delete.png"
+                      alt="Избриши ставку"
+                      onClick={() => removeModule(index)}
+                    />
+                  </div>
                 ))}
               </div>
             )}
