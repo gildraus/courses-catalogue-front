@@ -129,6 +129,8 @@ const Searchbar = ({
           placeholder="Претражите курсеве по називу, тагу, називу катедре..."
           value={query}
           onChange={handleInputChange}
+          disabled
+          //trenutno ne radi
         />
         {suggestions.length > 0 && (
           <ul className="suggestions-list">
