@@ -104,14 +104,24 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
           </ul>
         </ul>
       </ul>
-      <h2>Напомена</h2>
-      <p>
-        <img src="./images/danger.png" alt="Warning" />
-        {course.note}
-      </p>
-      <p>
-        Веб сајт: <a href={course.link}>{course.link}</a>
-      </p>
+      {course.note && course.note !== "" && (
+        <div>
+          {" "}
+          <h2>Напомена</h2>
+          <p>
+            <img src="./images/danger.png" alt="Warning" />
+            {course.note}
+          </p>
+        </div>
+      )}
+      {course.link && course.link !== "" && (
+        <div>
+          {" "}
+          <p>
+            Веб сајт: <a href={course.link}>{course.link}</a>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
