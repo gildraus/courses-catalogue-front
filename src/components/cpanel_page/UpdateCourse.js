@@ -232,6 +232,28 @@ const UpdateCourse = ({
       setLiteratureInputValue(""); // Resetovanje input polja nakon dodavanja
     }
   };
+  const parseString = () => {
+    const literatureString = literatureInputValue.trim();
+
+    // Splitting string into individual literature items
+    const literatureItems = literatureString
+      .split(/\d+[.,]\s*/)
+      .filter((item) => item.trim() !== "");
+
+    // Handling the first item separately
+    const firstItem = literatureString.match(/^[^0-9]+/);
+    if (firstItem) {
+      literatureItems[0] = firstItem[0].trim() + literatureItems[0];
+    }
+
+    // Adding each literature item to formData.literatures
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      literatures: [...prevFormData.literatures, ...literatureItems],
+    }));
+
+    setLiteratureInputValue(""); // Resetting input field after parsing
+  };
 
   const removeLiterature = (indexToRemove) => {
     setFormData((prevFormData) => ({
@@ -294,7 +316,7 @@ const UpdateCourse = ({
       });
     }
   };
-  
+
   const handleModuleRemove = (indexToRemove) => {
     const updatedModules = formData.modules.filter(
       (_, index) => index !== indexToRemove
@@ -891,6 +913,11 @@ const UpdateCourse = ({
                     <h4>+</h4>
                   </b>
                 </div>
+                <div className="dropdown-plus" onClick={parseString}>
+                  <b>
+                    <h4>Парсирај стринг(demo)</h4>
+                  </b>
+                </div>
               </div>
 
               <div className="added-elements">
@@ -1000,10 +1027,14 @@ const UpdateCourse = ({
                     <p>Семестар: {formData.semester}</p>
                     <p>Ниво студија: {formData.levelOfStudy}</p>
                     <p>Програм: {formData.program}</p>
-                    <p>Модул: 
-                      <ul>{formData.modules.map((item, index)=>(
-                        <li key={index}>{item}</li>
-                      ))}</ul></p>
+                    <p>
+                      Модул:
+                      <ul>
+                        {formData.modules.map((item, index) => (
+                          <li key={index}>{item}</li>
+                        ))}
+                      </ul>
+                    </p>
                     <p>Година студија: {formData.yearOfStudy}</p>
                     <p>Статус предмета: {formData.status}</p>
                     <p>ESPB: {formData.espb}</p>
