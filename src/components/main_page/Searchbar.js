@@ -86,16 +86,18 @@ const Searchbar = ({
     if (inputValue.length >= 1) {
       let filteredSuggestions = allCourses.filter(
         (item) =>
-          remapLang(item.name.toLowerCase()).startsWith(inputValue) ||
-          item.tags.some((tag) =>
-            remapLang(tag.toLowerCase()).startsWith(inputValue)
-          ) ||
-          item.departments.some((department) =>
-            remapLang(department.toLowerCase()).startsWith(inputValue)
-          )
+          item.name &&
+          item.name.trim() !== "" &&
+          (remapLang(item.name.toLowerCase()).startsWith(inputValue) ||
+            item.tags.some((tag) =>
+              remapLang(tag.toLowerCase()).startsWith(inputValue)
+            ) ||
+            item.departments.some((department) =>
+              remapLang(department.toLowerCase()).startsWith(inputValue)
+            ))
       );
 
-      //ovde dodajem funcionalnost sakrivanja duplikata
+      // ovdje dodajem funkcionalnost sakrivanja duplikata
 
       let uniqueNamesSet = new Set();
 
@@ -129,8 +131,6 @@ const Searchbar = ({
           placeholder="Претражите курсеве по називу, тагу, називу катедре..."
           value={query}
           onChange={handleInputChange}
-          disabled
-          //trenutno ne radi
         />
         {suggestions.length > 0 && (
           <ul className="suggestions-list">
