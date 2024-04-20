@@ -123,7 +123,7 @@ const Searchbar = ({
 
   return (
     <div className="header">
-      <div className="search-bar-logo">KATALOG PREDMETA</div>
+      <div className="search-bar-logo">КАТАЛОГ ПРЕДМЕТА</div>
 
       <div className="search-bar">
         <input
