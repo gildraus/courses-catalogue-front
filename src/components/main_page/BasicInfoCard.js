@@ -36,14 +36,14 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
 
       {course.status && <p>Статус: {course.status}</p>}
       {course.departments && <p>
-        Катедре на којима се јавља курс:
+        Катедре:
         <ul>
           {course.departments.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
       </p>}
-      <p>Модули на којима се јавља курс:</p>
+      <p>Модули:</p>
       <div className="modules-preview">
         {coursesOfTheSameName
           .slice(0, expandedModules ? coursesOfTheSameName.length : 3)
