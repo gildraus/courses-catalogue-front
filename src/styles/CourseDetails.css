@@ -129,6 +129,41 @@ img {
     padding: 10px; 
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
 }
+.session_time_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.session_time_table caption {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.session_time_table th,
+.session_time_table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.session_time_table thead {
+  background-color: #f2f2f2;
+}
+
+.session_time_table th {
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+.session_time_table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.session_time_table tr:hover {
+  background-color: #ddd;
+}
+
 
 /*
  *  Styling for extra large screens

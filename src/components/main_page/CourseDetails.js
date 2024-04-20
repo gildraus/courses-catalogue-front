@@ -95,7 +95,7 @@ const CourseDetails = ({
               />
             </div>
 
-            {course.lecture_session_time.length > 0 ||
+            {/* {course.lecture_session_time.length > 0 ||
             course.exercise_session_time.length > 0 ||
             course.lecturers.length > 0 ? (
               <div className="course-details-basic-info-box">
@@ -130,8 +130,131 @@ const CourseDetails = ({
                   </div>
                 )}
               </div>
-            ) : null}
+            ) : null} */}
+            <div className="course-details-basic-info-box">
+              <div className="lecture_session_time-div">
+                <h3>Термини предавања</h3>
+                <table className="session_time_table" border="1">
 
+                  <thead>
+                    <tr>
+                      <th>Датум</th>
+                      <th>Време</th>
+                      <th>Број сале</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>5. фебруар 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>7. фебруар 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>12. фебруар 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>27. фебруар 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>29. фебруар 2024.</td>
+                      <td>14:15</td>
+                      <td>09</td>
+                    </tr>
+                    <tr>
+                      <td>12. фебруар 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>4. март 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>6. март 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>8. март 2024.</td>
+                      <td>14:15</td>
+                      <td>61</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+              <div className="exercise_session_time-div">
+                <h3>Термини вежби</h3>
+                <table class="session_time_table">
+
+                  <thead>
+                    <tr>
+                      <th>Датум</th>
+                      <th>Време</th>
+                      <th>Број сале</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>5. фебруар 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>7. фебруар 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>12. фебруар 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>27. фебруар 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>29. фебруар 2024.</td>
+                      <td>18:15</td>
+                      <td>09</td>
+                    </tr>
+                    <tr>
+                      <td>12. фебруар 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>4. март 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>6. март 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                    <tr>
+                      <td>8. март 2024.</td>
+                      <td>18:15</td>
+                      <td>61</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
             <div className="course-details-literature">
               <h2>Опис и литература</h2>
               <br />
