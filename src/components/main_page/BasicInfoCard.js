@@ -18,17 +18,31 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
     <div>
       <h2>Картон предмета</h2>
 
-      <p>Број ЕСПБ поена: {course.espb}</p>
-      <p>Семестар: {course.semester}</p>
-      <p>Статус: {course.status}</p>
-      <p>
+      <h4>Ниво студија</h4>
+      <ul>
+        <li>{course.level_of_study}</li>
+        <ul>
+          <li>{course.program}</li>
+          <ul>
+            {course.modules.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </ul>
+      </ul>
+     
+      {course.espb && <p>Број ЕСПБ поена: {course.espb}</p>}
+      {course.semester && <p>Семестар: {course.semester}</p>}
+
+      {course.status && <p>Статус: {course.status}</p>}
+      {course.departments && <p>
         Катедре на којима се јавља курс:
         <ul>
           {course.departments.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
-      </p>
+      </p>}
       <p>Модули на којима се јавља курс:</p>
       <div className="modules-preview">
         {coursesOfTheSameName
@@ -59,6 +73,11 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
           </p>
         )}
       </div>
+
+      
+
+      
+    
 
       {course.tags && course.tags.length > 0 && (
         <div className="tags-preview">
@@ -92,18 +111,6 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
           )}
         </div>
       )}
-      <h2>Ниво студија</h2>
-      <ul>
-        <li>{course.level_of_study}</li>
-        <ul>
-          <li>{course.program}</li>
-          <ul>
-            {course.modules.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </ul>
-      </ul>
       {course.note && course.note !== "" && (
         <div>
           {" "}

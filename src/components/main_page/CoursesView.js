@@ -266,7 +266,7 @@ const CoursesView = ({
                         value={levelofstudy.levelOfStudyName}
                         name="level_of_study"
                         onChange={handleLevelOfStudyChange}
-                      />
+                      />{" "}
                       {levelofstudy.levelOfStudyName}
                     </div>
                   ))}
@@ -297,7 +297,7 @@ const CoursesView = ({
                             onChange={() =>
                               handleProgramChange(program.programName)
                             }
-                          />
+                          />{" "}
                           {program.programName}
                         </div>
                       ))}
@@ -342,7 +342,7 @@ const CoursesView = ({
                               name="module"
                               checked={selectedModule === module.module}
                               onChange={() => handleModuleChange(module.module)}
-                            />
+                            />{" "}
                             {module.module}
                           </div>
                         ))}
