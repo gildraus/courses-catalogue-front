@@ -1049,7 +1049,16 @@ const UpdateCourse = ({
                     </p>
                     <p>Опис курса: {formData.description}</p>
                     <p>Напомена: {formData.note}</p>
-                    <p>Ставка литературе: {formData.literatures.join(", ")}</p>
+                    <p>
+                      Литература:{" "}
+                      <ul>
+                        {formData.literatures.map((item, index) => (
+                          <li>
+                            <p key={index}>{item}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </p>
                     <p>Тагови: {formData.tags.join(", ")}</p>
                     <p>Линк ка веб сајту: {formData.link}</p>
                     <p>Линк ка промо видеу: {formData.video}</p>
