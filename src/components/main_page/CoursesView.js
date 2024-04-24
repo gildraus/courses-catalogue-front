@@ -219,6 +219,8 @@ const CoursesView = ({
           Ресетуј филтере
         </p>
 
+        Proba
+
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Сортирај приказ
