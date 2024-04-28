@@ -15,7 +15,9 @@ const CourseDetails = ({
   const { id } = useParams();
   const [course, setCourse] = useState(null);
   const navigate = useNavigate();
-
+  const [selectedProgram, setSelectedProgram] = useState(undefined);
+  const [selectedModule, setSelectedModule] = useState(undefined);
+  const [sessions, setSessions] = useState(undefined);
 
 
 
@@ -36,6 +38,39 @@ const CourseDetails = ({
     fetchCourseData();
   }, [id]);
 
+  useEffect(() => {
+    if (course && course.programs && course.programs.length > 0) {
+      setSelectedProgram(course.programs[0]);
+    }
+    if (course && course.modules && course.modules.length > 0) {
+      setSelectedModule(course.modules[0]);
+    }
+  }, [course]);
+
+  useEffect(() => {
+    const fetchSessions = async () => {
+      try {
+        const response = await axios.get(`${server_name}/api/sessions`, {
+          params: {
+            selectedProgram,
+            selectedModule,
+            name: course && course.name
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        });
+        setSessions(response.data);
+
+      } catch (error) {
+        console.error('Error fetching sessions:', error);
+      }
+    };
+
+    fetchSessions();
+  }, [selectedProgram, selectedModule, course]);
+
+
   return (
     <div className="course-details-background">
       <div className="close-button-container">
@@ -48,8 +83,36 @@ const CourseDetails = ({
           <div id="course-department-header-text">{course && course.departments}</div>
         </div>
         <div className="module-selector">
+          <p> Изабери програм:</p>
+          {course && <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              {selectedProgram ? selectedProgram : "Изабери програм"}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {course.programs.map((program, index) => (
+                <Dropdown.Item key={index} onClick={() => setSelectedProgram(program)} >{program}</Dropdown.Item>
+              ))}
+
+
+            </Dropdown.Menu>
+          </Dropdown>}
           <p> Изабери модул:</p>
+          {course && <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              {selectedModule ? selectedModule : "Изабери модул"}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {course.modules.map((module, index) => (
+                <Dropdown.Item key={index} onClick={() => setSelectedModule(module)} >{module}</Dropdown.Item>
+              ))}
+
+
+            </Dropdown.Menu>
+          </Dropdown>}
         </div>
+
         <div className="course-details-body">
           <div className="course-details-main-body">
             <div className="course-details-video-box">
@@ -89,15 +152,52 @@ const CourseDetails = ({
             <div className="course-details-basic-info-box">
               <div className="lecture_session_time-div">
                 <h3>Термини предавања</h3>
-                <table className="session_time_table" border="1">
-                  {/* Table content */}
-                </table>
+                {sessions && sessions.length > 0 ? (
+                  <table className="session_time_table">
+                    <thead>
+                      <tr>
+                        <th>Рб.</th>
+                        <th>датум-место-време</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sessions.map((session, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{session.lecture_session_time}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p>Подаци о предавањима нису доступни</p>
+                )}
+
+
               </div>
               <div className="exercise_session_time-div">
                 <h3>Термини вежби</h3>
-                <table className="session_time_table">
-                  {/* Table content */}
-                </table>
+                {sessions && sessions.length > 0 ? (
+                  <table className="session_time_table">
+                    <thead>
+                      <tr>
+                        <th>Рб.</th>
+                        <th>датум-место-време</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sessions.map((session, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{session.exercise_session_time}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                ) : (
+                  <p>Подаци о вежбама нису доступни</p>
+                )}
+
               </div>
             </div>
             <div className="course-details-literature">
