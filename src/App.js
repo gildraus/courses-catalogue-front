@@ -121,7 +121,7 @@ function App() {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const isTokenExpired = () => {
@@ -170,7 +170,7 @@ function App() {
 
               <div className="App">
                 <div className="row">
-                  {selectedCourse === undefined ? (
+               
                     <div className="body-container">
                       <Searchbar
                         allCourses={allCourses}
@@ -211,13 +211,7 @@ function App() {
                         fetchFilteredCourses={fetchFilteredCourses}
                       />
                     </div>
-                  ) : (
-                    <CourseDetails
-                      coursesOfTheSameName={coursesOfTheSameName}
-                      selectedCourse={selectedCourse}
-                      setSelectedCourse={setSelectedCourse}
-                    />
-                  )}
+                  
                 </div>
 
                 <div className="row">
@@ -225,6 +219,16 @@ function App() {
                 </div>
               </div>
             </div>
+          }
+        />
+        <Route
+          path="/:id"
+          element={
+            <CourseDetails
+              coursesOfTheSameName={coursesOfTheSameName}
+              selectedCourse={selectedCourse}
+              setSelectedCourse={setSelectedCourse}
+            />
           }
         />
         <Route
@@ -238,7 +242,7 @@ function App() {
                 allDepartments={allDepartments}
               />
             ) : (
-              // <Form allModules={allModules} allDepartments={allDepartments} />
+             
               <Navigate to="/login" />
             )
           }
@@ -254,21 +258,7 @@ function App() {
           }
         />
 
-        {/* <Route
-          path="/update/:id"
-          element={
-            cookies.access_token && !isTokenExpired() ? (
-              <UpdatePage
-                allLevelsOfStudy={allLevelsOfStudy}
-                allCourses={allCourses}
-                allModules={allModules}
-                allDepartments={allDepartments}
-              />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        /> */}
+       
 
         <Route
           path="/update/:id"

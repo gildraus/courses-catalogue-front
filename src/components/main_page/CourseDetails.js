@@ -1,65 +1,59 @@
 import { Dropdown, DropdownItem } from "react-bootstrap";
 import "../../styles/CourseDetails.css";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import CloseButton from "react-bootstrap/CloseButton";
 import BasicInfoCard from "./BasicInfoCard";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import server_name from "../../config";
 
 const CourseDetails = ({
   coursesOfTheSameName,
   selectedCourse,
   setSelectedCourse,
 }) => {
-  const course = selectedCourse;
+  const { id } = useParams();
+  const [course, setCourse] = useState(null);
+  const navigate = useNavigate();
 
-  let literatureItems;
-  if (Array.isArray(course.literature)) {
-    literatureItems = course.literature.map((item, index) => (
-      <p key={index}>
-        {index + 1}. {item}
-      </p>
-    ));
-  } else {
-    literatureItems = <p>{course.literature}</p>;
-  }
-  const closeCourseDetails = () => {
-    setSelectedCourse(undefined);
-  };
+
+
+
+  useEffect(() => {
+    const fetchCourseData = async () => {
+      try {
+        const response = await axios.get(`${server_name}/api/courses/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
+        setCourse(response.data);
+      } catch (error) {
+        console.error("Error fetching course data:", error);
+      }
+    };
+
+    fetchCourseData();
+  }, [id]);
 
   return (
     <div className="course-details-background">
       <div className="close-button-container">
         {" "}
-        <CloseButton className="close-button" onClick={closeCourseDetails} />
+        <CloseButton className="close-button" onClick={() => navigate(-1)} />
       </div>
-
       <div className="course-details">
         <div className="course-details-header">
-          <h2 id="course-name-header-text">{course.name}</h2>
-          <div id="course-department-header-text">{course.departments}</div>
+          <h2 id="course-name-header-text">{course && course.name}</h2>
+          <div id="course-department-header-text">{course && course.departments}</div>
         </div>
         <div className="module-selector">
           <p> Изабери модул:</p>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {selectedCourse.modules[0]}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {coursesOfTheSameName.map((item) => (
-                <Dropdown.Item
-                  onClick={() => setSelectedCourse(item)}
-                  key={item.course_id}
-                >
-                  {item.modules[0]}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
         </div>
-
         <div className="course-details-body">
           <div className="course-details-main-body">
             <div className="course-details-video-box">
-              {course.video ? (
+              {course && course.video && (
                 <div
                   className="iframe-div"
                   style={{
@@ -84,199 +78,50 @@ const CourseDetails = ({
                     allowFullScreen
                   ></iframe>
                 </div>
-              ) : null}
+              )}
             </div>
-
             <div className="course-details-info">
               {/* desktop view */}
-              <BasicInfoCard
-                selectedCourse={selectedCourse}
-                coursesOfTheSameName={coursesOfTheSameName}
-              />
+              {course && <BasicInfoCard
+                course={course}
+              />}
             </div>
-
-            {/* {course.lecture_session_time.length > 0 ||
-            course.exercise_session_time.length > 0 ||
-            course.lecturers.length > 0 ? (
-              <div className="course-details-basic-info-box">
-                {course.lecturers.length > 0 && (
-                  <div className="lecturers-div">
-                    <h3>Предавачи:</h3>
-                    <ul>
-                      {course.lecturers.map((lecturer, index) => (
-                        <li key={index}>{lecturer}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {course.lecture_session_time.length > 0 && (
-                  <div className="lecture_session_time-div">
-                    <h3>Термини предавања:</h3>
-                    <ul>
-                      {course.lecture_session_time.map((time, index) => (
-                        <li key={index}>{time}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {course.exercise_session_time.length > 0 && (
-                  <div className="exercise_session_time-div">
-                    <h3>Термини вежби:</h3>
-                    <ul>
-                      {course.exercise_session_time.map((time, index) => (
-                        <li key={index}>{time}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ) : null} */}
             <div className="course-details-basic-info-box">
               <div className="lecture_session_time-div">
                 <h3>Термини предавања</h3>
                 <table className="session_time_table" border="1">
-
-                  <thead>
-                    <tr>
-                      <th>Датум</th>
-                      <th>Време</th>
-                      <th>Број сале</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>5. фебруар 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>7. фебруар 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>12. фебруар 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>27. фебруар 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>29. фебруар 2024.</td>
-                      <td>14:15</td>
-                      <td>09</td>
-                    </tr>
-                    <tr>
-                      <td>12. фебруар 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>4. март 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>6. март 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>8. март 2024.</td>
-                      <td>14:15</td>
-                      <td>61</td>
-                    </tr>
-                  </tbody>
+                  {/* Table content */}
                 </table>
-
               </div>
               <div className="exercise_session_time-div">
                 <h3>Термини вежби</h3>
-                <table class="session_time_table">
-
-                  <thead>
-                    <tr>
-                      <th>Датум</th>
-                      <th>Време</th>
-                      <th>Број сале</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>5. фебруар 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>7. фебруар 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>12. фебруар 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>27. фебруар 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>29. фебруар 2024.</td>
-                      <td>18:15</td>
-                      <td>09</td>
-                    </tr>
-                    <tr>
-                      <td>12. фебруар 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>4. март 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>6. март 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                    <tr>
-                      <td>8. март 2024.</td>
-                      <td>18:15</td>
-                      <td>61</td>
-                    </tr>
-                  </tbody>
+                <table className="session_time_table">
+                  {/* Table content */}
                 </table>
-
               </div>
             </div>
             <div className="course-details-literature">
               <h2>Опис и литература</h2>
               <br />
               <h3 className="green-paragraph">Опис</h3>
-              {course.description}
+              {course && course.description}
               <hr />
               <h3 className="green-paragraph">Литература</h3>
-              <ul>
-                {course.literature.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
+              {course && course.literature && (
+                <ul>
+                  {course.literature.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
-
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
               {/* mobile view */}
-              <BasicInfoCard
-                selectedCourse={selectedCourse}
-                coursesOfTheSameName={coursesOfTheSameName}
-              />
+              {course && <BasicInfoCard
+                course={course}
+              />}
             </div>
           </div>
         </div>

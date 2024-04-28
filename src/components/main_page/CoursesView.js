@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import SkeletonCourseCard from "../skeletons/SkeletonCourseCard";
 import SkeletonSidebarCard from "../skeletons/SkeletonSidebarCard";
+import { useNavigate } from "react-router-dom";
+
 
 const CoursesView = ({
   allCourses,
@@ -37,6 +39,14 @@ const CoursesView = ({
   fetchFilteredCourses,
   isLoadingCourses,
 }) => {
+  const [isSmallScreen, setIsSmallScreen] = useState([false]);
+  const navigate = useNavigate();
+
+  const handleCourseOpen = (courseId) => {
+    navigate(`/${courseId}`);
+  }
+
+
   function toggle(groupName) {
     var displayType = document.getElementById(groupName).style.display;
     document.getElementById(groupName).style.display =
@@ -44,8 +54,6 @@ const CoursesView = ({
     document.getElementById(groupName + "-arrow").style.rotate =
       displayType === "none" ? "180deg" : "0deg";
   }
-
-  const [isSmallScreen, setIsSmallScreen] = useState([false]);
 
   const createCheckboxChangeHandler = (state, setState) => (event) => {
     const { value, checked } = event.target;
@@ -219,7 +227,7 @@ const CoursesView = ({
           Ресетуј филтере
         </p>
 
-        Proba
+
 
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -494,7 +502,7 @@ const CoursesView = ({
                     <div
                       key={index}
                       className="courses-view-card clickable"
-                      onClick={() => setSelectedCourse(course)}
+                      onClick={() => handleCourseOpen(course._id)}
                     >
                       <div className="courses-view-card-left">
                         <img src="./images/Imagery.png" alt="" />
@@ -527,7 +535,7 @@ const CoursesView = ({
                                 alt=""
                               />
                             </div>
-                            <p>{course.program}</p>
+                            <p>{course.programs[0]}</p>
                           </div>
                         </div>
                       </div>

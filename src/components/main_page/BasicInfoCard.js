@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../../styles/CourseDetails.css";
 
-const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
-  const course = selectedCourse;
+const BasicInfoCard = ({ course }) => {
+
   const [expandedModules, setExpandedModules] = useState(false);
   const [expandedTags, setExpandedTags] = useState(false);
 
@@ -17,20 +17,23 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
   return (
     <div>
       <h2>Картон предмета</h2>
-
-      <h4>Ниво студија</h4>
-      <ul>
-        <li>{course.level_of_study}</li>
+      <div className="level_of_study-waterfall-structure"> <h4>Ниво студија:</h4>
+        <ul><li>{course.level_of_study}</li></ul>
+        <h4>Програми:</h4>
         <ul>
-          <li>{course.program}</li>
-          <ul>
-            {course.modules.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
+          {course.programs.map((item, index) => (
+            <li key={index}> {item}</li>
+          ))}
         </ul>
-      </ul>
-     
+
+        <h4>Модули:</h4>
+        <ul>
+          {course.modules.map((item, index) => (
+            <li key={index}> {item}</li>
+          ))}
+        </ul></div>
+
+
       {course.espb && <p>Број ЕСПБ поена: {course.espb}</p>}
       {course.semester && <p>Семестар: {course.semester}</p>}
 
@@ -43,41 +46,41 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
           ))}
         </ul>
       </p>}
-      <p>Модули:</p>
-      <div className="modules-preview">
-        {coursesOfTheSameName
-          .slice(0, expandedModules ? coursesOfTheSameName.length : 3)
-          .map((item) => (
-            <ul>
-              <li key={item.course_id}>{item.modules[0]}</li>
-            </ul>
-          ))}
-        {coursesOfTheSameName.length > 3 && !expandedModules && (
-          <p>
-            <span
-              onClick={toggleExpandModules}
-              style={{ cursor: "pointer", color: "blue" }}
-            >
-              + кликни за више
-            </span>
-          </p>
-        )}
-        {expandedModules && (
-          <p>
-            <span
-              onClick={toggleExpandModules}
-              style={{ cursor: "pointer", color: "blue" }}
-            >
-              - кликни за мање
-            </span>
-          </p>
-        )}
-      </div>
 
-      
 
-      
-    
+
+      {course.modules && course.modules.length > 0 && (
+        <div className="modules-preview">
+          <p>Модули:</p>
+          {course.modules
+            .slice(0, expandedModules ? course.modules.length : 3)
+            .map((module, index) => (
+              <ul>
+                <li key={index}>{module}</li>
+              </ul>
+            ))}
+          {course.modules.length > 3 && !expandedModules && (
+            <p>
+              <span
+                onClick={toggleExpandModules}
+                style={{ cursor: "pointer", color: "blue" }}
+              >
+                + кликни за више
+              </span>
+            </p>
+          )}
+          {expandedModules && (
+            <p>
+              <span
+                onClick={toggleExpandModules}
+                style={{ cursor: "pointer", color: "blue" }}
+              >
+                - кликни за мање
+              </span>
+            </p>
+          )}
+        </div>
+      )}
 
       {course.tags && course.tags.length > 0 && (
         <div className="tags-preview">
@@ -129,6 +132,8 @@ const BasicInfoCard = ({ selectedCourse, coursesOfTheSameName }) => {
           </p>
         </div>
       )}
+
+
     </div>
   );
 };
