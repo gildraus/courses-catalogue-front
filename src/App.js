@@ -6,7 +6,6 @@ import Searchbar from "./components/main_page/Searchbar";
 import CoursesView from "./components/main_page/CoursesView";
 import CourseDetails from "./components/main_page/CourseDetails";
 import Login from "./components/login_page/Login";
-import Form from "./components/form_page/Form";
 import NewCourseForm from "./components/form_page/NewCourseForm";
 import Dashboard from "./components/cpanel_page/Dashboard";
 import { useState, useEffect } from "react";
@@ -15,8 +14,6 @@ import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import server_name from "./config";
 import axios from "axios";
-import { Button } from "@mui/material";
-import UpdatePage from "./components/cpanel_page/UpdatePage";
 import Test from "./components/main_page/Test";
 import UpdateCourse from "./components/cpanel_page/UpdateCourse";
 
