@@ -321,6 +321,8 @@ input{
 
 .courses-view-card-icon{
   min-width: 18px;
+  max-width: 18px;
+  margin-right: 10px;
 }
 
 .active-filter{

@@ -7,7 +7,6 @@ import SkeletonCourseCard from "../skeletons/SkeletonCourseCard";
 import SkeletonSidebarCard from "../skeletons/SkeletonSidebarCard";
 import { useNavigate } from "react-router-dom";
 
-
 const CoursesView = ({
   allCourses,
   allDepartments,
@@ -44,8 +43,7 @@ const CoursesView = ({
 
   const handleCourseOpen = (courseId) => {
     navigate(`/${courseId}`);
-  }
-
+  };
 
   function toggle(groupName) {
     var displayType = document.getElementById(groupName).style.display;
@@ -153,18 +151,29 @@ const CoursesView = ({
     const buttons = document.getElementsByName("semester");
     buttons.forEach((button) => {
       button.checked = false;
-    })
+    });
     setSelectedSemester([]);
-  }
+  };
 
   const handleYearOfStudyUncheck = () => {
     const buttons = document.getElementsByName("year_of_study");
     buttons.forEach((button) => {
       button.checked = false;
-    })
+    });
     setSelectedYearOfStudy([]);
-  }
+  };
 
+  const TagList = ({ tags }) => {
+    if (!tags || tags.length === 0) {
+      return <p>Предмет још увек нема тагова</p>;
+    }
+  
+    const firstThreeTags = tags.slice(0, 3);
+  
+    const tagString = firstThreeTags.join(", ");
+  
+    return <p>{tagString}</p>;
+  };
   return (
     <div className="courses-view">
       <div className="courses-view-header">
@@ -198,23 +207,18 @@ const CoursesView = ({
               <CloseButton onClick={handleModuleUncheck} />
             </button>
           )}
-
           {selectedSemester != null && selectedSemester.length > 0 && (
             <button className="active-filter">
               Семестар
               <CloseButton onClick={handleSemesterUncheck} />
             </button>
           )}
-
-
           {selectedYearOfStudy != null && selectedYearOfStudy.length > 0 && (
             <button className="active-filter">
               Година студија
               <CloseButton onClick={handleYearOfStudyUncheck} />
             </button>
-
           )}
-
         </div>
 
         <p
@@ -226,8 +230,6 @@ const CoursesView = ({
         >
           Ресетуј филтере
         </p>
-
-
 
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -519,7 +521,7 @@ const CoursesView = ({
                           <div className="espb-card-item">
                             <div>
                               <img
-                                src="./images/ic_round-star.png"
+                                src="./images/star.png"
                                 className="courses-view-card-icon"
                                 alt=""
                               />
@@ -530,12 +532,12 @@ const CoursesView = ({
                           <div className="program-card-item">
                             <div>
                               <img
-                                src="./images/clarity_group-solid.png"
+                                src="./images/tag.png"
                                 className="courses-view-card-icon"
                                 alt=""
                               />
                             </div>
-                            <p>{course.programs[0]}</p>
+                            <TagList tags={course.tags} />
                           </div>
                         </div>
                       </div>
