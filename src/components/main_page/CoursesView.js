@@ -167,11 +167,11 @@ const CoursesView = ({
     if (!tags || tags.length === 0) {
       return <p>Предмет још увек нема тагова</p>;
     }
-  
+
     const firstThreeTags = tags.slice(0, 3);
-  
+
     const tagString = firstThreeTags.join(", ");
-  
+
     return <p>{tagString}</p>;
   };
   return (
@@ -407,69 +407,73 @@ const CoursesView = ({
               </div>
 
               {/* Година студија*/}
-              <div className="filter-box">
-                <h4 className="filter-box-header">
-                  <b>Година студија</b>{" "}
-                  <img
-                    id="year-of-study-group-arrow"
-                    src="./images/feArrowDown0.png"
-                    onClick={() => toggle("year-of-study-group")}
-                    className="clickable-pointer"
-                    alt=""
-                  />
-                </h4>
-                <div id="year-of-study-group">
-                  <div>
-                    {" "}
-                    <input
-                      type="checkbox"
-                      value="прва"
-                      name="year_of_study"
-                      onChange={createCheckboxChangeHandler(
-                        selectedYearOfStudy,
-                        setSelectedYearOfStudy
-                      )}
-                    />{" "}
-                    Прва
+              <div>
+                {(!selectedLevelOfStudy ||
+                  selectedLevelOfStudy !==
+                    "Мастер академске студије") && (
+                  <div className="filter-box">
+                    <h4 className="filter-box-header">
+                      <b>Година студија</b>
+                      <img
+                        id="year-of-study-group-arrow"
+                        src="./images/feArrowDown0.png"
+                        onClick={() => toggle("year-of-study-group")}
+                        className="clickable-pointer"
+                        alt=""
+                      />
+                    </h4>
+                    <div id="year-of-study-group">
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="прва"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        Прва
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="друга"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        Друга
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="трећа"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        Трећа
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="четврта"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        Четврта
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      value="друга"
-                      name="year_of_study"
-                      onChange={createCheckboxChangeHandler(
-                        selectedYearOfStudy,
-                        setSelectedYearOfStudy
-                      )}
-                    />{" "}
-                    Друга
-                  </div>
-                  <div>
-                    {" "}
-                    <input
-                      type="checkbox"
-                      value="трећа"
-                      name="year_of_study"
-                      onChange={createCheckboxChangeHandler(
-                        selectedYearOfStudy,
-                        setSelectedYearOfStudy
-                      )}
-                    />{" "}
-                    Трећа
-                  </div>
-                  <div>
-                    <input
-                      type="checkbox"
-                      value="четврта"
-                      name="year_of_study"
-                      onChange={createCheckboxChangeHandler(
-                        selectedYearOfStudy,
-                        setSelectedYearOfStudy
-                      )}
-                    />{" "}
-                    Четврта
-                  </div>
-                </div>
+                )}
               </div>
             </div>
           )

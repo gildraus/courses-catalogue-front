@@ -39,7 +39,7 @@ const BasicInfoCard = ({ course }) => {
 
       {course.status && <p>Статус: {course.status}</p>}
       {course.departments && <p>
-        Катедре:
+        Катедре задужене за извођење предмета:
         <ul>
           {course.departments.map((item, index) => (
             <li key={index}>{item}</li>
