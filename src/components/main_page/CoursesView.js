@@ -523,7 +523,7 @@ const CoursesView = ({
                               <img
                                 src="./images/star.png"
                                 className="courses-view-card-icon"
-                                alt=""
+                                alt="ЕСПБ"
                               />
                             </div>
                             <p>{course.espb} ЕСПБ</p>
@@ -534,7 +534,7 @@ const CoursesView = ({
                               <img
                                 src="./images/tag.png"
                                 className="courses-view-card-icon"
-                                alt=""
+                                alt="Тагови"
                               />
                             </div>
                             <TagList tags={course.tags} />
