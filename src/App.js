@@ -171,9 +171,6 @@ function App() {
                     <div className="body-container">
                       <Searchbar
                         allCourses={allCourses}
-                        coursesToShow={coursesToShow}
-                        setCoursesToShow={setCoursesToShow}
-                        setSelectedCourse={setSelectedCourse}
                       />
                       <CoursesView
                         allCourses={allCourses}

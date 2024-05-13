@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import "../../styles/Searchbar.css";
 import React, { useState } from "react";
 
@@ -72,12 +73,14 @@ function remapLang(str) {
 
 const Searchbar = ({
   allCourses,
-  coursesToShow,
-  setCoursesToShow,
-  setSelectedCourse,
 }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
+
+  const handleCourseOpen = (courseId) => {
+    navigate(`/${courseId}`);
+  };
 
   const handleInputChange = (event) => {
     const inputValue = remapLang(event.target.value.toLowerCase());
@@ -97,30 +100,13 @@ const Searchbar = ({
             ))
       );
 
-      // ovdje dodajem funkcionalnost sakrivanja duplikata
-
-      let uniqueNamesSet = new Set();
-
-      filteredSuggestions = filteredSuggestions.filter((item) => {
-        if (!uniqueNamesSet.has(item.name)) {
-          uniqueNamesSet.add(item.name);
-          return true;
-        }
-        return false;
-      });
-
       setSuggestions(filteredSuggestions);
     } else {
       setSuggestions([]);
     }
   };
 
-  const handleButtonClick = () => {
-    setCoursesToShow(suggestions);
-  };
-
-  const test = () => {};
-
+  
   return (
     <div className="header">
       <div className="search-bar-logo">КАТАЛОГ ПРЕДМЕТА</div>
@@ -135,17 +121,12 @@ const Searchbar = ({
         {suggestions.length > 0 && (
           <ul className="suggestions-list">
             {suggestions.map((suggestion, index) => (
-              <li onClick={() => setSelectedCourse(suggestion)} key={index}>
+              <li onClick={() => handleCourseOpen(suggestion._id)} key={index}>
                 {suggestion.name}
               </li>
             ))}
           </ul>
         )}
-      </div>
-      <div className="submit-button">
-        <button onClick={handleButtonClick} type="submit">
-          Претражи
-        </button>
       </div>
     </div>
   );
