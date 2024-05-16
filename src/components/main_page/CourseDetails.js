@@ -19,8 +19,6 @@ const CourseDetails = ({
   const [selectedModule, setSelectedModule] = useState(undefined);
   const [sessions, setSessions] = useState(undefined);
 
-
-
   useEffect(() => {
     const fetchCourseData = async () => {
       try {
@@ -54,22 +52,21 @@ const CourseDetails = ({
           params: {
             selectedProgram,
             selectedModule,
-            name: course && course.name
+            level_of_study: course.level_of_study,
+            name: course && course.name,
           },
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           },
         });
         setSessions(response.data);
-
       } catch (error) {
-        console.error('Error fetching sessions:', error);
+        console.error("Error fetching sessions:", error);
       }
     };
 
     fetchSessions();
   }, [selectedProgram, selectedModule, course]);
-
 
   return (
     <div className="course-details-background">
@@ -80,37 +77,49 @@ const CourseDetails = ({
       <div className="course-details">
         <div className="course-details-header">
           <h2 id="course-name-header-text">{course && course.name}</h2>
-          <div id="course-department-header-text">{course && course.departments}</div>
+          <div id="course-department-header-text">
+            {course && course.departments}
+          </div>
         </div>
         <div className="module-selector">
           <p> Изабери програм:</p>
-          {course && <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {selectedProgram ? selectedProgram : "Изабери програм"}
-            </Dropdown.Toggle>
+          {course && (
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                {selectedProgram ? selectedProgram : "Изабери програм"}
+              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              {course.programs.map((program, index) => (
-                <Dropdown.Item key={index} onClick={() => setSelectedProgram(program)} >{program}</Dropdown.Item>
-              ))}
-
-
-            </Dropdown.Menu>
-          </Dropdown>}
+              <Dropdown.Menu>
+                {course.programs.map((program, index) => (
+                  <Dropdown.Item
+                    key={index}
+                    onClick={() => setSelectedProgram(program)}
+                  >
+                    {program}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
           <p> Изабери модул:</p>
-          {course && <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {selectedModule ? selectedModule : "Изабери модул"}
-            </Dropdown.Toggle>
+          {course && (
+            <Dropdown>
+              <Dropdown.Toggle variant="success" id="dropdown-basic">
+                {selectedModule ? selectedModule : "Изабери модул"}
+              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              {course.modules.map((module, index) => (
-                <Dropdown.Item key={index} onClick={() => setSelectedModule(module)} >{module}</Dropdown.Item>
-              ))}
-
-
-            </Dropdown.Menu>
-          </Dropdown>}
+              <Dropdown.Menu>
+                {course.modules.map((module, index) => (
+                  <Dropdown.Item
+                    key={index}
+                    onClick={() => setSelectedModule(module)}
+                  >
+                    {module}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
         </div>
 
         <div className="course-details-body">
@@ -145,9 +154,7 @@ const CourseDetails = ({
             </div>
             <div className="course-details-info">
               {/* desktop view */}
-              {course && <BasicInfoCard
-                course={course}
-              />}
+              {course && <BasicInfoCard course={course} />}
             </div>
             <div className="course-details-basic-info-box">
               <div className="lecture_session_time-div">
@@ -161,19 +168,19 @@ const CourseDetails = ({
                       </tr>
                     </thead>
                     <tbody>
-                      {sessions.map((session, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{session.lecture_session_time}</td>
-                        </tr>
-                      ))}
+                      {sessions
+                        .filter((session) => session.lecture_session_time)
+                        .map((session, index) => (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{session.lecture_session_time}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 ) : (
                   <p>Подаци о предавањима нису доступни</p>
                 )}
-
-
               </div>
               <div className="exercise_session_time-div">
                 <h3>Термини вежби</h3>
@@ -186,18 +193,19 @@ const CourseDetails = ({
                       </tr>
                     </thead>
                     <tbody>
-                      {sessions.map((session, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
-                          <td>{session.exercise_session_time}</td>
-                        </tr>
-                      ))}
+                      {sessions
+                        .filter((session) => session.exercise_session_time)
+                        .map((session, index) => (
+                          <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{session.exercise_session_time}</td>
+                          </tr>
+                        ))}
                     </tbody>
                   </table>
                 ) : (
                   <p>Подаци о вежбама нису доступни</p>
                 )}
-
               </div>
             </div>
             <div className="course-details-literature">
@@ -219,9 +227,7 @@ const CourseDetails = ({
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
               {/* mobile view */}
-              {course && <BasicInfoCard
-                course={course}
-              />}
+              {course && <BasicInfoCard course={course} />}
             </div>
           </div>
         </div>
