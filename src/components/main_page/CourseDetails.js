@@ -1,5 +1,7 @@
 import { Dropdown, DropdownItem } from "react-bootstrap";
 import "../../styles/CourseDetails.css";
+import Navbar from "../main_page/Navbar";
+import Footer from "../main_page/Footer";
 import { useState, useEffect } from "react";
 import CloseButton from "react-bootstrap/CloseButton";
 import BasicInfoCard from "./BasicInfoCard";
@@ -70,6 +72,11 @@ const CourseDetails = ({
 
   return (
     <div className="course-details-background">
+      <div className="row navbar-row">
+        <div className="navbar-container col-sm-12">
+          <Navbar />
+        </div>
+      </div>
       <div className="close-button-container">
         {" "}
         <CloseButton className="close-button" onClick={() => navigate(-1)} />
@@ -157,6 +164,19 @@ const CourseDetails = ({
               {course && <BasicInfoCard course={course} />}
             </div>
             <div className="course-details-basic-info-box">
+              <h2>Основне информације</h2>
+
+              {course && course.lecturers.length > 0 && (
+                <div className="lecturers-div">
+                  <h3>Предавачи</h3>
+                  <ul>
+                    {course.lecturers.map((lecturer, index) => (
+                      <li key={index}>{lecturer}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               <div className="lecture_session_time-div">
                 <h3>Термини предавања</h3>
                 {sessions && sessions.length > 0 ? (
@@ -209,7 +229,7 @@ const CourseDetails = ({
               </div>
             </div>
             <div className="course-details-literature">
-              <h2>Опис и литература</h2>
+              <h2>Опширније информације</h2>
               <br />
               <h3 className="green-paragraph">Опис</h3>
               {course && course.description}
@@ -223,6 +243,11 @@ const CourseDetails = ({
                 </ul>
               )}
             </div>
+          <div className="course-details-categorization">
+            <h2>Категоризација
+              
+            </h2>
+          </div>
           </div>
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
@@ -231,6 +256,9 @@ const CourseDetails = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="row">
+        <Footer />
       </div>
     </div>
   );

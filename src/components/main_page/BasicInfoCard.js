@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../../styles/CourseDetails.css";
 
 const BasicInfoCard = ({ course }) => {
-
   const [expandedModules, setExpandedModules] = useState(false);
   const [expandedTags, setExpandedTags] = useState(false);
 
@@ -17,39 +16,42 @@ const BasicInfoCard = ({ course }) => {
   return (
     <div>
       <h2>Картон предмета</h2>
-      <div className="level_of_study-waterfall-structure"> <h4>Ниво студија:</h4>
-        <ul><li>{course.level_of_study}</li></ul>
+      {/* <div className="level_of_study-waterfall-structure">
+        {" "}
+        <h4>Ниво студија:</h4>
+        <ul>
+          <li>{course.level_of_study}</li>
+        </ul>
         <h4>Програми:</h4>
         <ul>
           {course.programs.map((item, index) => (
             <li key={index}> {item}</li>
           ))}
         </ul>
-
         <h4>Модули:</h4>
         <ul>
           {course.modules.map((item, index) => (
             <li key={index}> {item}</li>
           ))}
-        </ul></div>
-
+        </ul>
+      </div> */}
 
       {course.espb && <p>Број ЕСПБ поена: {course.espb}</p>}
       {course.semester && <p>Семестар: {course.semester}</p>}
 
       {course.status && <p>Статус: {course.status}</p>}
-      {course.departments && <p>
-        Катедре задужене за извођење предмета:
-        <ul>
-          {course.departments.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
-        </ul>
-      </p>}
+      {course.departments && (
+        <p>
+          Катедре задужене за извођење предмета:
+          <ul>
+            {course.departments.map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
+          </ul>
+        </p>
+      )}
 
-
-
-      {course.modules && course.modules.length > 0 && (
+      {/* {course.modules && course.modules.length > 0 && (
         <div className="modules-preview">
           <p>Модули:</p>
           {course.modules
@@ -79,6 +81,25 @@ const BasicInfoCard = ({ course }) => {
               </span>
             </p>
           )}
+        </div>
+      )} */}
+
+      {course.link && course.link !== "" && (
+        <div>
+          {" "}
+          <p>
+            Веб сајт: <a href={course.link}>{course.link}</a>
+          </p>
+        </div>
+      )}
+      {course.note && course.note !== "" && (
+        <div>
+          {" "}
+          <h2>Напомена</h2>
+          <p>
+            <img src="./images/danger.png" alt="Warning" />
+            {course.note}
+          </p>
         </div>
       )}
 
@@ -114,26 +135,6 @@ const BasicInfoCard = ({ course }) => {
           )}
         </div>
       )}
-      {course.note && course.note !== "" && (
-        <div>
-          {" "}
-          <h2>Напомена</h2>
-          <p>
-            <img src="./images/danger.png" alt="Warning" />
-            {course.note}
-          </p>
-        </div>
-      )}
-      {course.link && course.link !== "" && (
-        <div>
-          {" "}
-          <p>
-            Веб сајт: <a href={course.link}>{course.link}</a>
-          </p>
-        </div>
-      )}
-
-
     </div>
   );
 };

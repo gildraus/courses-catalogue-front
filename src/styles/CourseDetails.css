@@ -14,6 +14,18 @@
   background-size: 100% 250px;
 }
 
+.row {
+  margin: 0px;
+}
+
+.navbar-row {
+  margin: 0px;
+}
+
+.navbar-container {
+  padding: 0px;
+}
+
 .course-details-header {
   margin-bottom: 25px;
   text-align: center;
@@ -71,6 +83,13 @@
   padding: 30px 25px 30px 25px;
   margin-top: 25px;
 }
+.course-details-categorization {
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-align: left;
+  padding: 30px 25px 30px 25px;
+  margin-top: 25px;
+}
 
 .course-details-sidecard {
   margin-top: 0px;
@@ -109,25 +128,25 @@ img {
   right: 0;
 }
 
-.module-selector{
+.module-selector {
   display: flex;
   flex-direction: column;
-
 }
 .module-selector p {
   margin-bottom: 5px; /* Adjust margin as needed */
 }
 
-#course-name-header-text, #course-department-header-text{
+#course-name-header-text,
+#course-department-header-text {
   text-align: center;
 }
 
-.tags-preview{
-  background-color: #f8f8f8; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    padding: 10px; 
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+.tags-preview {
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 .session_time_table {
   width: 100%;
@@ -164,11 +183,10 @@ img {
   background-color: #ddd;
 }
 
-
 /*
  *  Styling for extra large screens
  */
- @media (min-width: 1200px) {
+@media (min-width: 1200px) {
   .course-details {
     padding: 0px;
   }
@@ -178,10 +196,9 @@ img {
   .course-details-info {
     display: none;
   }
- }
+}
 
- @media (min-width: 1000px) and (max-width: 1200px){
-  
+@media (min-width: 1000px) and (max-width: 1200px) {
   .course-details-sidebar {
     display: none;
   }
@@ -191,9 +208,9 @@ img {
   .course-details-main-body {
     width: 90%;
   }
- }
+}
 
- @media (max-width: 1000px) {
+@media (max-width: 1000px) {
   .course-details {
     padding: 0px;
   }
@@ -206,4 +223,4 @@ img {
   .course-details-main-body {
     width: 90%;
   }
- }
+}
