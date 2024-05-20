@@ -55,21 +55,26 @@
 }
 
 .course-details-main-body {
-  width: 60%;
+  width: 70%;
 }
 
 .course-details-sidebar {
-  width: 40%;
+  width: 30%;
   padding-left: 15px;
 }
 
+
 .course-details-video-box {
   width: 100%;
+  max-width: 1000px; 
+  /* margin: 0 auto; */ 
+  padding-left: 15px;
 }
 
 .course-details-video-box iframe {
   border-radius: 10px;
-  width: 80%;
+  width: 100%; 
+  height: auto; 
 }
 
 .course-details-basic-info-box,
@@ -131,9 +136,11 @@ img {
 .module-selector {
   display: flex;
   flex-direction: column;
+  align-self: flex-end; 
+  margin-left: auto; 
 }
 .module-selector p {
-  margin-bottom: 5px; /* Adjust margin as needed */
+  margin-bottom: 5px; 
 }
 
 #course-name-header-text,
@@ -188,7 +195,7 @@ img {
  */
 @media (min-width: 1200px) {
   .course-details {
-    padding: 0px;
+    padding: 0px 125px 0px 125px;
   }
   .course-details-sidecard {
     display: block;
