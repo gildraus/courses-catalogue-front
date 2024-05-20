@@ -243,11 +243,31 @@ const CourseDetails = ({
                 </ul>
               )}
             </div>
-          <div className="course-details-categorization">
-            <h2>Категоризација
-              
-            </h2>
-          </div>
+            {course && (
+              <div className="course-details-categorization">
+                <h2>Категоризација</h2>
+
+                <div className="level_of_study-waterfall-structure">
+                  {" "}
+                  <h4>Ниво студија:</h4>
+                  <ul>
+                    <li>{course.level_of_study}</li>
+                  </ul>
+                  <h4>Програми:</h4>
+                  <ul>
+                    {course.programs.map((item, index) => (
+                      <li key={index}> {item}</li>
+                    ))}
+                  </ul>
+                  <h4>Модули:</h4>
+                  <ul>
+                    {course.modules.map((item, index) => (
+                      <li key={index}> {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            )}
           </div>
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
