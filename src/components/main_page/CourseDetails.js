@@ -89,43 +89,49 @@ const CourseDetails = ({
           </div>
         </div>
         <div className="module-selector">
-          <p> Изабери програм:</p>
-          {course && (
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {selectedProgram ? selectedProgram : "Изабери програм"}
-              </Dropdown.Toggle>
+          {course && course.programs.length > 1 && (
+            <div>
+              <p> Изабери програм:</p>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {selectedProgram ? selectedProgram : "Изабери програм"}
+                </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                {course.programs.map((program, index) => (
-                  <Dropdown.Item
-                    key={index}
-                    onClick={() => setSelectedProgram(program)}
-                  >
-                    {program}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
+                <Dropdown.Menu>
+                  {course.programs.map((program, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      onClick={() => setSelectedProgram(program)}
+                    >
+                      {program}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           )}
-          <p> Изабери модул:</p>
-          {course && (
-            <Dropdown>
-              <Dropdown.Toggle variant="success" id="dropdown-basic">
-                {selectedModule ? selectedModule : "Изабери модул"}
-              </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                {course.modules.map((module, index) => (
-                  <Dropdown.Item
-                    key={index}
-                    onClick={() => setSelectedModule(module)}
-                  >
-                    {module}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
+          {course && course.modules.length > 1 && (
+            <div>
+              <p> Изабери модул:</p>
+
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  {selectedModule ? selectedModule : "Изабери модул"}
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  {course.modules.map((module, index) => (
+                    <Dropdown.Item
+                      key={index}
+                      onClick={() => setSelectedModule(module)}
+                    >
+                      {module}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           )}
         </div>
 
