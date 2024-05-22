@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/main_page/Navbar";
+import Navbar2 from "./components/main_page/Navbar2";
 import Footer from "./components/main_page/Footer";
 import Searchbar from "./components/main_page/Searchbar";
 import CoursesView from "./components/main_page/CoursesView";
@@ -118,7 +119,7 @@ function App() {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const isTokenExpired = () => {
@@ -162,50 +163,47 @@ function App() {
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
                   <Navbar />
+                  <Navbar2 />
                 </div>
               </div>
 
               <div className="App">
                 <div className="row">
-               
-                    <div className="body-container">
-                      <Searchbar
-                        allCourses={allCourses}
-                      />
-                      <CoursesView
-                        allCourses={allCourses}
-                        allDepartments={allDepartments}
-                        allModules={allModules}
-                        allLevelsOfStudy={allLevelsOfStudy}
-                        coursesToShow={coursesToShow}
-                        selectedLevelOfStudy={selectedLevelOfStudy}
-                        selectedProgram={selectedProgram}
-                        selectedModule={selectedModule}
-                        selectedSemester={selectedSemester}
-                        selectedYearOfStudy={selectedYearOfStudy}
-                        selectedDepartments={selectedDepartments}
-                        selectedCourse={selectedCourse}
-                        emptyResponse={emptyResponse}
-                        isSidebarVisible={isSidebarVisible}
-                        isLoadingCourses={isLoadingCourses}
-                        isLoadingLevelsOfStudy={isLoadingLevelsOfStudy}
-                        setAllCourses={setAllCourses}
-                        setCoursesToShow={setCoursesToShow}
-                        setSelectedLevelOfStudy={setSelectedLevelOfStudy}
-                        setSelectedProgram={setSelectedProgram}
-                        setSelectedModule={setSelectedModule}
-                        setSelectedSemester={setSelectedSemester}
-                        setSelectedYearOfStudy={setSelectedYearOfStudy}
-                        setSelectedDepartments={setSelectedDepartments}
-                        setSelectedCourse={setSelectedCourse}
-                        setEmptyResponse={setEmptyResponse}
-                        setIsSidebarVisible={setIsSidebarVisible}
-                        setIsLoadingLevelsOfStudy={setIsLoadingLevelsOfStudy}
-                        setIsLoadingCourses={setIsLoadingCourses}
-                        fetchFilteredCourses={fetchFilteredCourses}
-                      />
-                    </div>
-                  
+                  <div className="body-container">
+                    <Searchbar allCourses={allCourses} />
+                    <CoursesView
+                      allCourses={allCourses}
+                      allDepartments={allDepartments}
+                      allModules={allModules}
+                      allLevelsOfStudy={allLevelsOfStudy}
+                      coursesToShow={coursesToShow}
+                      selectedLevelOfStudy={selectedLevelOfStudy}
+                      selectedProgram={selectedProgram}
+                      selectedModule={selectedModule}
+                      selectedSemester={selectedSemester}
+                      selectedYearOfStudy={selectedYearOfStudy}
+                      selectedDepartments={selectedDepartments}
+                      selectedCourse={selectedCourse}
+                      emptyResponse={emptyResponse}
+                      isSidebarVisible={isSidebarVisible}
+                      isLoadingCourses={isLoadingCourses}
+                      isLoadingLevelsOfStudy={isLoadingLevelsOfStudy}
+                      setAllCourses={setAllCourses}
+                      setCoursesToShow={setCoursesToShow}
+                      setSelectedLevelOfStudy={setSelectedLevelOfStudy}
+                      setSelectedProgram={setSelectedProgram}
+                      setSelectedModule={setSelectedModule}
+                      setSelectedSemester={setSelectedSemester}
+                      setSelectedYearOfStudy={setSelectedYearOfStudy}
+                      setSelectedDepartments={setSelectedDepartments}
+                      setSelectedCourse={setSelectedCourse}
+                      setEmptyResponse={setEmptyResponse}
+                      setIsSidebarVisible={setIsSidebarVisible}
+                      setIsLoadingLevelsOfStudy={setIsLoadingLevelsOfStudy}
+                      setIsLoadingCourses={setIsLoadingCourses}
+                      fetchFilteredCourses={fetchFilteredCourses}
+                    />
+                  </div>
                 </div>
 
                 <div className="row">
@@ -236,7 +234,6 @@ function App() {
                 allDepartments={allDepartments}
               />
             ) : (
-             
               <Navigate to="/login" />
             )
           }
@@ -251,8 +248,6 @@ function App() {
             )
           }
         />
-
-       
 
         <Route
           path="/update/:id"
