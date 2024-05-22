@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/main_page/Navbar";
-import Navbar2 from "./components/main_page/Navbar2";
 import Footer from "./components/main_page/Footer";
 import Searchbar from "./components/main_page/Searchbar";
 import CoursesView from "./components/main_page/CoursesView";
@@ -39,6 +38,7 @@ function App() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [emptyResponse, setEmptyResponse] = useState(false);
   const cookies = useCookies(["access_token"])[0];
+  const [language, setLanguage] = useState("Ћирилица");
   const [testData, setTestData] = useState(null);
 
   const fetchTestData = async () => {
@@ -119,7 +119,7 @@ function App() {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const isTokenExpired = () => {
@@ -162,8 +162,7 @@ function App() {
             <div className="container-fluid">
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
-                  <Navbar />
-                  <Navbar2 />
+                  <Navbar language={language} setLanguage={setLanguage} />
                 </div>
               </div>
 
