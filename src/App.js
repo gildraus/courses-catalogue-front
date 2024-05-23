@@ -14,7 +14,6 @@ import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import server_name from "./config";
 import axios from "axios";
-import Test from "./components/main_page/Test";
 import UpdateCourse from "./components/cpanel_page/UpdateCourse";
 
 function App() {
@@ -265,7 +264,7 @@ function App() {
         />
 
         <Route path="/login" element={<Login />} />
-        <Route path="/test" element={<Test />} />
+       
       </Routes>
     </BrowserRouter>
   );

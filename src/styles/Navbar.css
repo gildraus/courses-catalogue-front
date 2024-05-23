@@ -8,12 +8,9 @@
 .navbar-title,
 .navbar-subtitle {
   color: #ffffff;
-
-
-
-
-
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .navbar-container {
@@ -32,6 +29,15 @@
 
 }
 
+.navbar-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-logo-container {
+  padding-left: 100px;
+}
+
 .navbar-logo-img {
   max-width: 100px;
   height: auto;
@@ -45,6 +51,7 @@
 
 .language-dropdown {
   margin-left: auto;
+  padding-right: 100px;
 }
 
 .language-dropdown .btn {
