@@ -170,6 +170,8 @@ const CoursesView = ({
 
     const firstThreeTags = tags.slice(0, 3);
 
+    
+
     const tagString = firstThreeTags.join(", ");
 
     return <p>{tagString}</p>;
@@ -525,7 +527,7 @@ const CoursesView = ({
                           <div className="espb-card-item">
                             <div>
                               <img
-                                src="./images/star.png"
+                                src="./images/ects-icon.png"
                                 className="courses-view-card-icon"
                                 alt="ЕСПБ"
                               />

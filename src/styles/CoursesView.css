@@ -51,7 +51,7 @@
 
 .courses-view-sidebar {
   background-color: #ffffff;
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: auto;
   text-align: left;
   margin-bottom: 15px;
@@ -78,7 +78,6 @@
   justify-content: space-between;
   align-items: center;
 
-  padding-left: 5px;
   padding-right: 5px;
 }
 
@@ -94,9 +93,8 @@
 
 .courses-view-card {
   width: 100%;
-  min-height: 150px;
+  min-height: 184px;
   background-color: #ffffff;
-
   border-radius: 10px;
   padding: 15px;
   margin-left: 10px;
@@ -332,8 +330,8 @@ input {
 }
 
 .courses-view-card-icon {
-  min-width: 18px;
-  max-width: 18px;
+  min-width: 16px;
+  max-width: 16px;
   margin-right: 10px;
 }
 
