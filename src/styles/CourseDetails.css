@@ -8,7 +8,7 @@
       transparent 250px
     ),
     url("../../public/images/course-details-background.png");
-  background-color: transparent;
+  background-color: #F6F6F9;
   background-blend-mode: multiply;
   background-repeat: no-repeat;
   background-size: 100% 250px;
@@ -29,7 +29,7 @@
 .course-details-header {
   margin-bottom: 25px;
   text-align: center;
-}
+}s
 
 .course-details-header h1 {
   text-align: left;
@@ -84,9 +84,11 @@
 .course-details-literature {
   background-color: #ffffff;
   border-radius: 10px;
+  border: 1px solid #E8E8E8;
   text-align: left;
   padding: 30px 25px 30px 25px;
   margin-top: 25px;
+
 }
 .course-details-categorization {
   background-color: #ffffff;
@@ -149,11 +151,17 @@ img {
 }
 
 .tags-preview {
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+}
+.tag-card {
+  display: inline-block;
+  padding: 8px 16px 8px 16px;
+  margin: 4px;
+  background-color: #DDFEF6;
+
+  border-radius: 54px;
+  font-size: 14px;
+  color: #008767;
 }
 .session_time_table {
   width: 100%;
@@ -189,6 +197,14 @@ img {
 .session_time_table tr:hover {
   background-color: #ddd;
 }
+
+.horizontal-separator-basic-info-card {
+  border-top: 1px solid #004A7C; 
+  width: 100%;
+  
+  padding-bottom: 20px;
+}
+
 
 /*
  *  Styling for extra large screens
