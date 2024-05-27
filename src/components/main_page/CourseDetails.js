@@ -174,7 +174,7 @@ const CourseDetails = ({
 
               {course && course.lecturers.length > 0 && (
                 <div className="lecturers-div">
-                  <h3>Предавачи</h3>
+                  <h3 className="green-paragraph">Предавачи</h3>
                   <ul>
                     {course.lecturers.map((lecturer, index) => (
                       <li key={index}>{lecturer}</li>
@@ -184,7 +184,7 @@ const CourseDetails = ({
               )}
 
               <div className="lecture_session_time-div">
-                <h3>Термини предавања</h3>
+                <h3 className="green-paragraph">Термини предавања</h3>
                 {sessions && sessions.length > 0 ? (
                   <table className="session_time_table">
                     <thead>
@@ -209,7 +209,7 @@ const CourseDetails = ({
                 )}
               </div>
               <div className="exercise_session_time-div">
-                <h3>Термини вежби</h3>
+                <h3 className="green-paragraph">Термини вежби</h3>
                 {sessions && sessions.length > 0 ? (
                   <table className="session_time_table">
                     <thead>
@@ -255,17 +255,17 @@ const CourseDetails = ({
 
                 <div className="level_of_study-waterfall-structure">
                   {" "}
-                  <h4>Ниво студија:</h4>
+                  <h4 className="green-paragraph">Ниво студија:</h4>
                   <ul>
                     <li>{course.level_of_study}</li>
                   </ul>
-                  <h4>Програми:</h4>
+                  <h4 className="green-paragraph">Програми:</h4>
                   <ul>
                     {course.programs.map((item, index) => (
                       <li key={index}> {item}</li>
                     ))}
                   </ul>
-                  <h4>Модули:</h4>
+                  <h4 className="green-paragraph">Модули:</h4>
                   <ul>
                     {course.modules.map((item, index) => (
                       <li key={index}> {item}</li>

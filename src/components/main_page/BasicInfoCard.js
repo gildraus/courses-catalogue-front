@@ -16,7 +16,6 @@ const BasicInfoCard = ({ course }) => {
   return (
     <div>
       <h2>Картон предмета</h2>
- 
 
       {course.espb && <p>Број ЕСПБ поена: {course.espb}</p>}
       {course.status && <p>Статус: {course.status}</p>}
@@ -25,30 +24,42 @@ const BasicInfoCard = ({ course }) => {
       {course.tags && course.tags.length > 0 && (
         <div className="tags-preview">
           <h3>Тагови:</h3>
-      {course.tags.map((tag,index)=>(
-        <div className="tag-card" key={index}>{tag}</div>
-        
-      ))}
-    
-      
+          {course.tags.map((tag, index) => (
+            <div className="tag-card" key={index}>
+              {tag}
+            </div>
+          ))}
         </div>
       )}
 
       <div className="horizontal-separator-basic-info-card"></div>
-      
-      {course.departments && (
-        <p>
-          Катедре задужене за извођење предмета:
-          <ul>
-            {course.departments.map((item, index) => (
-              <li key={index}>{item}</li>
-            ))}
-          </ul>
-        </p>
+      <div className="departments-preview">
+        {" "}
+        {course.departments && (
+          <p>
+            Катедре задужене за извођење предмета:
+            <ul>
+              {course.departments.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </p>
+        )}
+      </div>
+
+      <div className="horizontal-separator-basic-info-card"></div>
+      {course.note && course.note !== "" && (
+        <div>
+          {" "}
+          <h3>Ограничења</h3>
+          <p>
+            <img src="./images/danger.png" alt="Warning" />
+            {course.note}
+          </p>
+        </div>
       )}
 
-
-
+      <div className="horizontal-separator-basic-info-card"></div>
       {course.link && course.link !== "" && (
         <div>
           {" "}
@@ -57,18 +68,6 @@ const BasicInfoCard = ({ course }) => {
           </p>
         </div>
       )}
-      {course.note && course.note !== "" && (
-        <div>
-          {" "}
-          <h3>Напомена</h3>
-          <p>
-            <img src="./images/danger.png" alt="Warning" />
-            {course.note}
-          </p>
-        </div>
-      )}
-
-     
     </div>
   );
 };
