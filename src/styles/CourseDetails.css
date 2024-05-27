@@ -120,6 +120,11 @@
 
 .green-paragraph {
   color: #008767;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 31.06px;
+  
 }
 
 img {
@@ -186,7 +191,7 @@ img {
 }
 
 .session_time_table th {
-  background-color: #ddd;
+  background-color: #E4EFEC;
   font-weight: bold;
 }
 
@@ -195,7 +200,7 @@ img {
 }
 
 .session_time_table tr:hover {
-  background-color: #ddd;
+  background-color: #EFEFEF;
 }
 
 .horizontal-separator-basic-info-card {
