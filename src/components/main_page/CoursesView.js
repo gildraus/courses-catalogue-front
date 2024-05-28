@@ -45,12 +45,21 @@ const CoursesView = ({
     navigate(`/${courseId}`);
   };
 
+  // function toggle(groupName) {
+  //   var displayType = document.getElementById(groupName).style.display;
+  //   document.getElementById(groupName).style.display =
+  //     displayType === "none" ? "inline" : "none";
+  //   document.getElementById(groupName + "-arrow").style.rotate =
+  //     displayType === "none" ? "180deg" : "0deg";
+  // }
   function toggle(groupName) {
-    var displayType = document.getElementById(groupName).style.display;
-    document.getElementById(groupName).style.display =
-      displayType === "none" ? "inline" : "none";
-    document.getElementById(groupName + "-arrow").style.rotate =
-      displayType === "none" ? "180deg" : "0deg";
+    var element = document.getElementById(groupName);
+    var arrow = document.getElementById(groupName + "-arrow");
+    var isVisible = element.classList.toggle("show");
+
+    arrow.style.transform = isVisible ? "rotate(0deg)" : "rotate(180deg)";
+    element.style.maxHeight = isVisible ? "500px" : "0"; // Set max-height to show or hide the content
+    element.style.opacity = isVisible ? "1" : "0"; // Adjust opacity
   }
 
   const createCheckboxChangeHandler = (state, setState) => (event) => {
@@ -270,18 +279,22 @@ const CoursesView = ({
             </div>
           ) : (
             <div className="courses-view-sidebar col-lg-12 col-xs-12">
-              {/* НИВО СТУДИЈА*/}
               <div className="filter-box">
-                <h4 className="filter-box-header">
+                <h4
+                  className="filter-box-header"
+                  onClick={() => toggle("level-of-study-group")}
+                >
                   <b>Ниво студија</b>{" "}
                   <img
                     id="level-of-study-group-arrow"
                     src="./images/feArrowDown0.png"
-                    onClick={() => toggle("level-of-study-group")}
                     alt=""
                   />
                 </h4>
-                <div id="level-of-study-group">
+                <div
+                  id="level-of-study-group"
+                  className="filter-box-content show"
+                >
                   {allLevelsOfStudy.map((levelofstudy, index) => (
                     <div key={index}>
                       <input
@@ -294,17 +307,24 @@ const CoursesView = ({
                     </div>
                   ))}
                 </div>
-
                 <hr className="filter-box-separator"></hr>
               </div>
 
               {/* СТУДИЈСКИ ПРОГРАМ*/}
               {selectedLevelOfStudy && (
                 <div className="filter-box">
-                  <h4 className="filter-box-header">
-                    <b>Студијски програми</b>
+                  <h4
+                    className="filter-box-header"
+                    onClick={() => toggle("programs-group")}
+                  >
+                    <b>Студијски програми</b>{" "}
+                    <img
+                      id="programs-group-arrow"
+                      src="./images/feArrowDown0.png"
+                      alt=""
+                    />
                   </h4>
-                  <div id="programs-group">
+                  <div id="programs-group" className="filter-box-content show">
                     {allLevelsOfStudy
                       .find(
                         (level) =>
@@ -328,6 +348,7 @@ const CoursesView = ({
                   <hr className="filter-box-separator"></hr>
                 </div>
               )}
+
               {/* МОДУЛ*/}
               {selectedProgram &&
                 allLevelsOfStudy
@@ -338,17 +359,18 @@ const CoursesView = ({
                     (program) => program.programName === selectedProgram
                   )?.modules?.length > 0 && ( // Check if modules array is not empty
                   <div className="filter-box">
-                    <h4 className="filter-box-header">
+                    <h4
+                      className="filter-box-header"
+                      onClick={() => toggle("module-group")}
+                    >
                       <b>Модули</b>{" "}
                       <img
                         id="module-group-arrow"
                         src="./images/feArrowDown0.png"
-                        onClick={() => toggle("module-group")}
-                        className="clickable-pointer"
                         alt=""
                       />
                     </h4>
-                    <div id="module-group">
+                    <div id="module-group" className="filter-box-content show">
                       {allLevelsOfStudy
                         .find(
                           (level) =>
@@ -376,17 +398,18 @@ const CoursesView = ({
 
               {/* Семестар*/}
               <div className="filter-box">
-                <h4 className="filter-box-header">
+                <h4
+                  className="filter-box-header"
+                  onClick={() => toggle("semester-group")}
+                >
                   <b>Семестар</b>{" "}
                   <img
                     id="semester-group-arrow"
                     src="./images/feArrowDown0.png"
-                    onClick={() => toggle("semester-group")}
-                    className="clickable-pointer"
                     alt=""
                   />
                 </h4>
-                <div id="semester-group">
+                <div id="semester-group" className="filter-box-content show">
                   <div>
                     {" "}
                     <input
@@ -422,17 +445,21 @@ const CoursesView = ({
                 {(!selectedLevelOfStudy ||
                   selectedLevelOfStudy !== "Мастер академске студије") && (
                   <div className="filter-box">
-                    <h4 className="filter-box-header">
+                    <h4
+                      className="filter-box-header"
+                      onClick={() => toggle("year-of-study-group")}
+                    >
                       <b>Година студија</b>
                       <img
                         id="year-of-study-group-arrow"
                         src="./images/feArrowDown0.png"
-                        onClick={() => toggle("year-of-study-group")}
-                        className="clickable-pointer"
                         alt=""
                       />
                     </h4>
-                    <div id="year-of-study-group">
+                    <div
+                      id="year-of-study-group"
+                      className="filter-box-content show"
+                    >
                       <div>
                         <input
                           type="checkbox"

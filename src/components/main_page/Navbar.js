@@ -42,6 +42,9 @@ const Navbar = ({ language, setLanguage }) => {
               <Dropdown.Item onClick={() => setLanguage("Latinica")}>
                 Latinica
               </Dropdown.Item>
+              <Dropdown.Item onClick={() => setLanguage("English")}>
+                English
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>{" "}

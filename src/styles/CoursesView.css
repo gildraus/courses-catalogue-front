@@ -93,13 +93,30 @@ html {
   justify-content: space-between;
   align-items: center;
   padding-right: 5px;
+  cursor: pointer; /* Indicate that the header is clickable */
+
+}
+.filter-box-content {
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  max-height: 0; /* Hide the content by default */
+  opacity: 0;
 }
 
-.filter-box-header > img {
+.filter-box-content.show {
+  max-height: 500px; /* Set a high enough max-height to fit the content */
+  opacity: 1; /* Make content visible */
+}
+
+
+
+/* .filter-box-header > img {
   rotate: 180deg;
   transition: transform 0.5s;
+} */
+.filter-box img {
+  transition: transform 0.5s ease-in-out; /* Apply transition to the rotation */
 }
-
 .filter-box-separator {
   width: 90%;
   justify-self: center;
