@@ -77,63 +77,8 @@ const CourseDetails = ({
           <Navbar />
         </div>
       </div>
-      <div className="close-button-container">
-        {" "}
-        <CloseButton className="close-button" onClick={() => navigate(-1)} />
-      </div>
+
       <div className="course-details">
-        {/* <div className="course-details-header">
-          <h2 id="course-name-header-text">{course && course.name}</h2>
-          <div id="course-department-header-text">
-            {course && course.departments}
-          </div>
-        </div>
-        <div className="module-selector">
-          {course && course.programs.length > 1 && (
-            <div>
-              <p> Изабери програм:</p>
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {selectedProgram ? selectedProgram : "Изабери програм"}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  {course.programs.map((program, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      onClick={() => setSelectedProgram(program)}
-                    >
-                      {program}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          )}
-
-          {course && course.modules.length > 1 && (
-            <div>
-              <p> Изабери модул:</p>
-
-              <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  {selectedModule ? selectedModule : "Изабери модул"}
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  {course.modules.map((module, index) => (
-                    <Dropdown.Item
-                      key={index}
-                      onClick={() => setSelectedModule(module)}
-                    >
-                      {module}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          )}
-        </div> */}
         <div className="course-details-header">
           <div className="header-title">
             <h2 id="course-name-header-text">{course && course.name}</h2>
