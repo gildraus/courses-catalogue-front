@@ -11,6 +11,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 7.36px;
+  font-weight: 450;
+  line-height: 8.83px;
+  letter-spacing: 0.22em;
+  text-align: center;
 }
 
 .navbar-container {
@@ -39,7 +46,8 @@
 }
 
 .navbar-logo-img {
-  max-width: 100px;
+  max-width: 68px;
+  max-height: 30px;
   height: auto;
 }
 

@@ -61,29 +61,29 @@
   font-weight: 700;
   font-size: 16px;
 }
-.program-column{
+.program-column {
   width: 50%;
   padding: 15px 0px 15px 15px;
 }
-.module-column{
+.module-column {
   width: 50%;
   padding: 15px 0px 15px 15px;
 }
 
-.selector-dropdown{
+.selector-dropdown {
   margin-left: auto;
 }
-.selector-dropdown>.btn {
+.selector-dropdown > .btn {
   background-color: #ffffff;
   color: #040303;
-  border: 1px solid #CDCDCD;
+  border: 1px solid #cdcdcd;
   border-radius: 3px;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 14px;
 }
 
-.sort-dropdown>.btn:hover {
+.sort-dropdown > .btn:hover {
   background-color: rgba(193, 193, 193, 0.33);
   color: #000000;
 }
@@ -139,12 +139,44 @@
   padding: 30px 25px 30px 25px;
   margin-top: 25px;
 }
+.details-card-title {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 28px;
+  color: #181818;
+}
+.details-card-subtitle {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #008767;
+}
+.details-card-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #181818cc;
+}
+
+.sidebar-subtitle {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #181818cc;
+}
+
 .course-details-categorization {
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
   border-radius: 10px;
   text-align: left;
   padding: 30px 25px 30px 25px;
   margin-top: 25px;
+}
+.categorization-body {
+  display: flex;
+  flex-direction: row;
 }
 
 .course-details-sidecard {
@@ -205,6 +237,10 @@ img {
 .tags-preview .departments-preview {
   padding-bottom: 20px;
 }
+
+.tags-preview {
+  padding-bottom: 10px;
+}
 .tag-card {
   display: inline-block;
   padding: 8px 16px 8px 16px;
@@ -227,8 +263,18 @@ img {
   margin-bottom: 10px;
 }
 
-.session_time_table th,
+.session_time_table th {
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px;
+  text-align: left;
+}
+
 .session_time_table td {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
   padding: 8px;
   text-align: left;
 }
@@ -250,12 +296,20 @@ img {
   background-color: #efefef;
 }
 
+.list-text {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .horizontal-separator-basic-info-card {
   border-top: 1px solid #004a7c;
   width: 100%;
 
   padding-bottom: 20px;
 }
+
+
 
 /*
  *  Styling for extra large screens
@@ -296,5 +350,8 @@ img {
   }
   .course-details-main-body {
     width: 90%;
+  }
+  .header-module-selector{
+    display: none;
   }
 }

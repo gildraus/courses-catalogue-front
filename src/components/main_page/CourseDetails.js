@@ -223,21 +223,23 @@ const CourseDetails = ({
               {course && <BasicInfoCard course={course} />}
             </div>
             <div className="course-details-basic-info-box">
-              <h2>Основне информације</h2>
+              <h2 className="details-card-title">Основне информације</h2>
 
               {course && course.lecturers.length > 0 && (
                 <div className="lecturers-div">
-                  <h3 className="green-paragraph">Предавачи</h3>
+                  <h3 className="details-card-subtitle">Предавачи</h3>
                   <ul>
                     {course.lecturers.map((lecturer, index) => (
-                      <li key={index}>{lecturer}</li>
+                      <li className="details-card-text" key={index}>
+                        {lecturer}
+                      </li>
                     ))}
                   </ul>
                 </div>
               )}
 
               <div className="lecture_session_time-div">
-                <h3 className="green-paragraph">Термини предавања</h3>
+                <h3 className="details-card-subtitle">Термини предавања</h3>
                 {sessions && sessions.length > 0 ? (
                   <table className="session_time_table">
                     <thead>
@@ -262,7 +264,7 @@ const CourseDetails = ({
                 )}
               </div>
               <div className="exercise_session_time-div">
-                <h3 className="green-paragraph">Термини вежби</h3>
+                <h3 className="details-card-subtitle">Термини вежби</h3>
                 {sessions && sessions.length > 0 ? (
                   <table className="session_time_table">
                     <thead>
@@ -287,46 +289,57 @@ const CourseDetails = ({
                 )}
               </div>
             </div>
+            {course && (
+              <div className="course-details-categorization">
+                <div className="categorization-header">
+                  <h2 className="details-card-title">Категоризација</h2>
+                </div>
+                <div className="categorization-body">
+                  <div className="program-category">
+                    {" "}
+                    <h4 className="details-card-subtitle">Програми:</h4>
+                    <ul>
+                      {course.programs.map((item, index) => (
+                        <li className="details-card-text" key={index}>
+                          {" "}
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="module-category">
+                    <h4 className="details-card-subtitle">Модули:</h4>
+                    <ul>
+                      {course.modules.map((item, index) => (
+                        <li className="details-card-text" key={index}>
+                          {" "}
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="course-details-literature">
-              <h2>Опширније информације</h2>
+              <h2 className="details-card-title">Опширније информације</h2>
               <br />
-              <h3 className="green-paragraph">Опис</h3>
-              {course && course.description}
+              <h3 className="details-card-subtitle">Опис</h3>
+              {course && (
+                <p className="details-card-text">{course.description}</p>
+              )}
               <hr />
-              <h3 className="green-paragraph">Литература</h3>
+              <h3 className="details-card-subtitle">Литература</h3>
               {course && course.literature && (
                 <ul>
                   {course.literature.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li className="details-card-text" key={index}>
+                      {item}
+                    </li>
                   ))}
                 </ul>
               )}
             </div>
-            {course && (
-              <div className="course-details-categorization">
-                <h2>Категоризација</h2>
-
-                <div className="level_of_study-waterfall-structure">
-                  {" "}
-                  <h4 className="green-paragraph">Ниво студија:</h4>
-                  <ul>
-                    <li>{course.level_of_study}</li>
-                  </ul>
-                  <h4 className="green-paragraph">Програми:</h4>
-                  <ul>
-                    {course.programs.map((item, index) => (
-                      <li key={index}> {item}</li>
-                    ))}
-                  </ul>
-                  <h4 className="green-paragraph">Модули:</h4>
-                  <ul>
-                    {course.modules.map((item, index) => (
-                      <li key={index}> {item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
           </div>
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">

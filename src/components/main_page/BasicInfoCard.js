@@ -15,15 +15,26 @@ const BasicInfoCard = ({ course }) => {
 
   return (
     <div>
-      <h2>Картон предмета</h2>
+      <h2 className="details-card-title">Картон предмета</h2>
 
-      {course.espb && <p>Број ЕСПБ поена: {course.espb}</p>}
-      {course.status && <p>Статус: {course.status}</p>}
-      {course.semester && <p>Семестар: {course.semester}</p>}
-      {course.level_of_study && <p>Ниво студија: {course.level_of_study}</p>}
+      {course.espb && (
+        <p className="details-card-text">Број ЕСПБ поена: {course.espb}</p>
+      )}
+      {course.status && (
+        <p className="details-card-text">Статус: {course.status}</p>
+      )}
+      {course.semester && (
+        <p className="details-card-text">Семестар: {course.semester}</p>
+      )}
+      {course.level_of_study && (
+        <p className="details-card-text">
+          Ниво студија: {course.level_of_study}
+        </p>
+      )}
+      <div className="horizontal-separator-basic-info-card"></div>
       {course.tags && course.tags.length > 0 && (
         <div className="tags-preview">
-          <h3>Тагови:</h3>
+          <h3 className="sidebar-subtitle">Тагови:</h3>
           {course.tags.map((tag, index) => (
             <div className="tag-card" key={index}>
               {tag}
@@ -36,11 +47,13 @@ const BasicInfoCard = ({ course }) => {
       <div className="departments-preview">
         {" "}
         {course.departments && (
-          <p>
+          <p className="sidebar-subtitle">
             Катедре задужене за извођење предмета:
             <ul>
               {course.departments.map((item, index) => (
-                <li key={index}>{item}</li>
+                <li className="details-card-text" key={index}>
+                  {item}
+                </li>
               ))}
             </ul>
           </p>
@@ -51,8 +64,8 @@ const BasicInfoCard = ({ course }) => {
       {course.note && course.note !== "" && (
         <div>
           {" "}
-          <h3>Ограничења</h3>
-          <p>
+          <h3 className="sidebar-subtitle">Ограничења</h3>
+          <p className="details-card-text">
             <img src="./images/danger.png" alt="Warning" />
             {course.note}
           </p>
@@ -63,8 +76,9 @@ const BasicInfoCard = ({ course }) => {
       {course.link && course.link !== "" && (
         <div>
           {" "}
+          <h3 className="sidebar-subtitle">Веб сајт:</h3>
           <p>
-            Веб сајт: <a href={course.link}>{course.link}</a>
+            <a href={course.link}>{course.link}</a>
           </p>
         </div>
       )}

@@ -71,9 +71,7 @@ function remapLang(str) {
   });
 }
 
-const Searchbar = ({
-  allCourses,
-}) => {
+const Searchbar = ({ allCourses }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
@@ -106,7 +104,6 @@ const Searchbar = ({
     }
   };
 
-  
   return (
     <div className="header">
       <div className="search-bar-logo">КАТАЛОГ ПРЕДМЕТА</div>
