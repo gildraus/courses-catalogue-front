@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 .filter-button {
   background-color: #ffffff;
   color: #000000;
@@ -10,42 +21,46 @@
   display: flex;
   align-items: center;
   font-weight: bold;
+  max-width: 100%;
 }
 
 .courses-view-header {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .sort-dropdown {
   margin-left: auto;
 }
 
-.sort-dropdown>.btn {
+.sort-dropdown > .btn {
   background-color: #ffffff;
   color: #040303;
-  border: 1px solid #CDCDCD;
+  border: 1px solid #cdcdcd;
   border-radius: 3px;
 }
 
-.sort-dropdown>.btn:hover {
+.sort-dropdown > .btn:hover {
   background-color: rgba(193, 193, 193, 0.33);
   color: #000000;
 }
 
 .course-view-body {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  width: 100%;
 }
 
 .courses-view-header {
   margin: 20px;
+  width: 100%;
 }
 
 .course-view-body .courses-view-sidebar {
   width: 20%;
 }
-
 
 .courses-view-sidebar {
   background-color: #ffffff;
@@ -56,10 +71,12 @@
   height: fit-content;
   display: grid;
   padding: 30px 5px 30px 5px;
+  max-width: 100%;
 }
 
 .course-view-body .courses-view-cards {
   width: 80%;
+  max-width: 100%;
 }
 
 .filter-box {
@@ -75,11 +92,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding-right: 5px;
 }
 
-.filter-box-header>img {
+.filter-box-header > img {
   rotate: 180deg;
   transition: transform 0.5s;
 }
@@ -97,34 +113,29 @@
   padding: 15px;
   margin-left: 10px;
   margin-bottom: 15px;
-
   display: flex;
   justify-content: center;
 }
 
 .courses-view-card-left {
   width: 30%;
-
   padding: 5px;
-
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.courses-view-card-left>img {
+.courses-view-card-left > img {
   width: 100%;
   max-width: 500px;
 }
 
 .courses-view-card-right {
   width: 70%;
-
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: start;
-
   padding: 15px;
 }
 
@@ -151,15 +162,14 @@
   justify-content: center;
 }
 
-.card-options-group>div {
+.card-options-group > div {
   margin: 5px;
   border-radius: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 15px;
   padding-right: 15px;
-
-  max-width: 600px;
+  max-width: 100%;
 }
 
 .card-option-mandatory {
@@ -226,10 +236,10 @@
 }
 
 .arrow-circle-container {
-  width: 100px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  gap: 10px; /* Adjust this value to control the spacing between the arrows */
 }
 
 .arrow-circle {
@@ -245,12 +255,14 @@
   font-weight: bolder;
   font-size: 24px;
   padding-bottom: 2px;
+  margin: 0 5px; /* Adjust this value to control the spacing around each arrow */
 }
 
 .arrow-circle:hover {
   background-color: #FFF;
   color: #11C098;
 }
+
 
 .page-counter-container {
   display: flex;
@@ -261,9 +273,9 @@
 
 .page-counter {
   border-radius: 2px;
-  border: 2px solid #CDCDCD;
-  color: #CDCDCD;
-  background-color: #FFFFFF;
+  border: 2px solid #cdcdcd;
+  color: #cdcdcd;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -279,30 +291,26 @@
 }
 
 @media (max-width: 1200px) {
-  .courses-view-card-left {
-    width: 100%;
-  }
-
-  .courses-view-card-left>img {
-    width: 90%;
-  }
-
-  .course-view-body .courses-view-cards {
-    width: 70%;
-  }
-
   .courses-view-card {
     flex-direction: column;
     margin-left: 0px;
   }
 
+  .courses-view-card-left {
+    width: 100%;
+  }
+
+  .courses-view-card-left > img {
+    width: 90%;
+  }
+
+  .course-view-body .courses-view-cards {
+    width: 100%;
+  }
+
   .card-options-group {
     flex-direction: column;
   }
-
-  /* .courses-view-card-right {
-    color: blue;
-  } */
 }
 
 @media (max-width: 992px) {
@@ -313,10 +321,10 @@
   .courses-view-sidebar {
     width: 100% !important;
   }
-
-  /* .courses-view-card-right {
-    color: red;
-  } */
+}
+.department-card-item {
+  align-items: left;
+  text-align: left;
 }
 
 .clickable-pointer {
@@ -342,7 +350,7 @@ input {
 .active-filter {
   display: flex;
   align-items: center;
-  background-color: #DDFEF6;
+  background-color: #ddfef6;
   color: #008767;
   border: none;
   border-radius: 54px;
@@ -364,9 +372,14 @@ input {
   display: inline-block;
   padding: 8px 16px 8px 16px;
   margin: 4px;
-  background-color: #DDFEF6;
-
+  background-color: #ddfef6;
   border-radius: 54px;
   font-size: 14px;
   color: #008767;
+}
+
+@media (max-width: 1000px) {
+  .sort-dropdown {
+    display: none;
+  }
 }

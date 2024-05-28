@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import "../../styles/Navbar.css";
+import "../../styles/Navbar2.css";
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
-
 const Navbar = ({ language, setLanguage }) => {
   const navigate = useNavigate();
 
@@ -11,26 +10,22 @@ const Navbar = ({ language, setLanguage }) => {
   };
 
   return (
-    <div className="navbar">
-      <div className="navbar-container">
-        <div className="navbar-title-column">
-          <div className="navbar-logo-container">
-            <img
-              className="navbar-logo-img"
-              src="./images/fon-logo-cyr.png"
-              alt="Logo"
-              onClick={redirectToHomepage}
-            />
-          </div>
-          <div className="navbar-separator"></div>
-          <div className="navbar-text-container">
-            <span className="navbar-title">УНИВЕРЗИТЕТ У БЕОГРАДУ</span>
-            <span className="navbar-subtitle">
-              ФАКУЛТЕТ ОРГАНИЗАЦИОНИХ НАУКА
-            </span>
-          </div>
+    <div className="navbar-container">
+      <div className="navbar-header">
+        <img
+          className="navbar-logo-img"
+          src="./images/fon-logo-cyr.png"
+          alt="Logo"
+          onClick={redirectToHomepage}
+        />
+        <div className="navbar-separator"></div>
+        <div className="navbar-text-container">
+          <span className="navbar-title">УНИВЕРЗИТЕТ У БЕОГРАДУ</span>
+          <span className="navbar-subtitle">ФАКУЛТЕТ ОРГАНИЗАЦИОНИХ НАУКА</span>
         </div>
-        <div className="language-selector">
+      </div>
+      <div className="navbar-selector">
+        <div className="navbar-language-selector">
           <Dropdown className="language-dropdown">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {language ? language : "Ћирилица"}
@@ -45,7 +40,8 @@ const Navbar = ({ language, setLanguage }) => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        </div>{" "}
+        </div>
+        <div className="navbar-mobile-selector"><button>klik</button></div>
       </div>
     </div>
   );
