@@ -23,6 +23,7 @@ const CoursesView = ({
   emptyResponse,
   isSidebarVisible,
   isLoadingLevelsOfStudy,
+  tagsToSearch,
   setAllCourses,
   setCoursesToShow,
   setSelectedLevelOfStudy,
@@ -37,29 +38,33 @@ const CoursesView = ({
   setIsLoadingLevelsOfStudy,
   fetchFilteredCourses,
   isLoadingCourses,
+  setTagsToSearch,
 }) => {
   const [isSmallScreen, setIsSmallScreen] = useState([false]);
   const navigate = useNavigate();
+
+  const addTagToSearchCriterias = (tag) => {
+    if (!tagsToSearch.includes(tag)) {
+      setTagsToSearch((prevTags) => [...prevTags, tag]);
+    }
+  };
+  const handleRemoveTag = (tagToRemove) => {
+    const updatedTags = tagsToSearch.filter((tag) => tag !== tagToRemove);
+    setTagsToSearch(updatedTags);
+  };
 
   const handleCourseOpen = (courseId) => {
     navigate(`/${courseId}`);
   };
 
-  // function toggle(groupName) {
-  //   var displayType = document.getElementById(groupName).style.display;
-  //   document.getElementById(groupName).style.display =
-  //     displayType === "none" ? "inline" : "none";
-  //   document.getElementById(groupName + "-arrow").style.rotate =
-  //     displayType === "none" ? "180deg" : "0deg";
-  // }
   function toggle(groupName) {
     var element = document.getElementById(groupName);
     var arrow = document.getElementById(groupName + "-arrow");
     var isVisible = element.classList.toggle("show");
 
     arrow.style.transform = isVisible ? "rotate(0deg)" : "rotate(180deg)";
-    element.style.maxHeight = isVisible ? "500px" : "0"; // Set max-height to show or hide the content
-    element.style.opacity = isVisible ? "1" : "0"; // Adjust opacity
+    element.style.maxHeight = isVisible ? "500px" : "0";
+    element.style.opacity = isVisible ? "1" : "0";
   }
 
   const createCheckboxChangeHandler = (state, setState) => (event) => {
@@ -182,7 +187,14 @@ const CoursesView = ({
     return (
       <div>
         {firstThreeTags.map((tag, index) => (
-          <div className="tag-card" key={index}>
+          <div
+            className="tag-card"
+            key={index}
+            onClick={(event) => {
+              event.stopPropagation(); //this will prevent trigger for opening CourseDetails
+              addTagToSearchCriterias(tag);
+            }}
+          >
             {tag}
           </div>
         ))}
@@ -196,50 +208,6 @@ const CoursesView = ({
           <img src="./images/filter-icon.png" alt="" />
           Филтери
         </button>
-
-        <div className="applied-filters-box">
-          {" "}
-          {/* Level of study applied filter */}
-          {selectedLevelOfStudy && (
-            <button className="active-filter">
-              <span>Ниво студија</span>
-              <CloseButton
-                className="active-filter-close-btn"
-                onClick={handleLevelOfStudyUncheck}
-              />
-            </button>
-          )}
-          {/* Program applied filter */}
-          {selectedProgram && (
-            <button className="active-filter">
-              {" "}
-              <span>Студијски програм</span>
-              <CloseButton
-                className="active-filter-close-btn"
-                onClick={handleProgramUncheck}
-              />
-            </button>
-          )}
-          {/* Module applied filter */}
-          {selectedModule != null && selectedModule.length > 0 && (
-            <button className="active-filter">
-              <span>Модул</span>
-              <CloseButton onClick={handleModuleUncheck} />
-            </button>
-          )}
-          {selectedSemester != null && selectedSemester.length > 0 && (
-            <button className="active-filter">
-              <span>Семестар</span>
-              <CloseButton onClick={handleSemesterUncheck} />
-            </button>
-          )}
-          {selectedYearOfStudy != null && selectedYearOfStudy.length > 0 && (
-            <button className="active-filter">
-              <span>Година студија</span>
-              <CloseButton onClick={handleYearOfStudyUncheck} />
-            </button>
-          )}
-        </div>
 
         <p
           className="reset-filter-text"
@@ -265,6 +233,57 @@ const CoursesView = ({
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+      </div>
+      <div className="courses-view-filters-row">
+        {" "}
+        {/* Level of study applied filter */}
+        {selectedLevelOfStudy && (
+          <button className="active-filter">
+            <span>{selectedLevelOfStudy}</span>
+            <CloseButton
+              className="active-filter-close-btn"
+              onClick={handleLevelOfStudyUncheck}
+            />
+          </button>
+        )}
+        {/* Program applied filter */}
+        {selectedProgram && (
+          <button className="active-filter">
+            {" "}
+            <span>{selectedProgram}</span>
+            <CloseButton
+              className="active-filter-close-btn"
+              onClick={handleProgramUncheck}
+            />
+          </button>
+        )}
+        {/* Module applied filter */}
+        {selectedModule != null && selectedModule.length > 0 && (
+          <button className="active-filter">
+            <span>{selectedModule}</span>
+            <CloseButton onClick={handleModuleUncheck} />
+          </button>
+        )}
+        {selectedSemester != null && selectedSemester.length > 0 && (
+          <button className="active-filter">
+            <span>{selectedSemester}</span>
+            <CloseButton onClick={handleSemesterUncheck} />
+          </button>
+        )}
+        {selectedYearOfStudy != null && selectedYearOfStudy.length > 0 && (
+          <button className="active-filter">
+            <span>{selectedYearOfStudy}</span>
+            <CloseButton onClick={handleYearOfStudyUncheck} />
+          </button>
+        )}
+        {tagsToSearch != null &&
+          tagsToSearch.length > 0 &&
+          tagsToSearch.map((tag, index) => (
+            <button className="active-filter">
+              <span>{tag}</span>
+              <CloseButton onClick={() => handleRemoveTag(tag)} />
+            </button>
+          ))}
       </div>
 
       <div className="course-view-body">

@@ -7,7 +7,7 @@
       #b2f1e3 250px,
       transparent 250px
     ),
-    url("../../public/images/course-details-background.png");
+    url("../../public/images/OAS-background.png");
   background-color: #f6f6f9;
   background-blend-mode: multiply;
   background-repeat: no-repeat;
@@ -309,8 +309,6 @@ img {
   padding-bottom: 20px;
 }
 
-
-
 /*
  *  Styling for extra large screens
  */
@@ -351,7 +349,7 @@ img {
   .course-details-main-body {
     width: 90%;
   }
-  .header-module-selector{
+  .header-module-selector {
     display: none;
   }
 }

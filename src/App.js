@@ -40,6 +40,7 @@ function App() {
   const cookies = useCookies(["access_token"])[0];
   const [language, setLanguage] = useState("Ћирилица");
   const [testData, setTestData] = useState(null);
+  const [tagsToSearch, setTagsToSearch] = useState([]);
 
   const fetchTestData = async () => {
     try {
@@ -188,6 +189,7 @@ function App() {
                       isSidebarVisible={isSidebarVisible}
                       isLoadingCourses={isLoadingCourses}
                       isLoadingLevelsOfStudy={isLoadingLevelsOfStudy}
+                      tagsToSearch={tagsToSearch}
                       setAllCourses={setAllCourses}
                       setCoursesToShow={setCoursesToShow}
                       setSelectedLevelOfStudy={setSelectedLevelOfStudy}
@@ -202,6 +204,7 @@ function App() {
                       setIsLoadingLevelsOfStudy={setIsLoadingLevelsOfStudy}
                       setIsLoadingCourses={setIsLoadingCourses}
                       fetchFilteredCourses={fetchFilteredCourses}
+                      setTagsToSearch={setTagsToSearch}
                     />
                   </div>
                 </div>

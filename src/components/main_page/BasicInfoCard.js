@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../styles/CourseDetails.css";
 
 const BasicInfoCard = ({ course }) => {
   const [expandedModules, setExpandedModules] = useState(false);
   const [expandedTags, setExpandedTags] = useState(false);
+  const [parsedLink, setParsedLink] = useState("");
+
+  function parseLink(link) {
+    if (/^https?:\/\//.test(link)) {
+      const parts = link.split("://");
+      let parsed = parts.length > 1 ? parts[1] : link;
+      if (parsed.endsWith("/")) {
+        parsed = parsed.slice(0, -1);
+      }
+      setParsedLink(parsed);
+    } else {
+      setParsedLink(link);
+    }
+  }
 
   const toggleExpandModules = () => {
     setExpandedModules(!expandedModules);
@@ -12,6 +26,11 @@ const BasicInfoCard = ({ course }) => {
   const toggleExpandTags = () => {
     setExpandedTags(!expandedTags);
   };
+  useEffect(() => {
+    if (course.link) {
+      parseLink(course.link);
+    }
+  });
 
   return (
     <div>
@@ -78,7 +97,7 @@ const BasicInfoCard = ({ course }) => {
           {" "}
           <h3 className="sidebar-subtitle">Веб сајт:</h3>
           <p>
-            <a href={course.link}>{course.link}</a>
+            <a href={course.link}>{parsedLink}</a>
           </p>
         </div>
       )}

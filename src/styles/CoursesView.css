@@ -29,7 +29,13 @@ html {
   align-items: center;
   width: 100%;
 }
+.courses-view-filters-row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
 
+  padding: 8px 16px 8px 0px;
+}
 .sort-dropdown {
   margin-left: auto;
 }
@@ -94,7 +100,6 @@ html {
   align-items: center;
   padding-right: 5px;
   cursor: pointer; /* Indicate that the header is clickable */
-
 }
 .filter-box-content {
   overflow: hidden;
@@ -107,8 +112,6 @@ html {
   max-height: 500px; /* Set a high enough max-height to fit the content */
   opacity: 1; /* Make content visible */
 }
-
-
 
 /* .filter-box-header > img {
   rotate: 180deg;
@@ -261,8 +264,8 @@ html {
 
 .arrow-circle {
   border-radius: 100%;
-  background-color: #11C098;
-  color: #FFF;
+  background-color: #11c098;
+  color: #fff;
   width: 40px;
   height: 40px;
   display: flex;
@@ -276,10 +279,9 @@ html {
 }
 
 .arrow-circle:hover {
-  background-color: #FFF;
-  color: #11C098;
+  background-color: #fff;
+  color: #11c098;
 }
-
 
 .page-counter-container {
   display: flex;
@@ -374,7 +376,7 @@ input {
   width: auto;
   height: 29px;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0px 10px;
 }
 
 .active-filter span {
@@ -393,6 +395,9 @@ input {
   border-radius: 54px;
   font-size: 14px;
   color: #008767;
+}
+.tag-card:hover {
+  background-color: #11c098;
 }
 
 @media (max-width: 1000px) {
