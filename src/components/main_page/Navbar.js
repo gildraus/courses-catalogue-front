@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Dropdown } from "react-bootstrap";
-import { useState } from "react";
 
 const Navbar = ({ language, setLanguage }) => {
   const navigate = useNavigate();
