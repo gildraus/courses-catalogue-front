@@ -1,4 +1,4 @@
-import { Dropdown, DropdownItem } from "react-bootstrap";
+import { Dropdown, DropdownItem, DropdownToggle } from "react-bootstrap";
 import "../../styles/CourseDetails.css";
 import Navbar from "../main_page/Navbar";
 import Footer from "../main_page/Footer";
@@ -82,7 +82,7 @@ const CourseDetails = ({
         <CloseButton className="close-button" onClick={() => navigate(-1)} />
       </div>
       <div className="course-details">
-        <div className="course-details-header">
+        {/* <div className="course-details-header">
           <h2 id="course-name-header-text">{course && course.name}</h2>
           <div id="course-department-header-text">
             {course && course.departments}
@@ -133,6 +133,59 @@ const CourseDetails = ({
               </Dropdown>
             </div>
           )}
+        </div> */}
+        <div className="course-details-header">
+          <div className="header-title">
+            <h2 id="course-name-header-text">{course && course.name}</h2>
+            <div id="course-department-header-text">
+              {course && course.departments}
+            </div>
+          </div>
+          <div className="header-module-selector">
+            {course && course.programs.length > 1 && (
+              <div className="program-column">
+                {" "}
+                <h4>Изабери програм</h4>{" "}
+                <Dropdown className="selector-dropdown">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {selectedProgram ? selectedProgram : "Изабери програм"}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {course.programs.map((program, index) => (
+                      <Dropdown.Item
+                        key={index}
+                        onClick={() => setSelectedProgram(program)}
+                      >
+                        {program}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            )}
+            {course && course.modules.length > 1 && (
+              <div className="module-column">
+                <h4>Изабери модул</h4>{" "}
+                <Dropdown className="selector-dropdown">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    {selectedModule ? selectedModule : "Изабери модул"}
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    {course.modules.map((module, index) => (
+                      <Dropdown.Item
+                        key={index}
+                        onClick={() => setSelectedModule(module)}
+                      >
+                        {module}
+                      </Dropdown.Item>
+                    ))}
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="course-details-body">

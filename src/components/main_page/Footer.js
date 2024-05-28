@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="main-footer-body">
         {" "}
         {/* <p>© 2023 Факултет организационих наука | Каталог курсева</p> */}
-        <div><p>© 2024 Факултет организационих наука | </p></div><div><p className="green-paragraph">&nbsp;Каталог предмета</p></div>
+        <div><p>© 2024 Факултет организационих наука | </p></div><div><p className="footer-paragraph">&nbsp;Каталог предмета</p></div>
       </div>
     </div>
   );

@@ -8,11 +8,8 @@
   border-radius: 5px;
   cursor: pointer;
   display: flex;
-  /* Center the content vertically */
   align-items: center;
-  /* Center the content vertically */
   font-weight: bold;
-  /* Make the text bold */
 }
 
 .courses-view-header {
