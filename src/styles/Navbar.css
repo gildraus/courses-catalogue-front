@@ -56,6 +56,10 @@
   max-width: 68px;
   max-height: 30px;
   height: auto;
+  cursor: default;
+}
+.navbar-logo-img:hover {
+  cursor: pointer;
 }
 
 .navbar-separator {
