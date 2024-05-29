@@ -1,13 +1,7 @@
 .course-details-background {
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(
-      to bottom,
-      #b2f1e3 0,
-      #b2f1e3 250px,
-      transparent 250px
-    ),
-    url("../../public/images/OAS-background.png");
+
   background-color: #f6f6f9;
   background-blend-mode: multiply;
   background-repeat: no-repeat;

@@ -20,6 +20,9 @@ const CourseDetails = ({
   const [selectedProgram, setSelectedProgram] = useState(undefined);
   const [selectedModule, setSelectedModule] = useState(undefined);
   const [sessions, setSessions] = useState(undefined);
+  const [backgroundString, setBackgroundString] = useState(
+    "../../public/images/OAS-background.png"
+  );
 
   useEffect(() => {
     const fetchCourseData = async () => {
@@ -37,6 +40,16 @@ const CourseDetails = ({
 
     fetchCourseData();
   }, [id]);
+
+  useEffect(() => {
+    if (course && course.level_of_study) {
+      if (course.level_of_study === "Основне академске студије") {
+        setBackgroundString("../../public/images/OAS-background.png");
+      } else if (course.level_of_study === "Мастер академске студије") {
+        setBackgroundString("../../public/images/MAS-background.png");
+      }
+    }
+  }, [course]);
 
   useEffect(() => {
     if (course && course.programs && course.programs.length > 0) {
@@ -71,7 +84,12 @@ const CourseDetails = ({
   }, [selectedProgram, selectedModule, course]);
 
   return (
-    <div className="course-details-background">
+    <div
+      className="course-details-background"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, #b2f1e3 0, #b2f1e3 250px, transparent 250px), url(${backgroundString})`,
+      }}
+    >
       <div className="row navbar-row">
         <div className="navbar-container col-sm-12">
           <Navbar />
