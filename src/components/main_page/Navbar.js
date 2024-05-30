@@ -56,13 +56,32 @@ const Navbar = ({ language, setLanguage }) => {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        <button className="mobile-navbar-dropdown-btn">
-          <img
-            src="../../images/menu-icon.svg"
-            className="mobile-navbar-dropdown-btn-img"
-          />
-        </button>
 
+        <Dropdown className="language-dropdown">
+          <Dropdown.Toggle
+            as="button"
+            className="mobile-navbar-dropdown-btn"
+            id="dropdown-basic"
+          >
+            <img
+              src="../../images/menu-icon.svg"
+              className="mobile-navbar-dropdown-btn-img"
+              alt="menu icon"
+            />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => setLanguage("Ћирилица")}>
+              Ћирилица
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setLanguage("Latinica")}>
+              Latinica
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setLanguage("English")}>
+              English
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </div>
     </div>
   );
