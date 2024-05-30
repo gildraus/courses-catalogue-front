@@ -1,9 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Dropdown } from "react-bootstrap";
+import { useState } from "react";
+import DropdownNavbar from "./DropdownNavbar";
 
 const Navbar = ({ language, setLanguage }) => {
   const navigate = useNavigate();
+  const [showMenu, setShowMenu] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   const redirectToHomepage = () => {
     navigate("/");
@@ -47,7 +55,14 @@ const Navbar = ({ language, setLanguage }) => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-        </div>{" "}
+        </div>
+        <button className="mobile-navbar-dropdown-btn">
+          <img
+            src="../../images/menu-icon.svg"
+            className="mobile-navbar-dropdown-btn-img"
+          />
+        </button>
+
       </div>
     </div>
   );

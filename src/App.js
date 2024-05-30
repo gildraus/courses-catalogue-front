@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/main_page/Navbar";
-import Navbar2 from "./components/main_page/Navbar2";
 import Footer from "./components/main_page/Footer";
 import Searchbar from "./components/main_page/Searchbar";
 import CoursesView from "./components/main_page/CoursesView";
@@ -164,7 +163,6 @@ function App() {
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
                   <Navbar language={language} setLanguage={setLanguage} />
-                  {/* <Navbar2 language={language} setLanguage={setLanguage}></Navbar2> */}
                 </div>
               </div>
 
