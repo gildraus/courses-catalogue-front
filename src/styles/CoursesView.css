@@ -34,7 +34,7 @@ html {
   width: 100%;
   flex-wrap: wrap;
 
-  padding: 8px 16px 8px 0px;
+  padding: 12px 16px 12px 0px;
 }
 .sort-dropdown {
   margin-left: auto;
@@ -55,12 +55,11 @@ html {
 .course-view-body {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   width: 100%;
 }
 
 .courses-view-header {
-  margin: 20px;
+  /* margin: 20px; */
   width: 100%;
 }
 
@@ -70,6 +69,7 @@ html {
 
 .courses-view-sidebar {
   background-color: #ffffff;
+
   border-radius: 10px;
   overflow: auto;
   text-align: left;
@@ -80,8 +80,12 @@ html {
   max-width: 100%;
 }
 
-.course-view-body .courses-view-cards {
-  width: 80%;
+.course-view-body {
+  width: 100%;
+  max-width: 100%;
+}
+.courses-view-cards {
+  width: 79%;
   max-width: 100%;
 }
 
