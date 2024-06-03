@@ -10,8 +10,8 @@
     cursor: pointer;
     border-radius: 50%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
     position: fixed;
     bottom: 40px;
     right: 40px;
@@ -26,8 +26,4 @@
 .arrow-icon {
     filter: brightness(0) invert(1); /* Makes the arrow white */
     transition: filter 0.3s;
-}
-
-.back-to-top button:hover .arrow-icon {
-    filter: brightness(0) invert(0); /* Makes the arrow green */
 }
