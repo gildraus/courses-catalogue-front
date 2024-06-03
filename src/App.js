@@ -111,6 +111,7 @@ function App() {
           selectedSemester,
           selectedYearOfStudy,
           selectedDepartments,
+          tagsToSearch,
         },
       });
       if (response.data.length === 0) {
