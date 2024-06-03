@@ -220,7 +220,6 @@ const CoursesView = ({
           Ресетуј филтере
         </p>
 
-        <button onClick={()=>alert(tagsToSearch)}>test</button>
 
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">

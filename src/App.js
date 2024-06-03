@@ -15,6 +15,7 @@ import { jwtDecode } from "jwt-decode";
 import server_name from "./config";
 import axios from "axios";
 import UpdateCourse from "./components/cpanel_page/UpdateCourse";
+import BackToTopButton from "./components/main_page/BackToTopButton";
 
 function App() {
   const [allCourses, setAllCourses] = useState([]);
@@ -211,6 +212,7 @@ function App() {
                 <div className="row">
                   <Footer />
                 </div>
+                <div className="row"><BackToTopButton/></div>
               </div>
             </div>
           }
