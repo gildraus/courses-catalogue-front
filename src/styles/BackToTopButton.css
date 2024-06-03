@@ -19,11 +19,9 @@
     padding: 0px;
 }
 
-.back-to-top button:hover {
-    background-color: white;
-}
 
 .arrow-icon {
     filter: brightness(0) invert(1); 
     transition: filter 0.3s;
 }
+
