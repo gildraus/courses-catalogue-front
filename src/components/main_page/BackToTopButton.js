@@ -31,7 +31,10 @@ const BackToTopButton = () => {
 
     return (
         <div className="back-to-top">
-            <button onClick={scrollToTop} style={{ display: visible ? 'inline' : 'none' }}><img src={"./images/up-arrow.svg"} className="arrow-icon" alt="Arrow Icon" />
+            <button onClick={scrollToTop} style={{
+                display: visible ? 'inline' : 'none',
+                padding: '0',
+            }}><img src={"./images/up-arrow.svg"} className="arrow-icon" alt="Arrow Icon" />
             </button>
         </div>
     );

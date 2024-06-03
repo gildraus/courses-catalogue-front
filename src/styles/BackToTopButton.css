@@ -16,6 +16,7 @@
     right: 40px;
     z-index: 1000;
     transition: background-color 0.3s;
+    padding: 0px;
 }
 
 .back-to-top button:hover {
