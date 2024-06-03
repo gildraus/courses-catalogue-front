@@ -46,8 +46,8 @@
 .header-module-selector {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   width: 50%;
+  justify-content: flex-end;
 }
 
 .header-module-selector h4 {
@@ -58,7 +58,9 @@
 .program-column {
   width: 50%;
   padding: 15px 0px 15px 15px;
+  
 }
+
 .module-column {
   width: 50%;
   padding: 15px 0px 15px 15px;
@@ -151,7 +153,12 @@
   font-size: 18px;
   color: #181818cc;
 }
-
+.details-basic-card-text{
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #181818cc;
+}
 .sidebar-subtitle {
   font-family: "PT Sans", sans-serif;
   font-weight: 700;

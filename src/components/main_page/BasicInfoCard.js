@@ -37,16 +37,16 @@ const BasicInfoCard = ({ course }) => {
       <h2 className="details-card-title">Картон предмета</h2>
 
       {course.espb && (
-        <p className="details-card-text">Број ЕСПБ поена: {course.espb}</p>
+        <p className="details-basic-card-text">Број ЕСПБ поена: {course.espb}</p>
       )}
       {course.status && (
-        <p className="details-card-text">Статус: {course.status}</p>
+        <p className="details-basic-card-text">Статус: {course.status}</p>
       )}
       {course.semester && (
-        <p className="details-card-text">Семестар: {course.semester}</p>
+        <p className="details-basic-card-text">Семестар: {course.semester}</p>
       )}
       {course.level_of_study && (
-        <p className="details-card-text">
+        <p className="details-basic-card-text">
           Ниво студија: {course.level_of_study}
         </p>
       )}
@@ -70,7 +70,7 @@ const BasicInfoCard = ({ course }) => {
             Катедре задужене за извођење предмета:
             <ul>
               {course.departments.map((item, index) => (
-                <li className="details-card-text" key={index}>
+                <li className="details-basic-card-text" key={index}>
                   {item}
                 </li>
               ))}
@@ -84,7 +84,7 @@ const BasicInfoCard = ({ course }) => {
         <div>
           {" "}
           <h3 className="sidebar-subtitle">Ограничења</h3>
-          <p className="details-card-text">
+          <p className="details-basic-card-text">
             <img src="./images/danger.png" alt="Warning" />
             {course.note}
           </p>

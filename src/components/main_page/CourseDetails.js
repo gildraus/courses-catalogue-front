@@ -108,6 +108,7 @@ const CourseDetails = ({
             {course && course.programs.length > 1 && (
               <div className="program-column">
                 {" "}
+
                 <h4>Изабери програм</h4>{" "}
                 <Dropdown className="selector-dropdown">
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -125,6 +126,7 @@ const CourseDetails = ({
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
+
               </div>
             )}
             {course && course.modules.length > 1 && (
@@ -146,6 +148,8 @@ const CourseDetails = ({
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
+
+
               </div>
             )}
           </div>
