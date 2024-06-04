@@ -8,6 +8,7 @@ import BasicInfoCard from "./BasicInfoCard";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import server_name from "../../config";
+import BackToTopButton from "./BackToTopButton";
 
 const CourseDetails = ({
   coursesOfTheSameName,
@@ -131,6 +132,7 @@ const CourseDetails = ({
             )}
             {course && course.modules.length > 1 && (
               <div className="module-column">
+
                 <h4>Изабери модул</h4>{" "}
                 <Dropdown className="selector-dropdown">
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -274,6 +276,7 @@ const CourseDetails = ({
                       ))}
                     </ul>
                   </div>
+
                   <div className="module-category">
                     <h4 className="details-card-subtitle">Модули:</h4>
                     <ul>
@@ -318,6 +321,9 @@ const CourseDetails = ({
       </div>
       <div className="row">
         <Footer />
+      </div>
+      <div className="row">
+        <BackToTopButton/>
       </div>
     </div>
   );
