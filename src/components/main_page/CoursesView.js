@@ -202,6 +202,8 @@ const CoursesView = ({
       </div>
     );
   };
+
+
   return (
     <div className="courses-view">
       <div className="courses-view-header">
@@ -219,7 +221,6 @@ const CoursesView = ({
         >
           Ресетуј филтере
         </p>
-
 
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -569,7 +570,14 @@ const CoursesView = ({
                       onClick={() => handleCourseOpen(course._id)}
                     >
                       <div className="courses-view-card-left">
-                        <img src="./images/Imagery.png" alt="" />
+                      {/* if picture does exist then render it else render default picture */}
+                        {course &&
+                        course.thumbnail_url &&
+                        course.thumbnail_url != "" ? (
+                          <img src={course.thumbnail_url} />
+                        ) : (
+                          <img src="./images/Imagery.png" alt="" />
+                        )}
                       </div>
                       <div className="courses-view-card-right">
                         <h4>

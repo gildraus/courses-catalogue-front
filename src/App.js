@@ -172,6 +172,7 @@ function App() {
                 <div className="row">
                   <div className="body-container">
                     <Searchbar allCourses={allCourses} />
+                
                     <CoursesView
                       allCourses={allCourses}
                       allDepartments={allDepartments}
