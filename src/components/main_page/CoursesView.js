@@ -203,7 +203,6 @@ const CoursesView = ({
     );
   };
 
-
   return (
     <div className="courses-view">
       <div className="courses-view-header">
@@ -570,13 +569,22 @@ const CoursesView = ({
                       onClick={() => handleCourseOpen(course._id)}
                     >
                       <div className="courses-view-card-left">
-                      {/* if picture does exist then render it else render default picture */}
+                        {/* if picture does exist then render it else render default picture */}
                         {course &&
                         course.thumbnail_url &&
-                        course.thumbnail_url != "" ? (
-                          <img src={course.thumbnail_url} />
+                        course.thumbnail_url !== "" ? (
+                          <img
+                            src={course.thumbnail_url}
+                            onError={(e) =>
+                              (e.target.src = "./images/Imagery.png")
+                            }
+                            alt="Course Thumbnail"
+                          />
                         ) : (
-                          <img src="./images/Imagery.png" alt="" />
+                          <img
+                            src="./images/Imagery.png"
+                            alt="Default Thumbnail"
+                          />
                         )}
                       </div>
                       <div className="courses-view-card-right">
