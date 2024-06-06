@@ -314,6 +314,9 @@ html {
 }
 
 @media (max-width: 1200px) {
+  .courses-view-sidebar{
+    width: 100% !important;
+  }
   .courses-view-card {
     flex-direction: column;
     margin-left: 0px;
