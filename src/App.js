@@ -16,8 +16,10 @@ import server_name from "./config";
 import axios from "axios";
 import UpdateCourse from "./components/cpanel_page/UpdateCourse";
 import BackToTopButton from "./components/main_page/BackToTopButton";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [allCourses, setAllCourses] = useState([]);
   const [allDepartments, setAllDepartments] = useState([]);
   const [allModules, setAllModules] = useState([]);
@@ -154,7 +156,11 @@ function App() {
       setCoursesOfTheSameName(filteredCourses);
     }
   }, [selectedCourse, allCourses]);
-
+  const lngs = {
+    cyr: { nativeName: "Ћирилица" },
+    lat: { nativeName: "Latinica" },
+    en: { nativeName: "English" },
+  };
   return (
     <BrowserRouter>
       <Routes>
@@ -164,7 +170,11 @@ function App() {
             <div className="container-fluid">
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
-                  <Navbar language={language} setLanguage={setLanguage} />
+                  <Navbar
+                    language={language}
+                    setLanguage={setLanguage}
+                    i18n={i18n}
+                  />
                 </div>
               </div>
 
@@ -172,7 +182,17 @@ function App() {
                 <div className="row">
                   <div className="body-container">
                     <Searchbar allCourses={allCourses} />
-                
+                    {Object.keys(lngs).map((lng) => (
+                      <button
+                        type="submit"
+                        key={lng}
+                        onClick={() => i18n.changeLanguage(lng)}
+                        disabled={i18n.resolvedLanguage === lng}
+                      >
+                        {lngs[lng].nativeName}
+                      </button>
+                    ))}
+                    {t("learn")}
                     <CoursesView
                       allCourses={allCourses}
                       allDepartments={allDepartments}
@@ -213,7 +233,9 @@ function App() {
                 <div className="row">
                   <Footer />
                 </div>
-                <div className="row"><BackToTopButton/></div>
+                <div className="row">
+                  <BackToTopButton />
+                </div>
               </div>
             </div>
           }

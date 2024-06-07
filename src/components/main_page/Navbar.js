@@ -4,7 +4,7 @@ import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import DropdownNavbar from "./DropdownNavbar";
 
-const Navbar = ({ language, setLanguage }) => {
+const Navbar = ({ language, setLanguage, i18n }) => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +16,7 @@ const Navbar = ({ language, setLanguage }) => {
   const redirectToHomepage = () => {
     navigate("/");
   };
+
 
   return (
     <div className="navbar">
@@ -45,7 +46,7 @@ const Navbar = ({ language, setLanguage }) => {
 
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => setLanguage("Ћирилица")}>
-                Ћирилица
+                Ћирилица 
               </Dropdown.Item>
               <Dropdown.Item onClick={() => setLanguage("Latinica")}>
                 Latinica
