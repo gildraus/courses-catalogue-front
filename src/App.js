@@ -180,10 +180,10 @@ function App() {
               <div className="App">
                 <div className="row">
                   <div className="body-container">
-                    <Searchbar allCourses={allCourses} />
+                    <Searchbar allCourses={allCourses}  t={t} />
                 
 
-                    {t("learn")}
+                    {/* {t("learn")} */}
                     <CoursesView
                       allCourses={allCourses}
                       allDepartments={allDepartments}
@@ -217,6 +217,7 @@ function App() {
                       setIsLoadingCourses={setIsLoadingCourses}
                       fetchFilteredCourses={fetchFilteredCourses}
                       setTagsToSearch={setTagsToSearch}
+                     
                     />
                   </div>
                 </div>

@@ -40,8 +40,8 @@ const Navbar = ({ language, setLanguage, lngs, i18n }) => {
         </div>
         <div className="language-selector">
           <Dropdown className="language-dropdown">
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {language ? language : "Ћирилица"}
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+              {lngs[i18n.language] ? lngs[i18n.language].nativeName : "Ћирилица"}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
