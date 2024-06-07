@@ -3,8 +3,9 @@ import "../../styles/Navbar.css";
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import DropdownNavbar from "./DropdownNavbar";
+import i18n from "i18next";
 
-const Navbar = ({ language, setLanguage, i18n }) => {
+const Navbar = ({ language, setLanguage, lngs, i18n }) => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,6 @@ const Navbar = ({ language, setLanguage, i18n }) => {
   const redirectToHomepage = () => {
     navigate("/");
   };
-
 
   return (
     <div className="navbar">
@@ -45,44 +45,18 @@ const Navbar = ({ language, setLanguage, i18n }) => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setLanguage("Ћирилица")}>
-                Ћирилица 
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setLanguage("Latinica")}>
-                Latinica
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setLanguage("English")}>
-                English
-              </Dropdown.Item>
+              {Object.keys(lngs).map((lng) => (
+                <Dropdown.Item
+                  key={lng}
+                  onClick={() => i18n.changeLanguage(lng)}
+                  disabled={i18n.resolvedLanguage === lng}
+                >
+                  {lngs[lng].nativeName}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </div>
-
-        <Dropdown className="language-dropdown">
-          <Dropdown.Toggle
-            as="button"
-            className="mobile-navbar-dropdown-btn"
-            id="dropdown-basic"
-          >
-            <img
-              src="../../images/menu-icon.svg"
-              className="mobile-navbar-dropdown-btn-img"
-              alt="menu icon"
-            />
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setLanguage("Ћирилица")}>
-              Ћирилица
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setLanguage("Latinica")}>
-              Latinica
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setLanguage("English")}>
-              English
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
       </div>
     </div>
   );

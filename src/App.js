@@ -85,8 +85,6 @@ function App() {
   const fetchLevelsOfStudy = async () => {
     try {
       const response = await axios.get(server_name + "/levelsofstudy");
-      console.log("balbla");
-
       setAllLevelsOfStudy(response.data);
     } catch (error) {
       console.log(error);
@@ -173,6 +171,7 @@ function App() {
                   <Navbar
                     language={language}
                     setLanguage={setLanguage}
+                    lngs={lngs}
                     i18n={i18n}
                   />
                 </div>
@@ -182,16 +181,8 @@ function App() {
                 <div className="row">
                   <div className="body-container">
                     <Searchbar allCourses={allCourses} />
-                    {Object.keys(lngs).map((lng) => (
-                      <button
-                        type="submit"
-                        key={lng}
-                        onClick={() => i18n.changeLanguage(lng)}
-                        disabled={i18n.resolvedLanguage === lng}
-                      >
-                        {lngs[lng].nativeName}
-                      </button>
-                    ))}
+                
+
                     {t("learn")}
                     <CoursesView
                       allCourses={allCourses}
