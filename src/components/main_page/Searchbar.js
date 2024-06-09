@@ -111,7 +111,7 @@ const Searchbar = ({ allCourses, t }) => {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Претражите курсеве по називу, тагу, називу катедре..."
+          placeholder={t("searchbar_text")}
           value={query}
           onChange={handleInputChange}
         />

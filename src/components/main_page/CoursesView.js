@@ -39,6 +39,7 @@ const CoursesView = ({
   fetchFilteredCourses,
   isLoadingCourses,
   setTagsToSearch,
+  t,
 }) => {
   const [isSmallScreen, setIsSmallScreen] = useState([false]);
   const navigate = useNavigate();
@@ -208,7 +209,7 @@ const CoursesView = ({
       <div className="courses-view-header">
         <button className="filter-button" onClick={toggleSidebar}>
           <img src="./images/filter-icon.png" alt="" />
-          Филтери
+          {t("filters")}
         </button>
 
         <p
@@ -218,20 +219,20 @@ const CoursesView = ({
             window.location.reload();
           }}
         >
-          Ресетуј филтере
+          {t("reset_filters")}
         </p>
 
         <Dropdown className="sort-dropdown">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Сортирај приказ
+            {t("sort")}
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
             <Dropdown.Item onClick={sortDataZtoA}>
-              Сортирај по називу опадајуће
+              {t("sort_z_to_a")}
             </Dropdown.Item>
             <Dropdown.Item onClick={sortDataAtoZ}>
-              Сортирај по називу растуће
+              {t("sort_a_to_z")}
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
@@ -423,7 +424,7 @@ const CoursesView = ({
                   className="filter-box-header"
                   onClick={() => toggle("semester-group")}
                 >
-                  <b>Семестар</b>{" "}
+                  <b>{t("semester")}</b>{" "}
                   <img
                     id="semester-group-arrow"
                     src="./images/feArrowDown0.png"
@@ -442,7 +443,7 @@ const CoursesView = ({
                         setSelectedSemester
                       )}
                     />{" "}
-                    Летњи семестар
+                    {t("summer_semester")}
                   </div>
                   <div>
                     <input
@@ -454,7 +455,7 @@ const CoursesView = ({
                         setSelectedSemester
                       )}
                     />{" "}
-                    Зимски семестар
+                    {t("winter_semester")}
                   </div>
                 </div>
 
@@ -470,7 +471,7 @@ const CoursesView = ({
                       className="filter-box-header"
                       onClick={() => toggle("year-of-study-group")}
                     >
-                      <b>Година студија</b>
+                      <b> {t("year_of_study")}</b>
                       <img
                         id="year-of-study-group-arrow"
                         src="./images/feArrowDown0.png"
@@ -491,7 +492,7 @@ const CoursesView = ({
                             setSelectedYearOfStudy
                           )}
                         />{" "}
-                        Прва
+                        {t("first_year")}
                       </div>
                       <div>
                         <input
@@ -503,7 +504,7 @@ const CoursesView = ({
                             setSelectedYearOfStudy
                           )}
                         />{" "}
-                        Друга
+                        {t("second_year")}
                       </div>
                       <div>
                         <input
@@ -515,7 +516,7 @@ const CoursesView = ({
                             setSelectedYearOfStudy
                           )}
                         />{" "}
-                        Трећа
+                        {t("third_year")}
                       </div>
                       <div>
                         <input
@@ -527,7 +528,7 @@ const CoursesView = ({
                             setSelectedYearOfStudy
                           )}
                         />{" "}
-                        Четврта
+                        {t("fourth_year")}
                       </div>
                     </div>
                   </div>
@@ -551,8 +552,8 @@ const CoursesView = ({
               {emptyResponse ? (
                 <div className="cards-not-found">
                   <img src="./images/EmptyState.png" alt="" />
-                  <h2>Није пронађен ниједан курс!</h2>
-                  <h4>Пробајте да претражите по другим параметрима.</h4>
+                  <h2>{t("course_404")}</h2>
+                  <h4>{t("course_404_try_again")}</h4>
                 </div>
               ) : (
                 coursesToDisplay

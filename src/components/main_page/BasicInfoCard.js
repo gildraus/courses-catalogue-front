@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/CourseDetails.css";
 
-const BasicInfoCard = ({ course }) => {
+const BasicInfoCard = ({ course, t }) => {
   const [expandedModules, setExpandedModules] = useState(false);
   const [expandedTags, setExpandedTags] = useState(false);
   const [parsedLink, setParsedLink] = useState("");
@@ -34,26 +34,32 @@ const BasicInfoCard = ({ course }) => {
 
   return (
     <div>
-      <h2 className="details-card-title">Картон предмета</h2>
+      <h2 className="details-card-title">{t("info_box_title")}</h2>
 
       {course.espb && (
-        <p className="details-basic-card-text">Број ЕСПБ поена: {course.espb}</p>
+        <p className="details-basic-card-text">
+          {t("espb")}: {course.espb}
+        </p>
       )}
       {course.status && (
-        <p className="details-basic-card-text">Статус: {course.status}</p>
+        <p className="details-basic-card-text">
+          {t("status")}: {course.status}
+        </p>
       )}
       {course.semester && (
-        <p className="details-basic-card-text">Семестар: {course.semester}</p>
+        <p className="details-basic-card-text">
+          {t("semester")}: {course.semester}
+        </p>
       )}
       {course.level_of_study && (
         <p className="details-basic-card-text">
-          Ниво студија: {course.level_of_study}
+          {t("level_of_study")}: {course.level_of_study}
         </p>
       )}
       <div className="horizontal-separator-basic-info-card"></div>
       {course.tags && course.tags.length > 0 && (
         <div className="tags-preview">
-          <h3 className="sidebar-subtitle">Тагови:</h3>
+          <h3 className="sidebar-subtitle">{t("tags")}:</h3>
           {course.tags.map((tag, index) => (
             <div className="tag-card" key={index}>
               {tag}
@@ -67,7 +73,7 @@ const BasicInfoCard = ({ course }) => {
         {" "}
         {course.departments && (
           <p className="sidebar-subtitle">
-            Катедре задужене за извођење предмета:
+            {t("departments")}:
             <ul>
               {course.departments.map((item, index) => (
                 <li className="details-basic-card-text" key={index}>
@@ -83,7 +89,7 @@ const BasicInfoCard = ({ course }) => {
       {course.note && course.note !== "" && (
         <div>
           {" "}
-          <h3 className="sidebar-subtitle">Ограничења</h3>
+          <h3 className="sidebar-subtitle">{t("restrictions")}</h3>
           <p className="details-basic-card-text">
             <img src="./images/danger.png" alt="Warning" />
             {course.note}
@@ -95,7 +101,7 @@ const BasicInfoCard = ({ course }) => {
       {course.link && course.link !== "" && (
         <div>
           {" "}
-          <h3 className="sidebar-subtitle">Веб сајт:</h3>
+          <h3 className="sidebar-subtitle">{t("website")}:</h3>
           <p>
             <a href={course.link}>{parsedLink}</a>
           </p>

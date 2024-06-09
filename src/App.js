@@ -168,20 +168,14 @@ function App() {
             <div className="container-fluid">
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
-                  <Navbar
-                    language={language}
-                    setLanguage={setLanguage}
-                    lngs={lngs}
-                    i18n={i18n}
-                  />
+                  <Navbar lngs={lngs} i18n={i18n} t={t} />
                 </div>
               </div>
 
               <div className="App">
                 <div className="row">
                   <div className="body-container">
-                    <Searchbar allCourses={allCourses}  t={t} />
-                
+                    <Searchbar allCourses={allCourses} t={t} />
 
                     {/* {t("learn")} */}
                     <CoursesView
@@ -217,13 +211,13 @@ function App() {
                       setIsLoadingCourses={setIsLoadingCourses}
                       fetchFilteredCourses={fetchFilteredCourses}
                       setTagsToSearch={setTagsToSearch}
-                     
+                      t={t}
                     />
                   </div>
                 </div>
 
                 <div className="row">
-                  <Footer />
+                  <Footer t={t} />
                 </div>
                 <div className="row">
                   <BackToTopButton />
@@ -239,6 +233,9 @@ function App() {
               coursesOfTheSameName={coursesOfTheSameName}
               selectedCourse={selectedCourse}
               setSelectedCourse={setSelectedCourse}
+              lngs={lngs}
+              i18n={i18n}
+              t={t}
             />
           }
         />

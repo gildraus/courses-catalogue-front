@@ -2,10 +2,8 @@ import { useNavigate } from "react-router-dom";
 import "../../styles/Navbar.css";
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
-import DropdownNavbar from "./DropdownNavbar";
-import i18n from "i18next";
 
-const Navbar = ({ language, setLanguage, lngs, i18n }) => {
+const Navbar = ({ lngs, i18n, t }) => {
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -32,16 +30,16 @@ const Navbar = ({ language, setLanguage, lngs, i18n }) => {
           </div>
           <div className="navbar-separator"></div>
           <div className="navbar-text-container">
-            <span className="navbar-title">УНИВЕРЗИТЕТ У БЕОГРАДУ</span>
-            <span className="navbar-subtitle">
-              ФАКУЛТЕТ ОРГАНИЗАЦИОНИХ НАУКА
-            </span>
+            <span className="navbar-title">{t("university")}</span>
+            <span className="navbar-subtitle">{t("faculty_navbar")}</span>
           </div>
         </div>
         <div className="language-selector">
           <Dropdown className="language-dropdown">
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {lngs[i18n.language] ? lngs[i18n.language].nativeName : "Ћирилица"}
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              {lngs[i18n.language]
+                ? lngs[i18n.language].nativeName
+                : "Ћирилица"}
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
