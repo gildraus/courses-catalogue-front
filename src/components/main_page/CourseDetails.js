@@ -11,12 +11,10 @@ import server_name from "../../config";
 import BackToTopButton from "./BackToTopButton";
 
 const CourseDetails = ({
-  coursesOfTheSameName,
-  selectedCourse,
-  setSelectedCourse,
   lngs,
   i18n,
   t,
+  currentLanguage,
 }) => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
@@ -28,12 +26,18 @@ const CourseDetails = ({
     "../../public/images/OAS-background.png"
   );
 
+
+
+
   useEffect(() => {
-    const fetchCourseData = async () => {
+    const fetchCourseData = async (currentLanguage = 'Ћирилица') => {
       try {
         const response = await axios.get(`${server_name}/api/courses/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+          params: {
+            script: currentLanguage
           },
         });
         setCourse(response.data);
@@ -41,9 +45,8 @@ const CourseDetails = ({
         console.error("Error fetching course data:", error);
       }
     };
-
-    fetchCourseData();
-  }, [id]);
+    fetchCourseData(currentLanguage);
+  }, [id, currentLanguage]);
 
   useEffect(() => {
     if (course && course.level_of_study) {
@@ -86,6 +89,7 @@ const CourseDetails = ({
 
     fetchSessions();
   }, [selectedProgram, selectedModule, course]);
+
 
   return (
     <div

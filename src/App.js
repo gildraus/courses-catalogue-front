@@ -43,6 +43,7 @@ function App() {
   const [language, setLanguage] = useState("Ћирилица");
   const [testData, setTestData] = useState(null);
   const [tagsToSearch, setTagsToSearch] = useState([]);
+  const [currentLanguage, setCurrentLanguage] = useState("Ћирилица");
 
   const fetchTestData = async () => {
     try {
@@ -53,9 +54,21 @@ function App() {
     }
   };
 
-  const fetchCourses = async () => {
+  // const fetchCourses = async () => {
+  //   try {
+  //     const response = await axios.get(server_name + "/courses");
+  //     setAllCourses(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoadingCourses(false);
+  //   }
+  // };
+  const fetchCourses = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/courses");
+      const response = await axios.get(`${server_name}/courses`, {
+        params: { script: currentLanguage }
+      });
       setAllCourses(response.data);
     } catch (error) {
       console.log(error);
@@ -64,27 +77,33 @@ function App() {
     }
   };
 
-  const fetchDepartments = async () => {
+  const fetchDepartments = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/departments");
+      const response = await axios.get(server_name + "/departments", {
+        params: { script: currentLanguage }
+      });
       setAllDepartments(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchModules = async () => {
+  const fetchModules = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/modules");
+      const response = await axios.get(server_name + "/modules", {
+        params: { script: currentLanguage }
+      });
       setAllModules(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchLevelsOfStudy = async () => {
+  const fetchLevelsOfStudy = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/levelsofstudy");
+      const response = await axios.get(server_name + "/levelsofstudy", {
+        params: { script: currentLanguage }
+      });
       setAllLevelsOfStudy(response.data);
     } catch (error) {
       console.log(error);
@@ -102,7 +121,7 @@ function App() {
     }
   };
 
-  const fetchFilteredCourses = async () => {
+  const fetchFilteredCourses = async (currentLanguage = 'Ћирилица') => {
     try {
       const response = await axios.get(server_name + "/filteredCourses", {
         params: {
@@ -113,6 +132,7 @@ function App() {
           selectedYearOfStudy,
           selectedDepartments,
           tagsToSearch,
+          script: currentLanguage,
         },
       });
       if (response.data.length === 0) {
@@ -121,7 +141,7 @@ function App() {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const isTokenExpired = () => {
@@ -139,12 +159,14 @@ function App() {
     return true; // No token, consider it expired
   };
 
+
   useEffect(() => {
-    fetchCourses();
-    fetchDepartments();
-    fetchModules();
-    fetchLevelsOfStudy();
-  }, []);
+    fetchCourses(currentLanguage);
+    fetchFilteredCourses(currentLanguage);
+    fetchDepartments(currentLanguage);
+    fetchModules(currentLanguage);
+    fetchLevelsOfStudy(currentLanguage);
+  }, [currentLanguage])
 
   useEffect(() => {
     if (selectedCourse && selectedCourse.name) {
@@ -154,11 +176,18 @@ function App() {
       setCoursesOfTheSameName(filteredCourses);
     }
   }, [selectedCourse, allCourses]);
+
   const lngs = {
     cyr: { nativeName: "Ћирилица" },
     lat: { nativeName: "Latinica" },
     en: { nativeName: "English" },
   };
+
+  useEffect(() => {
+    setCurrentLanguage(lngs[i18n.language].nativeName);
+  }, [i18n.language]);
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -176,8 +205,6 @@ function App() {
                 <div className="row">
                   <div className="body-container">
                     <Searchbar allCourses={allCourses} t={t} />
-
-                    {/* {t("learn")} */}
                     <CoursesView
                       allCourses={allCourses}
                       allDepartments={allDepartments}
@@ -212,6 +239,7 @@ function App() {
                       fetchFilteredCourses={fetchFilteredCourses}
                       setTagsToSearch={setTagsToSearch}
                       t={t}
+                      currentLanguage={currentLanguage}
                     />
                   </div>
                 </div>
@@ -230,12 +258,10 @@ function App() {
           path="/:id"
           element={
             <CourseDetails
-              coursesOfTheSameName={coursesOfTheSameName}
-              selectedCourse={selectedCourse}
-              setSelectedCourse={setSelectedCourse}
               lngs={lngs}
               i18n={i18n}
               t={t}
+              currentLanguage={currentLanguage}
             />
           }
         />

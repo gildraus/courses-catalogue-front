@@ -55,6 +55,7 @@ i18next.use(initReactI18next).init({
         choose_module: "Choose module",
         num_table: "Num.",
         date_place_time: "date-place-time",
+        programs_sidebar: "Programs",
       },
     },
     lat: {
@@ -105,6 +106,7 @@ i18next.use(initReactI18next).init({
         choose_module: "Izaberi modul",
         num_table: "Rb.",
         date_place_time: "datum-mesto-vreme",
+        programs_sidebar: "Studijski programi",
       },
     },
     cyr: {
@@ -155,6 +157,8 @@ i18next.use(initReactI18next).init({
         choose_module: "Изабери модул",
         num_table: "Рб.",
         date_place_time: "датум-место-време",
+        programs_sidebar: "Студијски програми",
+    
       },
     },
   },
