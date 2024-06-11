@@ -16,8 +16,10 @@ import server_name from "./config";
 import axios from "axios";
 import UpdateCourse from "./components/cpanel_page/UpdateCourse";
 import BackToTopButton from "./components/main_page/BackToTopButton";
+import { useTranslation } from "react-i18next";
 
 function App() {
+  const { t, i18n } = useTranslation();
   const [allCourses, setAllCourses] = useState([]);
   const [allDepartments, setAllDepartments] = useState([]);
   const [allModules, setAllModules] = useState([]);
@@ -41,6 +43,7 @@ function App() {
   const [language, setLanguage] = useState("Ћирилица");
   const [testData, setTestData] = useState(null);
   const [tagsToSearch, setTagsToSearch] = useState([]);
+  const [currentLanguage, setCurrentLanguage] = useState("Ћирилица");
 
   const fetchTestData = async () => {
     try {
@@ -51,9 +54,21 @@ function App() {
     }
   };
 
-  const fetchCourses = async () => {
+  // const fetchCourses = async () => {
+  //   try {
+  //     const response = await axios.get(server_name + "/courses");
+  //     setAllCourses(response.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setIsLoadingCourses(false);
+  //   }
+  // };
+  const fetchCourses = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/courses");
+      const response = await axios.get(`${server_name}/courses`, {
+        params: { script: currentLanguage }
+      });
       setAllCourses(response.data);
     } catch (error) {
       console.log(error);
@@ -62,29 +77,33 @@ function App() {
     }
   };
 
-  const fetchDepartments = async () => {
+  const fetchDepartments = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/departments");
+      const response = await axios.get(server_name + "/departments", {
+        params: { script: currentLanguage }
+      });
       setAllDepartments(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchModules = async () => {
+  const fetchModules = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/modules");
+      const response = await axios.get(server_name + "/modules", {
+        params: { script: currentLanguage }
+      });
       setAllModules(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const fetchLevelsOfStudy = async () => {
+  const fetchLevelsOfStudy = async (currentLanguage = 'Ћирилица') => {
     try {
-      const response = await axios.get(server_name + "/levelsofstudy");
-      console.log("balbla");
-
+      const response = await axios.get(server_name + "/levelsofstudy", {
+        params: { script: currentLanguage }
+      });
       setAllLevelsOfStudy(response.data);
     } catch (error) {
       console.log(error);
@@ -102,7 +121,7 @@ function App() {
     }
   };
 
-  const fetchFilteredCourses = async () => {
+  const fetchFilteredCourses = async (currentLanguage = 'Ћирилица') => {
     try {
       const response = await axios.get(server_name + "/filteredCourses", {
         params: {
@@ -113,6 +132,7 @@ function App() {
           selectedYearOfStudy,
           selectedDepartments,
           tagsToSearch,
+          script: currentLanguage,
         },
       });
       if (response.data.length === 0) {
@@ -121,7 +141,7 @@ function App() {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const isTokenExpired = () => {
@@ -139,12 +159,14 @@ function App() {
     return true; // No token, consider it expired
   };
 
+
   useEffect(() => {
-    fetchCourses();
-    fetchDepartments();
-    fetchModules();
-    fetchLevelsOfStudy();
-  }, []);
+    fetchCourses(currentLanguage);
+    fetchFilteredCourses(currentLanguage);
+    fetchDepartments(currentLanguage);
+    fetchModules(currentLanguage);
+    fetchLevelsOfStudy(currentLanguage);
+  }, [currentLanguage])
 
   useEffect(() => {
     if (selectedCourse && selectedCourse.name) {
@@ -155,6 +177,17 @@ function App() {
     }
   }, [selectedCourse, allCourses]);
 
+  const lngs = {
+    cyr: { nativeName: "Ћирилица" },
+    lat: { nativeName: "Latinica" },
+    en: { nativeName: "English" },
+  };
+
+  useEffect(() => {
+    setCurrentLanguage(lngs[i18n.language].nativeName);
+  }, [i18n.language]);
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -164,15 +197,14 @@ function App() {
             <div className="container-fluid">
               <div className="row navbar-row">
                 <div className="navbar-container col-sm-12">
-                  <Navbar language={language} setLanguage={setLanguage} />
+                  <Navbar lngs={lngs} i18n={i18n} t={t} />
                 </div>
               </div>
 
               <div className="App">
                 <div className="row">
                   <div className="body-container">
-                    <Searchbar allCourses={allCourses} />
-                
+                    <Searchbar allCourses={allCourses} t={t} />
                     <CoursesView
                       allCourses={allCourses}
                       allDepartments={allDepartments}
@@ -206,14 +238,18 @@ function App() {
                       setIsLoadingCourses={setIsLoadingCourses}
                       fetchFilteredCourses={fetchFilteredCourses}
                       setTagsToSearch={setTagsToSearch}
+                      t={t}
+                      currentLanguage={currentLanguage}
                     />
                   </div>
                 </div>
 
                 <div className="row">
-                  <Footer />
+                  <Footer t={t} />
                 </div>
-                <div className="row"><BackToTopButton/></div>
+                <div className="row">
+                  <BackToTopButton />
+                </div>
               </div>
             </div>
           }
@@ -222,9 +258,10 @@ function App() {
           path="/:id"
           element={
             <CourseDetails
-              coursesOfTheSameName={coursesOfTheSameName}
-              selectedCourse={selectedCourse}
-              setSelectedCourse={setSelectedCourse}
+              lngs={lngs}
+              i18n={i18n}
+              t={t}
+              currentLanguage={currentLanguage}
             />
           }
         />

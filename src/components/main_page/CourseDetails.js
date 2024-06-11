@@ -11,9 +11,10 @@ import server_name from "../../config";
 import BackToTopButton from "./BackToTopButton";
 
 const CourseDetails = ({
-  coursesOfTheSameName,
-  selectedCourse,
-  setSelectedCourse,
+  lngs,
+  i18n,
+  t,
+  currentLanguage,
 }) => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
@@ -25,12 +26,18 @@ const CourseDetails = ({
     "../../public/images/OAS-background.png"
   );
 
+
+
+
   useEffect(() => {
-    const fetchCourseData = async () => {
+    const fetchCourseData = async (currentLanguage = 'Ћирилица') => {
       try {
         const response = await axios.get(`${server_name}/api/courses/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+          params: {
+            script: currentLanguage
           },
         });
         setCourse(response.data);
@@ -38,9 +45,8 @@ const CourseDetails = ({
         console.error("Error fetching course data:", error);
       }
     };
-
-    fetchCourseData();
-  }, [id]);
+    fetchCourseData(currentLanguage);
+  }, [id, currentLanguage]);
 
   useEffect(() => {
     if (course && course.level_of_study) {
@@ -84,6 +90,7 @@ const CourseDetails = ({
     fetchSessions();
   }, [selectedProgram, selectedModule, course]);
 
+
   return (
     <div
       className="course-details-background"
@@ -93,7 +100,7 @@ const CourseDetails = ({
     >
       <div className="row navbar-row">
         <div className="navbar-container col-sm-12">
-          <Navbar />
+          <Navbar lngs={lngs} i18n={i18n} t={t} />
         </div>
       </div>
 
@@ -109,11 +116,10 @@ const CourseDetails = ({
             {course && course.programs.length > 1 && (
               <div className="program-column">
                 {" "}
-
-                <h4>Изабери програм</h4>{" "}
+                <h4>{t("choose_program")}</h4>{" "}
                 <Dropdown className="selector-dropdown">
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {selectedProgram ? selectedProgram : "Изабери програм"}
+                    {selectedProgram ? selectedProgram : t("choose_program")}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -127,16 +133,14 @@ const CourseDetails = ({
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-
               </div>
             )}
             {course && course.modules.length > 1 && (
               <div className="module-column">
-
-                <h4>Изабери модул</h4>{" "}
+                <h4>{t("choose_module")}</h4>{" "}
                 <Dropdown className="selector-dropdown">
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {selectedModule ? selectedModule : "Изабери модул"}
+                    {selectedModule ? selectedModule : t("choose_module")}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
@@ -150,8 +154,6 @@ const CourseDetails = ({
                     ))}
                   </Dropdown.Menu>
                 </Dropdown>
-
-
               </div>
             )}
           </div>
@@ -189,14 +191,14 @@ const CourseDetails = ({
             </div>
             <div className="course-details-info">
               {/* desktop view */}
-              {course && <BasicInfoCard course={course} />}
+              {course && <BasicInfoCard course={course} t={t} />}
             </div>
             <div className="course-details-basic-info-box">
-              <h2 className="details-card-title">Основне информације</h2>
+              <h2 className="details-card-title">{t("basic_info_title")}</h2>
 
               {course && course.lecturers.length > 0 && (
                 <div className="lecturers-div">
-                  <h3 className="details-card-subtitle">Предавачи</h3>
+                  <h3 className="details-card-subtitle">{t("lecturers")}</h3>
                   <ul>
                     {course.lecturers.map((lecturer, index) => (
                       <li className="details-card-text" key={index}>
@@ -208,7 +210,9 @@ const CourseDetails = ({
               )}
 
               <div className="lecture_session_time-div">
-                <h3 className="details-card-subtitle">Термини предавања</h3>
+                <h3 className="details-card-subtitle">
+                  {t("lecture_session_times")}
+                </h3>
                 {sessions && sessions.length > 0 ? (
                   <table className="session_time_table">
                     <thead>
@@ -229,17 +233,19 @@ const CourseDetails = ({
                     </tbody>
                   </table>
                 ) : (
-                  <p>Подаци о предавањима нису доступни</p>
+                  <p>{t("lecture_session_times_availability")}</p>
                 )}
               </div>
               <div className="exercise_session_time-div">
-                <h3 className="details-card-subtitle">Термини вежби</h3>
+                <h3 className="details-card-subtitle">
+                  {t("exercise_session_times")}
+                </h3>
                 {sessions && sessions.length > 0 ? (
                   <table className="session_time_table">
                     <thead>
                       <tr>
-                        <th>Рб.</th>
-                        <th>датум-место-време</th>
+                        <th>{t("num_table")}.</th>
+                        <th>{t("date_place_time")}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -254,19 +260,19 @@ const CourseDetails = ({
                     </tbody>
                   </table>
                 ) : (
-                  <p>Подаци о вежбама нису доступни</p>
+                  <p>{t("exercise_session_times_availability")}</p>
                 )}
               </div>
             </div>
             {course && (
               <div className="course-details-categorization">
                 <div className="categorization-header">
-                  <h2 className="details-card-title">Категоризација</h2>
+                  <h2 className="details-card-title">{t("categorization")}</h2>
                 </div>
                 <div className="categorization-body">
                   <div className="program-category">
                     {" "}
-                    <h4 className="details-card-subtitle">Програми:</h4>
+                    <h4 className="details-card-subtitle">{t("programs")}:</h4>
                     <ul>
                       {course.programs.map((item, index) => (
                         <li className="details-card-text" key={index}>
@@ -278,7 +284,7 @@ const CourseDetails = ({
                   </div>
 
                   <div className="module-category">
-                    <h4 className="details-card-subtitle">Модули:</h4>
+                    <h4 className="details-card-subtitle">{t("modules")}:</h4>
                     <ul>
                       {course.modules.map((item, index) => (
                         <li className="details-card-text" key={index}>
@@ -292,14 +298,14 @@ const CourseDetails = ({
               </div>
             )}
             <div className="course-details-literature">
-              <h2 className="details-card-title">Опширније информације</h2>
+              <h2 className="details-card-title">{t("more_info")}</h2>
               <br />
-              <h3 className="details-card-subtitle">Опис</h3>
+              <h3 className="details-card-subtitle">{t("description")}</h3>
               {course && (
                 <p className="details-card-text">{course.description}</p>
               )}
               <hr />
-              <h3 className="details-card-subtitle">Литература</h3>
+              <h3 className="details-card-subtitle">{t("literature")}</h3>
               {course && course.literature && (
                 <ul>
                   {course.literature.map((item, index) => (
@@ -314,16 +320,16 @@ const CourseDetails = ({
           <div className="course-details-sidebar">
             <div className="course-details-sidecard">
               {/* mobile view */}
-              {course && <BasicInfoCard course={course} />}
+              {course && <BasicInfoCard course={course} t={t} />}
             </div>
           </div>
         </div>
       </div>
       <div className="row">
-        <Footer />
+        <Footer t={t} />
       </div>
       <div className="row">
-        <BackToTopButton/>
+        <BackToTopButton />
       </div>
     </div>
   );

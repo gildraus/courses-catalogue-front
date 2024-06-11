@@ -71,7 +71,7 @@ function remapLang(str) {
   });
 }
 
-const Searchbar = ({ allCourses }) => {
+const Searchbar = ({ allCourses, t }) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
@@ -106,12 +106,12 @@ const Searchbar = ({ allCourses }) => {
 
   return (
     <div className="header">
-      <div className="search-bar-logo">КАТАЛОГ ПРЕДМЕТА</div>
+      <div className="search-bar-logo">{t("course_catalogue")}</div>
 
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Претражите курсеве по називу, тагу, називу катедре..."
+          placeholder={t("searchbar_text")}
           value={query}
           onChange={handleInputChange}
         />
