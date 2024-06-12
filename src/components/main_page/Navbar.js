@@ -34,7 +34,34 @@ const Navbar = ({ lngs, i18n, t }) => {
             <span className="navbar-subtitle">{t("faculty_navbar")}</span>
           </div>
         </div>
+        {/* mobile dropdown */}
+        <Dropdown className="language-dropdown">
+          <Dropdown.Toggle
+            as="button"
+            className="mobile-navbar-dropdown-btn"
+            id="dropdown-basic"
+          >
+            <img
+              src="../../images/menu-icon.svg"
+              className="mobile-navbar-dropdown-btn-img"
+              alt="menu icon"
+            />
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            {Object.keys(lngs).map((lng) => (
+              <Dropdown.Item
+                key={lng}
+                onClick={() => i18n.changeLanguage(lng)}
+                disabled={i18n.resolvedLanguage === lng}
+              >
+                {lngs[lng].nativeName}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
         <div className="language-selector">
+          {/* desktop dropdown */}
           <Dropdown className="language-dropdown">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {lngs[i18n.language]
