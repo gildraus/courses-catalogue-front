@@ -56,6 +56,7 @@ i18next.use(initReactI18next).init({
         num_table: "Num.",
         date_place_time: "date-place-time",
         programs_sidebar: "Programs",
+        no_tags: "Course has no tags yet",
       },
     },
     lat: {
@@ -107,6 +108,7 @@ i18next.use(initReactI18next).init({
         num_table: "Rb.",
         date_place_time: "datum-mesto-vreme",
         programs_sidebar: "Studijski programi",
+        no_tags: "Predmet još uvek nema tagova",
       },
     },
     cyr: {
@@ -158,7 +160,7 @@ i18next.use(initReactI18next).init({
         num_table: "Рб.",
         date_place_time: "датум-место-време",
         programs_sidebar: "Студијски програми",
-    
+        no_tags: "Предмет још увек нема тагова",
       },
     },
   },

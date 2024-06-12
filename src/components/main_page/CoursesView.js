@@ -6,7 +6,7 @@ import Loading from "./Loading";
 import SkeletonCourseCard from "../skeletons/SkeletonCourseCard";
 import SkeletonSidebarCard from "../skeletons/SkeletonSidebarCard";
 import { useNavigate } from "react-router-dom";
-import toLatin from 'cyrillic-to-latin';
+import toLatin from "cyrillic-to-latin";
 
 const CoursesView = ({
   allCourses,
@@ -183,7 +183,7 @@ const CoursesView = ({
 
   const TagList = ({ tags }) => {
     if (!tags || tags.length === 0) {
-      return <p>Предмет још увек нема тагова</p>;
+      return <p>{t("no_tags")}</p>;
     }
 
     const firstThreeTags = tags.slice(0, 3);
@@ -245,12 +245,9 @@ const CoursesView = ({
         {selectedLevelOfStudy && (
           <button className="active-filter">
             <span>
-
-              {
-                currentLanguage === "Ћирилица"
-                  ? selectedLevelOfStudy
-                  : toLatin(selectedLevelOfStudy)
-              }
+              {currentLanguage === "Ћирилица"
+                ? selectedLevelOfStudy
+                : toLatin(selectedLevelOfStudy)}
             </span>
             <CloseButton
               className="active-filter-close-btn"
@@ -263,11 +260,9 @@ const CoursesView = ({
           <button className="active-filter">
             {" "}
             <span>
-              {
-                currentLanguage === "Ћирилица"
-                  ? selectedProgram
-                  : toLatin(selectedProgram)
-              }
+              {currentLanguage === "Ћирилица"
+                ? selectedProgram
+                : toLatin(selectedProgram)}
             </span>
             <CloseButton
               className="active-filter-close-btn"
@@ -279,11 +274,9 @@ const CoursesView = ({
         {selectedModule != null && selectedModule.length > 0 && (
           <button className="active-filter">
             <span>
-              {
-                currentLanguage === "Ћирилица"
-                  ? selectedModule
-                  : toLatin(selectedModule)
-              }
+              {currentLanguage === "Ћирилица"
+                ? selectedModule
+                : toLatin(selectedModule)}
             </span>
             <CloseButton onClick={handleModuleUncheck} />
           </button>
@@ -346,11 +339,9 @@ const CoursesView = ({
                         name="level_of_study"
                         onChange={handleLevelOfStudyChange}
                       />{" "}
-
                       {currentLanguage === "Ћирилица"
                         ? levelofstudy.levelOfStudyName
-                        : toLatin(levelofstudy.levelOfStudyName)
-                      }
+                        : toLatin(levelofstudy.levelOfStudyName)}
                     </div>
                   ))}
                 </div>
@@ -390,16 +381,13 @@ const CoursesView = ({
                           />{" "}
                           {currentLanguage === "Ћирилица"
                             ? program.programName
-                            : toLatin(program.programName)
-                          }
-
+                            : toLatin(program.programName)}
                         </div>
                       ))}
                   </div>
                   <hr className="filter-box-separator"></hr>
                 </div>
               )}
-
 
               {/* МОДУЛ*/}
               {selectedProgram &&
@@ -440,11 +428,9 @@ const CoursesView = ({
                               checked={selectedModule === module.module}
                               onChange={() => handleModuleChange(module.module)}
                             />{" "}
-                            {
-                              currentLanguage === "Ћирилица"
-                                ? module.module
-                                : toLatin(module.module)
-                            }
+                            {currentLanguage === "Ћирилица"
+                              ? module.module
+                              : toLatin(module.module)}
                             {module.module}
                           </div>
                         ))}
@@ -501,73 +487,73 @@ const CoursesView = ({
               <div>
                 {(!selectedLevelOfStudy ||
                   selectedLevelOfStudy !== "Мастер академске студије") && (
-                    <div className="filter-box">
-                      <h4
-                        className="filter-box-header"
-                        onClick={() => toggle("year-of-study-group")}
-                      >
-                        <b> {t("year_of_study")}</b>
-                        <img
-                          id="year-of-study-group-arrow"
-                          src="./images/feArrowDown0.png"
-                          alt=""
-                        />
-                      </h4>
-                      <div
-                        id="year-of-study-group"
-                        className="filter-box-content show"
-                      >
-                        <div>
-                          <input
-                            type="checkbox"
-                            value="прва"
-                            name="year_of_study"
-                            onChange={createCheckboxChangeHandler(
-                              selectedYearOfStudy,
-                              setSelectedYearOfStudy
-                            )}
-                          />{" "}
-                          {t("first_year")}
-                        </div>
-                        <div>
-                          <input
-                            type="checkbox"
-                            value="друга"
-                            name="year_of_study"
-                            onChange={createCheckboxChangeHandler(
-                              selectedYearOfStudy,
-                              setSelectedYearOfStudy
-                            )}
-                          />{" "}
-                          {t("second_year")}
-                        </div>
-                        <div>
-                          <input
-                            type="checkbox"
-                            value="трећа"
-                            name="year_of_study"
-                            onChange={createCheckboxChangeHandler(
-                              selectedYearOfStudy,
-                              setSelectedYearOfStudy
-                            )}
-                          />{" "}
-                          {t("third_year")}
-                        </div>
-                        <div>
-                          <input
-                            type="checkbox"
-                            value="четврта"
-                            name="year_of_study"
-                            onChange={createCheckboxChangeHandler(
-                              selectedYearOfStudy,
-                              setSelectedYearOfStudy
-                            )}
-                          />{" "}
-                          {t("fourth_year")}
-                        </div>
+                  <div className="filter-box">
+                    <h4
+                      className="filter-box-header"
+                      onClick={() => toggle("year-of-study-group")}
+                    >
+                      <b> {t("year_of_study")}</b>
+                      <img
+                        id="year-of-study-group-arrow"
+                        src="./images/feArrowDown0.png"
+                        alt=""
+                      />
+                    </h4>
+                    <div
+                      id="year-of-study-group"
+                      className="filter-box-content show"
+                    >
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="прва"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        {t("first_year")}
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="друга"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        {t("second_year")}
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="трећа"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        {t("third_year")}
+                      </div>
+                      <div>
+                        <input
+                          type="checkbox"
+                          value="четврта"
+                          name="year_of_study"
+                          onChange={createCheckboxChangeHandler(
+                            selectedYearOfStudy,
+                            setSelectedYearOfStudy
+                          )}
+                        />{" "}
+                        {t("fourth_year")}
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
               </div>
             </div>
           )
@@ -607,8 +593,8 @@ const CoursesView = ({
                       <div className="courses-view-card-left">
                         {/* if picture does exist then render it else render default picture */}
                         {course &&
-                          course.thumbnail_url &&
-                          course.thumbnail_url !== "" ? (
+                        course.thumbnail_url &&
+                        course.thumbnail_url !== "" ? (
                           <img
                             src={course.thumbnail_url}
                             onError={(e) =>
