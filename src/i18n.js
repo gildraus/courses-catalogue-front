@@ -65,7 +65,7 @@ i18next.use(initReactI18next).init({
         course_catalogue_footer: "Katalog predmeta",
         university: "UNIVERZITET U BEOGRADU",
         faculty_navbar: "FAKULTET ORGANIZACIONIH NAUKA",
-        faculty_footer: "Fakultet оrganizacionih нauka",
+        faculty_footer: "Fakultet оrganizacionih nauka",
         searchbar_text: "Pretražite kurseve po nazivu, tagu, katedri...",
         filters: "Filteri",
         reset_filters: "Resetuj filtere",
