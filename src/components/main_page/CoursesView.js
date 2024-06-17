@@ -173,6 +173,8 @@ const CoursesView = ({
     setSelectedSemester([]);
   };
 
+
+
   const handleYearOfStudyUncheck = () => {
     const buttons = document.getElementsByName("year_of_study");
     buttons.forEach((button) => {
@@ -281,12 +283,21 @@ const CoursesView = ({
             <CloseButton onClick={handleModuleUncheck} />
           </button>
         )}
-        {selectedSemester != null && selectedSemester.length > 0 && (
-          <button className="active-filter">
-            <span>{selectedSemester}</span>
-            <CloseButton onClick={handleSemesterUncheck} />
-          </button>
-        )}
+        {selectedSemester != null &&
+          selectedSemester.length > 0 &&
+          selectedSemester.map((item, index) => (
+            <div>
+              <button className="active-filter" key={index}>
+                <span>{item}</span>
+                <CloseButton onClick={handleSemesterUncheck} />
+              </button>
+            </div>
+          ))
+          // <button className="active-filter">
+          //   <span>{selectedSemester}</span>
+          //   <CloseButton onClick={handleSemesterUncheck} />
+          // </button>
+        }
         {selectedYearOfStudy != null && selectedYearOfStudy.length > 0 && (
           <button className="active-filter">
             <span>{selectedYearOfStudy}</span>
