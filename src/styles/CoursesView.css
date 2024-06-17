@@ -412,4 +412,7 @@ input {
   .sort-dropdown {
     display: none;
   }
+  .courses-view-header{
+    display: none;
+  }
 }

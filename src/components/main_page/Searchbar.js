@@ -71,7 +71,12 @@ function remapLang(str) {
   });
 }
 
-const Searchbar = ({ allCourses, t }) => {
+const Searchbar = ({
+  allCourses,
+  isSidebarVisible,
+  setIsSidebarVisible,
+  t,
+}) => {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
@@ -115,7 +120,13 @@ const Searchbar = ({ allCourses, t }) => {
           value={query}
           onChange={handleInputChange}
         />
-       <button className="mobile-filters-btn"><img className="filter-img" src="../../../images/filter.png" /></button>
+        <button className="mobile-filters-btn">
+          <img
+            className="filter-img"
+            src="../../../images/filter.png"
+            onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+          />
+        </button>
         {suggestions.length > 0 && (
           <ul className="suggestions-list">
             {suggestions.map((suggestion, index) => (

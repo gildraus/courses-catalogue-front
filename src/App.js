@@ -64,10 +64,10 @@ function App() {
   //     setIsLoadingCourses(false);
   //   }
   // };
-  const fetchCourses = async (currentLanguage = 'Ћирилица') => {
+  const fetchCourses = async (currentLanguage = "Ћирилица") => {
     try {
       const response = await axios.get(`${server_name}/courses`, {
-        params: { script: currentLanguage }
+        params: { script: currentLanguage },
       });
       setAllCourses(response.data);
     } catch (error) {
@@ -77,10 +77,10 @@ function App() {
     }
   };
 
-  const fetchDepartments = async (currentLanguage = 'Ћирилица') => {
+  const fetchDepartments = async (currentLanguage = "Ћирилица") => {
     try {
       const response = await axios.get(server_name + "/departments", {
-        params: { script: currentLanguage }
+        params: { script: currentLanguage },
       });
       setAllDepartments(response.data);
     } catch (error) {
@@ -88,10 +88,10 @@ function App() {
     }
   };
 
-  const fetchModules = async (currentLanguage = 'Ћирилица') => {
+  const fetchModules = async (currentLanguage = "Ћирилица") => {
     try {
       const response = await axios.get(server_name + "/modules", {
-        params: { script: currentLanguage }
+        params: { script: currentLanguage },
       });
       setAllModules(response.data);
     } catch (error) {
@@ -99,10 +99,10 @@ function App() {
     }
   };
 
-  const fetchLevelsOfStudy = async (currentLanguage = 'Ћирилица') => {
+  const fetchLevelsOfStudy = async (currentLanguage = "Ћирилица") => {
     try {
       const response = await axios.get(server_name + "/levelsofstudy", {
-        params: { script: currentLanguage }
+        params: { script: currentLanguage },
       });
       setAllLevelsOfStudy(response.data);
     } catch (error) {
@@ -121,7 +121,7 @@ function App() {
     }
   };
 
-  const fetchFilteredCourses = async (currentLanguage = 'Ћирилица') => {
+  const fetchFilteredCourses = async (currentLanguage = "Ћирилица") => {
     try {
       const response = await axios.get(server_name + "/filteredCourses", {
         params: {
@@ -141,7 +141,7 @@ function App() {
         setEmptyResponse(false);
         setCoursesToShow(response.data);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const isTokenExpired = () => {
@@ -159,14 +159,13 @@ function App() {
     return true; // No token, consider it expired
   };
 
-
   useEffect(() => {
     fetchCourses(currentLanguage);
     fetchFilteredCourses(currentLanguage);
     fetchDepartments(currentLanguage);
     fetchModules(currentLanguage);
     fetchLevelsOfStudy(currentLanguage);
-  }, [currentLanguage])
+  }, [currentLanguage]);
 
   useEffect(() => {
     if (selectedCourse && selectedCourse.name) {
@@ -187,7 +186,6 @@ function App() {
     setCurrentLanguage(lngs[i18n.language].nativeName);
   }, [i18n.language]);
 
-
   return (
     <BrowserRouter>
       <Routes>
@@ -204,7 +202,12 @@ function App() {
               <div className="App">
                 <div className="row">
                   <div className="body-container">
-                    <Searchbar allCourses={allCourses} t={t} />
+                    <Searchbar
+                      allCourses={allCourses}
+                      isSidebarVisible={isSidebarVisible}
+                      setIsSidebarVisible={setIsSidebarVisible}
+                      t={t}
+                    />
                     <CoursesView
                       allCourses={allCourses}
                       allDepartments={allDepartments}

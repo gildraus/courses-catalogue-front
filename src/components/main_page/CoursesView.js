@@ -116,13 +116,6 @@ const CoursesView = ({
     setAllCourses(sortedData);
   };
 
-  const toggleSidebar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
-  };
-
-  const testiraj = () => {
-    alert(selectedLevelOfStudy);
-  };
   const handleLevelOfStudyChange = (event) => {
     const selectedLevel = event ? event.target.value : undefined;
     setSelectedLevelOfStudy(selectedLevel);
@@ -173,8 +166,6 @@ const CoursesView = ({
     setSelectedSemester([]);
   };
 
-
-
   const handleYearOfStudyUncheck = () => {
     const buttons = document.getElementsByName("year_of_study");
     buttons.forEach((button) => {
@@ -211,7 +202,10 @@ const CoursesView = ({
   return (
     <div className="courses-view">
       <div className="courses-view-header">
-        <button className="filter-button" onClick={toggleSidebar}>
+        <button
+          className="filter-button"
+          onClick={() => setIsSidebarVisible(!isSidebarVisible)}
+        >
           <img src="./images/filter-icon.png" alt="" />
           {t("filters")}
         </button>
@@ -283,16 +277,17 @@ const CoursesView = ({
             <CloseButton onClick={handleModuleUncheck} />
           </button>
         )}
-        {selectedSemester != null &&
-          selectedSemester.length > 0 &&
-          selectedSemester.map((item, index) => (
-            <div>
-              <button className="active-filter" key={index}>
-                <span>{item}</span>
-                <CloseButton onClick={handleSemesterUncheck} />
-              </button>
-            </div>
-          ))
+        {
+          selectedSemester != null &&
+            selectedSemester.length > 0 &&
+            selectedSemester.map((item, index) => (
+              <div>
+                <button className="active-filter" key={index}>
+                  <span>{item}</span>
+                  <CloseButton onClick={handleSemesterUncheck} />
+                </button>
+              </div>
+            ))
           // <button className="active-filter">
           //   <span>{selectedSemester}</span>
           //   <CloseButton onClick={handleSemesterUncheck} />
