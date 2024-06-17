@@ -58,7 +58,6 @@
 .program-column {
   width: 50%;
   padding: 15px 0px 15px 15px;
-  
 }
 
 .module-column {
@@ -153,7 +152,7 @@
   font-size: 18px;
   color: #181818cc;
 }
-.details-basic-card-text{
+.details-basic-card-text {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -341,6 +340,13 @@ img {
   .course-details {
     padding: 0px;
   }
+
+  #course-name-header-text {
+    text-align: left;
+  }
+  #course-department-header-text {
+    text-align: left;
+  }
   .course-details-sidebar {
     display: none;
   }
@@ -348,7 +354,8 @@ img {
     display: inline-block;
     width: 100%;
   }
-  .course-details-main-body {
+  .course-details-main-body,
+  .course-details-header {
     width: 90%;
   }
   .header-module-selector {
