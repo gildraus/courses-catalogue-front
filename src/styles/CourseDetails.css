@@ -346,6 +346,7 @@ img {
   }
   .course-details-info {
     display: inline-block;
+    width: 100%;
   }
   .course-details-main-body {
     width: 90%;
