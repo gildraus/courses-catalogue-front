@@ -6,6 +6,7 @@
   color: #fff;
 }
 
+
 .search-bar-logo {
   /* flex: 15%; */
   padding-right: 15px;
@@ -28,6 +29,18 @@
   font-size: 16px;
 }
 
+.mobile-filters-btn{
+  display: none;
+  width: 50px;
+  height: 47px;
+  border: 1px solid #11C098;
+  background-color: #FFFFFF;
+  border-radius: 4px;
+}
+.filter-img{
+  width: 24px;
+  height: 24px;
+}
 .suggestions-list {
   position: absolute;
   max-height: 250px;
@@ -67,4 +80,23 @@
 
 .submit-button button:hover {
   background-color: #039b77;
+}
+@media (max-width: 1000px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+  .search-bar{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+  .search-bar-logo {
+  font-size: 25px;
+  padding-bottom: 10px;
+  }
+  .mobile-filters-btn{
+    display: block;
+  }
 }

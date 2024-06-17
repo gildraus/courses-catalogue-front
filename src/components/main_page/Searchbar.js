@@ -115,6 +115,7 @@ const Searchbar = ({ allCourses, t }) => {
           value={query}
           onChange={handleInputChange}
         />
+       <button className="mobile-filters-btn"><img className="filter-img" src="../../../images/filter.png" /></button>
         {suggestions.length > 0 && (
           <ul className="suggestions-list">
             {suggestions.map((suggestion, index) => (
