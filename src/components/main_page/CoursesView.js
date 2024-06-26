@@ -437,7 +437,6 @@ const CoursesView = ({
                             {currentLanguage === "Ћирилица"
                               ? module.module
                               : toLatin(module.module)}
-                            {module.module}
                           </div>
                         ))}
                     </div>
